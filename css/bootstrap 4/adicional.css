@@ -1,0 +1,13 @@
+
+body{
+  background-color: #fafafa;
+}
+.espacioWidth{
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.espacioHeight{
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
