@@ -1,0 +1,381 @@
+<!-- bloque de productos -->
+<div class="col-md-10 mb-3">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <!-- productos recomendados -->
+      <div class="row">
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/3.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+
+              <div class="price-wrap">
+                <span class="price-new">$1280</span>
+                <del class="price-old">$1980</del>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/4.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/5.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/6.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/3.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+
+              <div class="price-wrap">
+                <span class="price-new">$1280</span>
+                <del class="price-old">$1980</del>
+              </div>
+              <!-- price-wrap.// -->
+
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/4.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/5.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/6.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+      </div>
+      <!-- row.// -->
+      <div class="row">
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/3.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+
+              <div class="price-wrap">
+                <span class="price-new">$1280</span>
+                <del class="price-old">$1980</del>
+              </div>
+              <!-- price-wrap.// -->
+
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/4.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/5.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/6.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+      </div>
+      <!-- row.// -->
+      <div class="row">
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/3.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+
+              <div class="price-wrap">
+                <span class="price-new">$1280</span>
+                <del class="price-old">$1980</del>
+              </div>
+              <!-- price-wrap.// -->
+
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/4.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/5.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/6.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+      </div>
+      <!-- row.// -->
+      <div class="row">
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/3.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+
+              <div class="price-wrap">
+                <span class="price-new">$1280</span>
+                <del class="price-old">$1980</del>
+              </div>
+              <!-- price-wrap.// -->
+
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/4.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/5.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/6.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+      </div>
+      <!-- row.// -->
+      <div class="row">
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/3.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+
+              <div class="price-wrap">
+                <span class="price-new">$1280</span>
+                <del class="price-old">$1980</del>
+              </div>
+              <!-- price-wrap.// -->
+
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/4.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/5.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+        <div class="col-md-3">
+          <figure class="card card-product">
+            <div class="img-wrap"> <img src="images/items/6.jpg"></div>
+            <figcaption class="info-wrap">
+              <h6 class="title "><a href="#">nombre producto</a></h6>
+              <div class="price-wrap">
+                <span class="price-new">$280</span>
+              </div>
+              <!-- price-wrap.// -->
+            </figcaption>
+          </figure>
+          <!-- card // -->
+        </div>
+        <!-- col // -->
+      </div>
+      <!-- row.// -->
+      <!-- productos recomendados -->
+    </div>
+  </div>
+</div>
+<!-- bloque de productos -->

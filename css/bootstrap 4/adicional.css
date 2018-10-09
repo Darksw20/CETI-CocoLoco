@@ -1,8 +1,13 @@
-
 body{
   background-color: #fafafa;
 }
+
 .espacioWidth{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.spacer{
   padding-left: 4rem;
   padding-right: 4rem;
 }
@@ -10,4 +15,13 @@ body{
 .espacioHeight{
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+
+.espacioHeightsm{
+  padding-top: 0.8em;
+  padding-bottom: 1.2rem;
+}
+
+.form-rounded {
+  border-radius: 1rem;
 }
