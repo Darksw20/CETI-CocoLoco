@@ -20,54 +20,7 @@
     proyecto Desarrollado por 8B1 con coquiux
   </div>
 
-  <!--Barra principal
-  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top my-2">
-    <a class="navbar-brand" href="#">
-      <h4 class="text-black font-weight-bold" style="padding-left: 2rem;">CoCo</h4>
-      <h6 class="text-black font-weight-bold" style="padding-left: 1rem;">Hola, username</h6>
-    </a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse collapse" id="navbarColor02" style="">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-          <a class="nav-link font-weight-bold" href="#">Inicio</a>
-        </li>
-        <li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbardrop" data-toggle="dropdown">Departamentos</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Link 1</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Link 2</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Link 3</a>
-            </div>
-          </li>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link font-weight-bold">Link</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link font-weight-bold">Link</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link font-weight-bold" href="#" data-toggle="modal" data-target="#modalRegistro"><img src="imagenes/account_circle_black.png" alt=""> Mi cuenta</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link font-weight-bold" href="#" data-toggle="modal" data-target="#modalCarrito"> <img src="imagenes/shopping_cart_black.png" alt=""> Carrito</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="¿Qué buscamos?" name="buscador">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><img src="imagenes/search_black.png" width="30" height="30"></button>
-      </form>
-    </div>
-  </nav>
-  Barra principal-->
+
 
   <!--barra inicio-->
   <div class="section-header sticky-top bg-white">
@@ -472,138 +425,6 @@
   </div>
   <!--modalCarrito-->
 
-  <div class="modal" id="modalProducto">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-xl-10 col-md-9 col-sm-12">
-
-
-              <main class="card">
-                <div class="row no-gutters">
-                  <aside class="col-sm-6 border-right">
-                    <article class="gallery-wrap">
-                      <div class="img-big-wrap">
-                        <div>
-                          <a href="images/items/1.jpg" data-fancybox=""><img src="images/items/1.jpg"></a>
-                        </div>
-                      </div>
-                      <!-- slider-product.// -->
-                      <div class="img-small-wrap">
-                        <div class="item-gallery"> <img src="images/items/1.jpg"></div>
-                        <div class="item-gallery"> <img src="images/items/2.jpg"></div>
-                        <div class="item-gallery"> <img src="images/items/3.jpg"></div>
-                        <div class="item-gallery"> <img src="images/items/4.jpg"></div>
-                      </div>
-                      <!-- slider-nav.// -->
-                    </article>
-                    <!-- gallery-wrap .end// -->
-                  </aside>
-                  <aside class="col-sm-6">
-                    <article class="card-body">
-                      <!-- short-info-wrap -->
-                      <h3 class="title mb-3">Original Version of Some product name</h3>
-
-                      <div class="mb-3">
-                        <var class="price h3 text-warning">
-		                        <span class="currency">US $</span><span class="num">1299</span>
-	                      </var>
-                        <span>/per kg</span>
-                      </div>
-                      <!-- price-detail-wrap .// -->
-                      <dl>
-                        <dt>Description</dt>
-                        <dd>
-                          <p>Here goes description consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </p>
-                        </dd>
-                      </dl>
-                      <dl class="row">
-                        <dt class="col-sm-3">Model#</dt>
-                        <dd class="col-sm-9">12345611</dd>
-
-                        <dt class="col-sm-3">Color</dt>
-                        <dd class="col-sm-9">Black and white </dd>
-
-                        <dt class="col-sm-3">Delivery</dt>
-                        <dd class="col-sm-9">Russia, USA, and Europe </dd>
-                      </dl>
-                      <div class="rating-wrap">
-
-                        <ul class="rating-stars">
-                          <li style="width:80%" class="stars-active">
-                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </li>
-                          <li>
-                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </li>
-                        </ul>
-                        <div class="label-rating">132 reviews</div>
-                        <div class="label-rating">154 orders </div>
-                      </div>
-                      <!-- rating-wrap.// -->
-                      <hr>
-                      <div class="row">
-                        <div class="col-sm-5">
-                          <dl class="dlist-inline">
-                            <dt>Quantity: </dt>
-                            <dd>
-                              <select class="form-control form-control-sm" style="width:70px;">
-                                <option> 1 </option>
-                                <option> 2 </option>
-                                <option> 3 </option>
-                              </select>
-                            </dd>
-                          </dl>
-                          <!-- item-property .// -->
-                        </div>
-                        <!-- col.// -->
-                        <div class="col-sm-7">
-                          <dl class="dlist-inline">
-                            <dt>Size: </dt>
-                            <dd>
-                              <label class="form-check form-check-inline">
-                                <input class="form-check-input" name="inlineRadioOptions" id="inlineRadio2" value="option2" type="radio">
-                                <span class="form-check-label">SM</span>
-                              </label>
-                              <label class="form-check form-check-inline">
-                                <input class="form-check-input" name="inlineRadioOptions" id="inlineRadio2" value="option2" type="radio">
-                                <span class="form-check-label">MD</span>
-                              </label>
-                              <label class="form-check form-check-inline">
-                                <input class="form-check-input" name="inlineRadioOptions" id="inlineRadio2" value="option2" type="radio">
-                                <span class="form-check-label">XXL</span>
-                              </label>
-                            </dd>
-                          </dl>
-                          <!-- item-property .// -->
-                        </div>
-                        <!-- col.// -->
-                      </div>
-                      <!-- row.// -->
-                      <hr>
-                      <a href="#" class="btn  btn-warning"> <i class="fa fa-envelope"></i> Contact Supplier </a>
-                      <a href="#" class="btn  btn-outline-warning"> Start Order </a>
-                      <!-- short-info-wrap .// -->
-                    </article>
-                    <!-- card-body.// -->
-                  </aside>
-                  <!-- col.// -->
-                </div>
-                <!-- row.// -->
-              </main>
-              <!-- card.// -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- productos recomendados -->
   <section class="section-request bg padding-y-sm">
     <div class="container">
@@ -739,14 +560,20 @@
   </section>
   <!-- productos recomendados -->
 
-  <div class="container-fluid bg-white">
-    <div class="row justify-content-center">
-      <h4 class="card-title">Desarrollado por 8B1</h4>
-    </div>
-  </div>
-
-  <footer class="container-fluid text-center" style="padding-top: 1rem;">
-    <p>Copyright (c) 2018 Diseñado por 8B1.</p>
+  <footer class="section-footer bg2 fixed-bottom">
+    <div class="container">
+      <section class="footer-bottom row">
+        <div class="col-sm-6">
+          <p> Hecho con un chingo de amor, dedicación y muchas desveladas por el grupo más verga del CETI sionoraza &lt;3 <br></p>
+        </div>
+        <div class="col-sm-6">
+          <p class="text-sm-right">
+              Copyright © 2018 <br>
+            <a href="https://www.facebook.com/ismaelCO2">Maestro chido de la carrera</a>
+          </p>
+        </div>
+      </section> <!-- //footer-top -->
+    </div><!-- //container -->
   </footer>
 
 </body>

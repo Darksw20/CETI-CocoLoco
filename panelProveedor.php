@@ -94,7 +94,7 @@
                   </div>
                   <div class="col-md-3 mb-2">
                     <label for="nombreP">Nombre</label>
-                    <input type="text" class="form-control" id="nombreP" name="nombreProveedor" required>
+                    <input type="text" class="form-control" id="nombreP" name="nombreProducto" required>
                   </div>
                   <div class="col-md-3 mb-2">
                     <label for="price">Precio</label>
@@ -147,9 +147,6 @@
                 <label for="eliminarP">ID de producto</label>
                 <div class="input-group">
                   <input type="text" class="form-control" id="eliminarP" placeholder="HP-1ZW00LA" name="eliminarProducto">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Buscar</button>
-                  </div>
                 </div>
               </div>
             </form>
@@ -193,9 +190,6 @@
                 <label for="modificarP">ID de producto</label>
                 <div class="input-group">
                   <input type="text" class="form-control" id="modificarP" placeholder="HP-1Z00WA" name="modificarProd">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">buscar</button>
-                  </div>
                 </div>
               </div>
             </form>

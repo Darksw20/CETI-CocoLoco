@@ -2,12 +2,12 @@
 <html lang="es" dir="ltr">
 
 <head>
-  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap 4/bootstrap.css">
   <link rel="stylesheet" href="css/bootstrap 4/adicional.css">
   <link href="css/uikit.css" rel="stylesheet" type="text/css" />
   <link href="css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+  <link href="css/fancybox.min.css" type="text/css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -17,37 +17,41 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
+  <script src="js/fancybox.min.js" type="text/javascript"></script>
 </head>
+
 <body>
 
-  <!-- barra navegacion Categorias -->
+  <!--barra inicio-->
   <div class="section-header sticky-top bg-white">
-    <section class="header-main">
+    <section style="padding: 5px;">
       <div class="container sticky-top">
         <div class="row align-items-center">
-          <div class="col-lg-5-24 col-sm-5 col-4">
+          <div class="col-lg-3 col-sm-5 col-4">
             <div class="brand-wrap">
               <img class="logo" src="">
-              <h2 class="logo-text">CoCo</h2>
+              <h2 class="logo-text text-primary">Co</h2><h2 class="logo-text text-warning">Co</h2>
             </div>
             <!-- brand-wrap -->
           </div>
-          <div class="col-lg-13-24 col-sm-12 order-3 order-lg-2">
-            <form action="#">
-              <div class="input-group w-100">
-                <input type="text" class="form-control" style="width:60%;" name="buscador" placeholder="¿Que buscamos?">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-dark" type="submit">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-            <!-- search-wrap .end// -->
+          <div class="col-lg-6 col-sm-12 order-3 order-lg-2">
+            <ul class="navbar mx-auto" style="list-style: none; margin-bottom: 0;">
+              <li class="nav-item">
+                <a class="nav-link font-weight-bold text-dark" href="#">Inicio</a>
+              </li>
+              <li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link font-weight-bold text-dark" href="departamentos.php">Departamentos</a>
+                </li>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link font-weight-bold text-dark">Link</a>
+              </li>
+            </ul>
+            <!-- search-wrap  -->
           </div>
           <!-- col -->
-          <div class="col-lg-6-24 col-sm-7 col-8  order-2  order-lg-3">
+          <div class="col-lg-3 col-sm-7 col-8  order-2  order-lg-3">
             <div class="d-flex justify-content-end">
               <div class="widget-header">
                 <small class="title text-muted" data-toggle="modal" data-target="#modalModificar">¡Hola, invitado!</small>
@@ -70,49 +74,84 @@
       </div>
       <!-- container -->
     </section>
-    <!-- header-main -->
+    <!-- header-main  -->
   </div>
-  <!-- barra navegacion Categorias -->
+  <!--barra inicio-->
 
-  <!-- container principal-->
-  <div class="container-fluid spacer">
-    <div class="row" style="padding-top: 1.2rem;">
-      <!-- bloque de categorias -->
-      <div class="col-md-2 mb-2">
-        <aside>
-          <div class="card shadow-sm">
-            <header class="card-header bg-light">
-              <i class="icon-menu"></i> Categorías
-            </header>
-            <ul class="menu-category text-dark">
-              <li> <a href="#">Ropita mamalona </a></li>
-              <li> <a href="#">Comidita shida </a></li>
-              <li> <a href="#">Jueguitos bonitos </a></li>
-              <li> <a href="#">Otra categoría xd</a></li>
-              <li> <a href="#">Laptops vergas </a></li>
-              <li> <a href="#">Otro gato</a></li>
-            </ul>
-          </div>
-          <!-- card  -->
-        </aside>
-        <!-- col  -->
-      </div>
-      <!-- bloque de categorias -->
+  <div class="row spacer" style="padding-top: 2rem;">
+    <div class="col-lg-12 col-md-10 col-sm-12">
+      <main class="card">
+        <div class="row">
+          <aside class="col-sm-6 border-right">
+            <article class="gallery-wrap">
+              <div class="img-big-wrap">
+                <div>
+                  <a href="images/items/1.jpg" data-fancybox=""><img src="images/items/1.jpg"></a>
+                </div>
+              </div>
+              <!-- slider-product -->
+            </article>
+            <!-- gallery-wrap -->
+          </aside>
+          <aside class="col-sm-6">
+            <article class="card-body">
+              <!-- short-info-wrap -->
+              <h3 class="title mb-3">Nombre mamalon</h3>
 
-      <!-- bloque de productos -->
-      <div class="col-md-10 mb-3">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="row" id="load_data">
-            </div>
-          </div>
+              <div class="mb-3">
+                <var class="price h3 text-primary">
+		                <span class="currency">MXN $</span><span class="num">1299</span>
+	              </var>
+                <span>/por unidad</span>
+              </div>
+              <!-- price-detail-wrap  -->
+              <dl>
+                <dt>Descripción</dt>
+                <dd>
+                  <p>un producto bien shido que si funciona </p>
+                </dd>
+              </dl>
+              <dl class="row">
+                <dt class="col-sm-3">ID Producto#</dt>
+                <dd class="col-sm-9">12345611</dd>
+
+                <dt class="col-sm-3">Vendido por:</dt>
+                <dd class="col-sm-9">planchasmamalonas.com</dd>
+
+              </dl>
+              <hr>
+              <div class="row">
+                <div class="col-sm-5">
+                  <dl class="dlist-inline">
+                    <dt>Quantity: </dt>
+                    <dd>
+                      <select class="form-control form-control-sm" style="width:70px;">
+                        <option> 1 </option>
+                        <option> 2 </option>
+                        <option> 3 </option>
+                      </select>
+                    </dd>
+                  </dl>
+                  <!-- item-property  -->
+                </div>
+                <!-- col -->
+              </div>
+              <!-- row -->
+              <hr>
+              <a href="#" class="btn  btn-primary"> <i class="fa fa-shopping-cart"></i> Agregar al carrito </a>
+              <!-- short-info-wrap  -->
+            </article>
+            <!-- card-body -->
+          </aside>
+          <!-- col -->
         </div>
-      </div>
-      <!-- bloque de productos -->
-
+        <!-- row -->
+      </main>
+      <!-- card -->
     </div>
+    <!-- col -->
   </div>
-  <!-- container principal -->
+  <!-- row -->
 
   <!--modalRegistro-->
   <div class="modal" id="modalRegistro">
@@ -446,55 +485,6 @@
   	</div><!-- //container -->
   </footer>
 
-  <script>
-    //onScroll
-    $(document).ready(function() {
-
-      var limit = 12;
-      var start = 0;
-      var action = 'inactive';
-
-      function load_country_data(limit, start) {
-        $.ajax({
-          url: "fetch.php",
-          type: "POST",
-          data: {
-            limit: limit,
-            start: start
-          },
-          cache: false,
-          success: function(data) {
-            $('#load_data').append(data);
-            if (data == '') {
-              $('#load_data_message').html("<button type='button' class='btn btn-info'>No Data Found</button>");
-              action = 'active';
-            } else {
-              $('#load_data_message').html("<button type='button' class='btn btn-warning'>Please Wait....</button>");
-              action = 'inactive';
-            }
-          }
-        });
-      }
-
-      if (action == 'inactive') {
-        action = 'active';
-        load_country_data(limit, start);
-      }
-
-      $(window).scroll(function() {
-        if ($(window).scrollTop() + $(window).height() > $("#load_data").height() && action == 'inactive') {
-          action = 'active';
-          start = start + limit;
-          setTimeout(function() {
-            load_country_data(limit, start);
-          }, 1000);
-        }
-      });
-
-
-    });
-    //onScroll
-  </script>
-
 </body>
+
 </html>

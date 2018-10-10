@@ -6,7 +6,7 @@
  while($row = mysqli_fetch_array($result))
  {
   echo '
-  
+
       <div class="col-md-3">
         <figure class="card card-product">
           <div class="img-wrap">imagen xd</div>
