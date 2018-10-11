@@ -3685,6 +3685,10 @@ input[type="button"].btn-block {
   content: "Browse";
 }
 
+.custom-file-input:lang(es) ~ .custom-file-label::after {
+  content: "Seleccionar";
+}
+
 .custom-file-label {
   position: absolute;
   top: 0;
@@ -3883,7 +3887,8 @@ input[type="button"].btn-block {
 }
 
 .nav-link:hover, .nav-link:focus {
-  text-decoration: none;
+  text-decoration: underline;
+  color: orange;
 }
 
 .nav-link.disabled {
