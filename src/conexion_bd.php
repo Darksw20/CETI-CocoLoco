@@ -2,7 +2,7 @@
 	$servidor = "localhost";
 	$usuario = "root";
 	$contraseña = "";
-	$basedatos = "invoice";
+	$basedatos = "Invoice";
 	
 	$con = mysqli_connect ($servidor, $usuario, $contraseña)
 	or die

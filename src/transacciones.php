@@ -14,7 +14,7 @@
                         <th scope='col'>Fecha</th>
                         <th scope='col'>Cliente</th>
                         <th scope='col'>Producto</th>
-                        <th scope='col'>Total</th>
+                        <th scope='col'>Subtotal</th>
                     </tr>
                 </thead>
                 <tbody>

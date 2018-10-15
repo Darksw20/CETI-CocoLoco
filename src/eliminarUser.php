@@ -3,7 +3,7 @@
 
     if (!empty($_POST['buscarProveedor'])) {
         if (!empty($delProv = $con->real_escape_string($_POST['buscarProveedor']))) {
-            $sql = "SELECT * FROM user WHERE User_Name LIKE '%".$delProv."%' AND Type_User = '1'";
+            $sql = "SELECT * FROM User WHERE User_Name LIKE '%".$delProv."%' AND Type_User = '1'";
             $resultado = $con->query($sql);
             if (mysqli_num_rows($resultado) > 0) {
                 echo "
@@ -46,7 +46,7 @@
         }
     } elseif (!empty($_POST['buscarUser'])) {
         if (!empty($delUser = $con->real_escape_string($_POST['buscarUser']))) {
-            $sql = "SELECT * FROM user WHERE User_Name LIKE '%".$delUser."%' AND Type_User = '0'";
+            $sql = "SELECT * FROM User WHERE User_Name LIKE '%".$delUser."%' AND Type_User = '0'";
             $resultado = $con->query($sql);
             if (mysqli_num_rows($resultado) > 0) {
                 echo "
@@ -91,7 +91,7 @@
 
     if (!empty($_POST['btnDel'])) {
         if (!empty($btnDel = $_POST['btnDel'])) {
-        $sql = mysqli_query($con, "DELETE FROM user WHERE User_Name = '$btnDel'");
+        $sql = mysqli_query($con, "DELETE FROM User WHERE User_Name = '$btnDel'");
             if ($sql) {
                 echo "Usuario eliminado.";
             } else {

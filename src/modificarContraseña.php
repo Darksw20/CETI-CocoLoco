@@ -9,7 +9,7 @@
   if(!empty($oldPass) && !empty($newPass) && !empty($newPass2)){
     if($oldPass == $_POST['modPasswordOld']){
       if($newPass == $newPass2){
-        $consulta = mysqli_query($con, "UPDATE user SET Password = '$newPass' WHERE User_Name = '$user'");
+        $consulta = mysqli_query($con, "UPDATE User SET Password = '$newPass' WHERE User_Name = '$user'");
         $msg = "Se cambió la contraseña.";
         header('Location: ../index.php?msg='.$msg);
       } else {

@@ -5,7 +5,7 @@
 	$pass = $con->real_escape_string($_POST['password']);
 		if (!empty($correo) && !empty($pass)) {
 			//$pass = sha1($pass);
-			$consulta = "SELECT * FROM user WHERE Mail = '$correo' AND Password = '$pass' LIMIT 1";
+			$consulta = "SELECT * FROM User WHERE Mail = '$correo' AND Password = '$pass' LIMIT 1";
 			$resultado = $con->query($consulta);
 			if ($resultado->num_rows > 0) {
 				$fila = $resultado->fetch_row();

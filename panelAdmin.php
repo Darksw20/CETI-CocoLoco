@@ -285,9 +285,9 @@
           <div class="card-body">
             <form action="src/transacciones.php" method="post" id="transaccion">
               <div class="form-row">
-                <label for="idProd">Nombre del producto o etiqueta</label>
+                <label for="idProd">Nombre del producto o categoría</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" id="buscarPGanancia" name="buscarPGanancia" onkeyup="verGanciasPProducto()" placeholder="Intoduce el nombre del producto o la etiqueta">
+                  <input type="text" class="form-control" id="buscarPGanancia" name="buscarPGanancia" onkeyup="verGanciasPProducto()" placeholder="Intoduce el nombre del producto o la categoría">
                 </div>
               </div>
             </form>
@@ -297,20 +297,6 @@
             <div class="container w-75 bg-light rounded shadow-sm" style="padding: 20px;">
               <div class="row">
                 <?php include('src/cuentas.php'); cuentas($con); ?>
-                <!--<div class="col">
-                  <h6>Productos vendidos</h6>
-                  <hr>
-                  <h5 class="text-success">
-                    <i class="fas fa-exchange-alt fa-lg"></i> 30
-                  </h5>
-                </div>
-                <div class="col">
-                  <h6>Ingreso total</h6>
-                  <hr>
-                  <h5 class="text-success">
-                    <i class="fas fa-dollar-sign fa-lg"></i> 90,000,000
-                  </h5>
-                </div>-->
               </div> 
             </div>
           </div>

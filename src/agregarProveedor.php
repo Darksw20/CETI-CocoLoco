@@ -13,7 +13,7 @@
     $codigoPostal = $con->real_escape_string($_POST['codigoPostal']);*/
     $tipoUsuario = $con->real_escape_string($_POST['Type_User']);
 
-    $sql = mysqli_query($con, "INSERT INTO user (User_Name, Password, Mail, Amount, Type_User, Name, Last_Name, Phone_Number, Adress_Code) VALUES ('$usernameProveedor', '$contrasenaProveedor', '$correoProveedor', '0', '$tipoUsuario', '$nombreProveedor', '$apellido', '$telefono', '60')");
+    $sql = mysqli_query($con, "INSERT INTO User (User_Name, Password, Mail, Amount, Type_User, Name, Last_Name, Phone_Number, Adress_Code) VALUES ('$usernameProveedor', '$contrasenaProveedor', '$correoProveedor', '0', '$tipoUsuario', '$nombreProveedor', '$apellido', '$telefono', '60')");
 
     if ($sql) {
         //echo "Se insertó";

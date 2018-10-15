@@ -3,7 +3,7 @@
 
     function infoUser($con, $user) {        
         //$user = $_POST['User_Name'];
-        $sql = "SELECT u.User_name, u.Password, u.Mail, u.Amount, u.Name, u.Last_Name, u.Phone_Number, u.Adress_Code, a.Code, a.Street AS St, a.Number AS StNum, a.Neighborhood_Code, n.Code AS Code, n.Name AS Col, n.PC AS PC FROM user AS u INNER JOIN adress AS a INNER JOIN neighborhood AS n ON u.Adress_Code = a.Code AND a.Neighborhood_Code = n.Code WHERE User_Name = '$user'";
+        $sql = "SELECT u.User_name, u.Password, u.Mail, u.Amount, u.Name, u.Last_Name, u.Phone_Number, u.Adress_Code, a.Code, a.Street AS St, a.Number AS StNum, a.Neighborhood_Code, n.Code AS Code, n.Name AS Col, n.PC AS PC FROM User AS u INNER JOIN Adress AS a INNER JOIN Neighborhood AS n ON u.Adress_Code = a.Code AND a.Neighborhood_Code = n.Code WHERE User_Name = '$user'";
         $res = $con->query($sql);
         if (mysqli_num_rows($res) > 0) {
             while ($fila = $res->fetch_assoc()) {                  

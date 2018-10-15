@@ -7,37 +7,37 @@
     $fecha7m2 = $fecha7m." 23:59:59";
     //Consulta donde verifico si la suma llegara a ser nula agregale un 0, un inner join de
     //la tabla de ventas a producto buscando entre el inicio de un dia y el final todas la ganancias
-    $Dato1=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN STOCKTAKING AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha7m1' AND '$fecha7m2'");
+    $Dato1=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN Stocktaking AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha7m1' AND '$fecha7m2'");
     //echo "7 dias:".$fecha7m."|".$fecha7m1."|".$fecha7m2."<br>";
     $fecha6m = date("Y-m-d",strtotime($fechahoy."- 5 days")); //a la fecha hoy resto 5 dias
     $fecha6m1 = $fecha6m." 00:00:00"; //Concateno con la hora de inicio del dia
     $fecha6m2 = $fecha6m." 23:59:59"; //Concateno con la ultima hora del dia
-    $Dato2=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN STOCKTAKING AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha6m1' AND '$fecha6m2'");
+    $Dato2=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN Stocktaking AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha6m1' AND '$fecha6m2'");
     //echo "6 dias:".$fecha6m."|".$fecha6m1."|".$fecha6m2."<br>";
     $fecha5m = date("Y-m-d",strtotime($fechahoy."- 4 days")); //a la fecha hoy resto 4 dias
     $fecha5m1 = $fecha5m." 00:00:00";
     $fecha5m2 = $fecha5m." 23:59:59";
-    $Dato3=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN STOCKTAKING AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha5m1' AND '$fecha5m2'");
+    $Dato3=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN Stocktaking AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha5m1' AND '$fecha5m2'");
     //echo "5 dias:".$fecha5m."|".$fecha5m1."|".$fecha5m2."<br>";
     $fecha4m = date("Y-m-d",strtotime($fechahoy."- 3 days")); //a la fecha hoy resto 3 dias
     $fecha4m1 = $fecha4m." 00:00:00";
     $fecha4m2 = $fecha4m." 23:59:59";
-    $Dato4=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN STOCKTAKING AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha4m1' AND '$fecha4m2'");
+    $Dato4=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN Stocktaking AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha4m1' AND '$fecha4m2'");
     //echo "4 dias:".$fecha4m."|".$fecha4m1."|".$fecha4m2."<br>";
     $fecha3m = date("Y-m-d",strtotime($fechahoy."- 2 days")); //a la fecha hoy resto 2 dias
     $fecha3m1 = $fecha3m." 00:00:00";
     $fecha3m2 = $fecha3m." 23:59:59";
-    $Dato5=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN STOCKTAKING AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha3m1' AND '$fecha3m2'");
+    $Dato5=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN Stocktaking AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha3m1' AND '$fecha3m2'");
     //echo "3 dias:".$fecha3m."|".$fecha3m1."|".$fecha3m2."<br>"; //a la fecha hoy resto 1 dias
     $fecha2m = date("Y-m-d",strtotime($fechahoy."- 1 days"));
     $fecha2m1 = $fecha2m." 00:00:00";
     $fecha2m2 = $fecha2m." 23:59:59";
-    $Dato6=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN STOCKTAKING AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha2m1' AND '$fecha2m2'");
+    $Dato6=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN Stocktaking AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha2m1' AND '$fecha2m2'");
     //echo "2 dias:".$fecha2m."|".$fecha2m1."|".$fecha2m2."<br>";//a la fecha hoy resto 6 dias
     $fecha1m = date("Y-m-d");
     $fecha1m1 = $fecha1m." 00:00:00";
     $fecha1m2 = $fecha1m." 23:59:59";
-    $Dato7=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN STOCKTAKING AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha1m1' AND '$fecha1m2'");
+    $Dato7=mysqli_query($con,"SELECT IFNULL(SUM(Rate),'0') FROM Transaction AS A INNER JOIN Stocktaking AS B ON A.Stocktaking_ID=B.ID WHERE A.Date BETWEEN '$fecha1m1' AND '$fecha1m2'");
     //echo "1 dias:".$fecha1m."|".$fecha1m1."|".$fecha1m2."<br>";//a la fecha hoy resto 6 dias
     //cadena para mandar al JS y mostrar
     //Estructura de la cadena
