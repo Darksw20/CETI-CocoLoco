@@ -268,3 +268,6 @@ ul ul a {
   font-style: normal;
   font-weight: normal;
 }
+.alert:hover {
+    cursor: pointer;
+  }

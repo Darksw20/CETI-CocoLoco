@@ -25,3 +25,7 @@ body{
 .form-rounded {
   border-radius: 1rem;
 }
+
+.alert:hover {
+  cursor: pointer;
+}
