@@ -138,14 +138,14 @@
               <div class="tab-content">
                 <div id="login" class="container tab-pane active">
                   <br>
-                  <form>
+                  <form action="src/proces-lgn.php" method="post">
                     <div class="form-group">
                       <label for="email">Correo electrónico:</label>
                       <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="form-group">
                       <label for="pwd">Contraseña:</label>
-                      <input type="password" class="form-control" name="contraseña" required>
+                      <input type="password" class="form-control" name="password" required>
                     </div>
                     <div class="form-group form-check">
                       <label class="form-check-label">
@@ -157,7 +157,7 @@
                 </div>
                 <div id="signup" class="container tab-pane fade">
                   <br>
-                  <form>
+                  <form action="src/registro.php" method="post">
                     <div class="form-row">
                       <div class="col-md-8 mb-3">
                         <label for="mail">Correo electrónico:</label>
@@ -175,31 +175,27 @@
                       </div>
                       <div class="col">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" class="form-control" name="apellido" id="apellido" required>
+                        <input type="text" class="form-control" name="apellidoUsuario" id="apellido" required>
                       </div>
                     </div>
                     <div class="form-row" style="padding-top: 1.2rem;">
                       <div class="col">
                         <label for="pwd">Contraseña:</label>
-                        <input type="password" class="form-control" name="contraseñaRegistro" id="pwd" required>
+                        <input type="password" class="form-control" name="passwordRegistro" id="pwd" required>
                       </div>
                       <div class="col">
                         <label for="pwd2">Repertir contraseña:</label>
-                        <input type="password" class="form-control" name="contraseñaRegistro2" id="pwd2" required>
+                        <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" required>
                       </div>
                     </div>
                     <h6 class="text-primary" style="padding-top:1.22rem;">Domicilio</h6>
                     <hr>
                     <div class="form-row">
-                      <div class="col-md-4 mb-2">
+                      <div class="col-md-6 mb-2">
                         <label for="streetReg">Calle</label>
                         <input type="text" class="form-control" id="streetReg" name="calle" required>
                       </div>
-                      <div class="col-md-2 mb-2">
-                        <label for="numCalleReg">Numero</label>
-                        <input type="text" class="form-control" id="numCalleReg" name="numeroCalle" required>
-                      </div>
-                      <div class="col-md-4 mb-2">
+                      <div class="col-md-6 mb-2">
                         <label for="formSelect0">Colonia</label>
                         <select class="form-control" id="formSelect0" name="colonia" required>
                           <option value=""></option>
@@ -208,10 +204,6 @@
                           <option value="2">La fresa</option>
                           <option value="3">La naca</option>
                         </select>
-                      </div>
-                      <div class="col-md-2 mb-2">
-                        <label for="cpReg">Código postal</label>
-                        <input type="text" class="form-control" id="cpReg" name="codigoPostal" required>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-primary" name="button">Registrar</button>
@@ -250,6 +242,9 @@
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#modPassword">Modificar contraseña</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link text-danger" href="src/proces-unlgn.php">Cerrar sesión</a>
+                </li>
               </ul>
             </div>
             <div class="card-body">
@@ -275,74 +270,7 @@
                   </form>
                 </div>
                 <div id="datos" class="container tab-pane fade">
-                  <form>
-                    <h6 class="text-primary">Datos personales</h6>
-                    <hr>
-                    <div class="form-row espacioHeightsm">
-                      <div class="col">
-                        <label for="nombre">Nombre(s):</label>
-                        <input type="text" class="form-control" name="nombreUsuario" id="nombre" placeholder="consulta para nombre">
-                      </div>
-                      <div class="col">
-                        <label for="apellidoMod">Apellido:</label>
-                        <input type="text" class="form-control" name="apellidoPatUsuario" id="apellidoMod" placeholder="consulta para AP">
-                      </div>
-                      <div class="col">
-                        <label for="tel">Telefono:</label>
-                        <input type="text" class="form-control" name="telefono" id="tel" placeholder="consulta para tel">
-                      </div>
-                    </div>
-                    <h6 class="text-primary">Domicilio</h6>
-                    <hr>
-                    <div class="form-row espacioHeightsm">
-                      <div class="col-md-4 mb-2">
-                        <label for="street">Calle</label>
-                        <input type="text" class="form-control" id="street" name="calle" placeholder="consulta para calle">
-                      </div>
-                      <div class="col-md-2 mb-2">
-                        <label for="numCalle">Numero</label>
-                        <input type="text" class="form-control" id="numCalle" name="numeroCalle" placeholder="consulta para numero">
-                      </div>
-                      <div class="col-md-4 mb-2">
-                        <label for="formSelect0">Colonia</label>
-                        <select class="form-control" id="formSelect0" name="colonia" required>
-                          <option value=""></option>
-                          <option value="0">La chida</option>
-                          <option value="1">La chafa</option>
-                          <option value="2">La fresa</option>
-                          <option value="3">La naca</option>
-                        </select>
-                      </div>
-                      <div class="col-md-2 mb-2">
-                        <label for="cp">Código postal</label>
-                        <input type="text" class="form-control" id="cp" name="codigoPostal" placeholder="consulta para CP">
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" name="button">Modificar</button>
-                  </form>
-                </div>
-                <div id="modPassword" class="container tab-pane">
-                  <form>
-                    <div class="form-row espacioHeightsm">
-                      <div class="col-md-6 -mb-3">
-                        <label for="passOld">Contraseña antigua:</label>
-                        <input type="password" class="form-control" name="modPasswordOld" id="passOld">
-                      </div>
-                    </div>
-                    <h6 class="text-primary">Escribe tu nueva contraseña</h6>
-                    <hr>
-                    <div class="form-row espacioHeightsm">
-                      <div class="col">
-                        <label for="newPwd">Contraseña:</label>
-                        <input type="password" class="form-control" name="contrasenaMod" id="newPwd">
-                      </div>
-                      <div class="col">
-                        <label for="newPwd2">Repertir contraseña:</label>
-                        <input type="password" class="form-control" name="contraseMod2" id="newPwd2">
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Modificar</button>
-                  </form>
+                  <?php infoUser($con, $user); ?>
                 </div>
               </div>
             </div>
@@ -456,7 +384,7 @@
 
       function load_country_data(limit, start) {
         $.ajax({
-          url: "fetch.php",
+          url: "src/fetchProductos.php",
           type: "POST",
           data: {
             limit: limit,
