@@ -5,7 +5,7 @@ function cerrarMsg() {
         })
     })
 }
-function buscarProv() { 
+function buscarProv() {
     $(function(){
         $('#buscar-proveedor').submit(function(e){
             e.preventDefault(); //Se previene el envio del formulario
@@ -145,6 +145,7 @@ $(document).ready(function(){
         edit_data(id,User_User_Name, "User_User_Name");
     });
 });
+
 function verGanciasPProducto() {
     $(function(){
         $('#transaccion').submit(function(e){
@@ -167,3 +168,50 @@ function verGanciasPProducto() {
         })
     })
 }
+//onScroll
+$(document).ready(function() {
+
+  var limit = 12;
+  var start = 0;
+  var action = 'inactive';
+
+  function load_country_data(limit, start) {
+    $.ajax({
+      url: "src/fetch.php",
+      type: "POST",
+      data: {
+        limit: limit,
+        start: start
+      },
+      cache: false,
+      success: function(data) {
+        $('#load_data').append(data);
+        if (data == '') {
+          $('#load_data_message').html("<button type='button' class='btn btn-info'>No Data Found</button>");
+          action = 'active';
+        } else {
+          $('#load_data_message').html("<button type='button' class='btn btn-warning'>Please Wait....</button>");
+          action = 'inactive';
+        }
+      }
+    });
+  }
+
+  if (action == 'inactive') {
+    action = 'active';
+    load_country_data(limit, start);
+  }
+
+  $(window).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() > $("#load_data").height() && action == 'inactive') {
+      action = 'active';
+      start = start + limit;
+      setTimeout(function() {
+        load_country_data(limit, start);
+      }, 1000);
+    }
+  });
+
+
+});
+//onScroll

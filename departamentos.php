@@ -1,3 +1,11 @@
+<?php
+  session_start();
+
+  include('src/infoUser.php');
+  $user = $_SESSION['User_Name'];
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
@@ -17,7 +25,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
+  <script src="js/ajax.js" charset="utf-8"></script>
 </head>
 <body>
 
@@ -358,7 +366,7 @@
   </div>
   <!--modalCarrito-->
 
-  <footer class="section-footer bg2 fixed-bottom">
+  <footer class="section-footer bg2">
   	<div class="container">
   		<section class="footer-bottom row">
   			<div class="col-sm-6">
@@ -373,56 +381,6 @@
   		</section> <!-- //footer-top -->
   	</div><!-- //container -->
   </footer>
-
-  <script>
-    //onScroll
-    $(document).ready(function() {
-
-      var limit = 12;
-      var start = 0;
-      var action = 'inactive';
-
-      function load_country_data(limit, start) {
-        $.ajax({
-          url: "src/fetchProductos.php",
-          type: "POST",
-          data: {
-            limit: limit,
-            start: start
-          },
-          cache: false,
-          success: function(data) {
-            $('#load_data').append(data);
-            if (data == '') {
-              $('#load_data_message').html("<button type='button' class='btn btn-info'>No Data Found</button>");
-              action = 'active';
-            } else {
-              $('#load_data_message').html("<button type='button' class='btn btn-warning'>Please Wait....</button>");
-              action = 'inactive';
-            }
-          }
-        });
-      }
-
-      if (action == 'inactive') {
-        action = 'active';
-        load_country_data(limit, start);
-      }
-
-      $(window).scroll(function() {
-        if ($(window).scrollTop() + $(window).height() > $("#load_data").height() && action == 'inactive') {
-          action = 'active';
-          start = start + limit;
-          setTimeout(function() {
-            load_country_data(limit, start);
-          }, 1000);
-        }
-      });
-
-
-    });
-    //onScroll
-  </script>
 
 </body>
 </html>

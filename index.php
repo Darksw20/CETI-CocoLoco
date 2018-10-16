@@ -1,8 +1,13 @@
 <?php
   session_start();
 
+  if (!$_SESSION) {
+    echo "";
+  } else {
+    $user = $_SESSION['User_Name'];
+  }
+
   include('src/infoUser.php');
-  $user = $_SESSION['User_Name'];
 ?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
@@ -216,11 +221,15 @@
                     <h6 class="text-primary" style="padding-top:1.22rem;">Domicilio</h6>
                     <hr>
                     <div class="form-row">
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-4 mb-2">
                         <label for="streetReg">Calle</label>
                         <input type="text" class="form-control" id="streetReg" name="calle" required>
                       </div>
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-2 mb-2">
+                        <label for="numCalleReg">Numero</label>
+                        <input type="text" class="form-control" id="numCalleReg" name="numeroCalle" required>
+                      </div>
+                      <div class="col-md-4 mb-2">
                         <label for="formSelect0">Colonia</label>
                         <select class="form-control" id="formSelect0" name="colonia" required>
                           <option value=""></option>
@@ -229,6 +238,10 @@
                           <option value="2">La fresa</option>
                           <option value="3">La naca</option>
                         </select>
+                      </div>
+                      <div class="col-md-2 mb-2">
+                        <label for="cpReg">Código postal</label>
+                        <input type="text" class="form-control" id="cpReg" name="codigoPostal" required>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-primary" name="button">Registrar</button>

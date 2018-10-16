@@ -77,7 +77,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="text-dark">
+          <a href="src/proces-unlgn.php" class="text-dark">
             <i class="fas fa-user-circle fa-lg"></i>Cerrar sesión
           </a>
         </li>

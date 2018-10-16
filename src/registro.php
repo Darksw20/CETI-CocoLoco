@@ -18,7 +18,14 @@
     $address = '60'; //La dirección por defecto es 1 (Ninguna (Así asignado en la BD))
 
     //Se insertan los datos en la tabla 'user'
-    $sql = mysqli_query($con, "INSERT INTO User(`User_Name`, `Password`, `Mail`, `Amount`, `Type_User`, `Name`, `Last_Name`, `Phone_Number`, `Adress_Code`) VALUES ('$nombreUser', '$passwordRegistro', '$emailRegistro', '$amount', '$type_User', '$nombreUsuario', '$apellidoUsuario', '$phone', '$address')"); 
+    //$sql = mysqli_query($con, "INSERT INTO User(`User_Name`, `Password`, `Mail`, `Amount`, `Type_User`, `Name`, `Last_Name`, `Phone_Number`, `Adress_Code`) VALUES ('$nombreUser', '$passwordRegistro', '$emailRegistro', '$amount', '$type_User', '$nombreUsuario', '$apellidoUsuario', '$phone', '$address')"); 
+
+    $sql = "INSERT INTO User(`User_Name`, `Password`, `Mail`, `Amount`, `Type_User`, `Name`, `Last_Name`, `Phone_Number`, `Adress_Code`) VALUES ('$nombreUser', '$passwordRegistro', '$emailRegistro', '$amount', '$type_User', '$nombreUsuario', '$apellidoUsuario', '$phone', '$address')"; 
+
+    $sentencia = $con->prepare($sql);
+    $sentencia->execute();
+    $sentencia->close();
+
     if ($sql) {
         //echo "EXITO";
         //Si se realizó la consulta, se regresa al usuario a la página principal
