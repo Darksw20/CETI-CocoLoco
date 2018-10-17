@@ -13,17 +13,11 @@
     $codigoPostal = $con->real_escape_string($_POST['codigoPostal']);*/
     $tipoUsuario = $con->real_escape_string($_POST['Type_User']);
 
-    //$sql = mysqli_query($con, "INSERT INTO User (User_Name, Password, Mail, Amount, Type_User, Name, Last_Name, Phone_Number, Adress_Code) VALUES ('$usernameProveedor', '$contrasenaProveedor', '$correoProveedor', '0', '$tipoUsuario', '$nombreProveedor', '$apellido', '$telefono', '60')");
-
-    $sql = "INSERT INTO User (User_Name, Password, Mail, Amount, Type_User, Name, Last_Name, Phone_Number, Adress_Code) VALUES ('$usernameProveedor', '$contrasenaProveedor', '$correoProveedor', '0', '$tipoUsuario', '$nombreProveedor', '$apellido', '$telefono', '60')";
-
-    $sentencia = $con->prepare($sql);
-    $sentencia->execute();
-    $sentencia->close();
+    $sql = mysqli_query($con, "INSERT INTO User (User_Name, Password, Mail, Amount, Type_User, Name, Last_Name, Phone_Number, Adress_Code) VALUES ('$usernameProveedor', '$contrasenaProveedor', '$correoProveedor', '0', '$tipoUsuario', '$nombreProveedor', '$apellido', '$telefono', '60')");
 
     if ($sql) {
         //echo "Se insertó";
-        $msg = "Se agregó proveedor.";
+        $msg = "Se agregó proveedor."
         header('Location: ../panelAdmin.php?msg='.$msg);
     } else {
         echo "No se insertó <br />";

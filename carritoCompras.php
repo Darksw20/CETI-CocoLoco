@@ -1,44 +1,27 @@
-<?php
-  session_start();
-
-  include('src/infoUser.php');
-  $user = $_SESSION['User_Name'];
-?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
 <head>
-  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap 4/bootstrap.css">
   <link rel="stylesheet" href="css/bootstrap 4/adicional.css">
   <link href="css/uikit.css" rel="stylesheet" type="text/css" />
   <link href="css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+  <link href="css/fancybox.min.css" type="text/css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script src="js/ajax.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="js/fancybox.min.js" type="text/javascript"></script>
 </head>
 
 <body>
 
-  <div class="container-fluid text-center espacioHeight">
-    proyecto Desarrollado por 8B1 con coquiux
-    <div class="row" id="msg">
-      <div class="container-fluid">
-        <?php
-          if (!empty($_GET['msg'])) {
-            echo "
-                <div class='alert alert-success position-absolute' role='alert' onclick='cerrarMsg()'>".
-                  $_GET['msg']
-                ."</div>
-            ";
-          }
-        ?>
-      </div>
-    </div>
-  </div>
   <!--barra inicio-->
   <div class="section-header sticky-top bg-white">
     <section style="padding: 5px;">
@@ -47,9 +30,9 @@
           <div class="col-lg-3 col-sm-5 col-4">
             <div class="brand-wrap">
               <img class="logo" src="">
-              <h2 class="logo-text">CoCo</h2>
+              <h2 class="logo-text text-primary">Co</h2><h2 class="logo-text text-warning">Co</h2>
             </div>
-            <!-- brand-wrap.// -->
+            <!-- brand-wrap -->
           </div>
           <div class="col-lg-6 col-sm-12 order-3 order-lg-2">
             <ul class="navbar mx-auto" style="list-style: none; margin-bottom: 0;">
@@ -65,30 +48,17 @@
                 <a href="#" class="nav-link font-weight-bold text-dark">Link</a>
               </li>
             </ul>
-            <!-- search-wrap .end// -->
+            <!-- search-wrap  -->
           </div>
-          <!-- col.// -->
+          <!-- col -->
           <div class="col-lg-3 col-sm-7 col-8  order-2  order-lg-3">
             <div class="d-flex justify-content-end">
-              <?php
-                if($_SESSION){
-                  echo"
-                  <div class='widget-header'>
-                    <small class='title text-muted' data-toggle='modal' data-target='#modalModificar'>Hola, ".$_SESSION['User_Name']."</small>
-                    <div>
-                      <a href='#'' class='text-dark' data-toggle='modal' data-target='#modalModificar'>Mi cuenta</a>
-                    </div>
-                  </div>";
-                } else {
-                  echo "
-                    <div class='widget-header'>
-                      <small class='title text-muted' >¡Hola, invitado!</small>
-                      <div>
-                        <a href='#'' class='text-dark' data-toggle='modal' data-target='#modalRegistro'>Iniciar sesión</a>
-                      </div>
-                    </div>";
-                }
-              ?>
+              <div class="widget-header">
+                <small class="title text-muted" data-toggle="modal" data-target="#modalModificar">¡Hola, invitado!</small>
+                <div>
+                  <a href="#" class="text-dark" data-toggle="modal" data-target="#modalRegistro">Iniciar sesión</a>
+                </div>
+              </div>
               <a href="#" class="widget-header border-left pl-3 ml-3" data-toggle="modal" data-target="#modalCarrito">
                 <div class="icontext">
                   <div class="icon-wrap icon-sm round border"><i class="fa fa-shopping-cart text-dark"></i></div>
@@ -96,48 +66,92 @@
                 <span class="badge badge-pill badge-danger notify">0</span>
               </a>
             </div>
-            <!-- widgets-wrap.// -->
+            <!-- widgets-wrap -->
           </div>
-          <!-- col.// -->
+          <!-- col -->
         </div>
-        <!-- row.// -->
+        <!-- row -->
       </div>
-      <!-- container.// -->
+      <!-- container -->
     </section>
-    <!-- header-main .// -->
+    <!-- header-main  -->
   </div>
   <!--barra inicio-->
 
-  <!--Carrusel-->
-  <div id="demo" class="carousel slide" data-ride="carousel">
-    <ul class="carousel-indicators">
-      <li data-target="#demo" data-slide-to="0" class="active"></li>
-      <li data-target="#demo" data-slide-to="1"></li>
-      <li data-target="#demo" data-slide-to="2"></li>
-    </ul>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="imagenes/gray.jpg" alt="Los Angeles" width="100%" height="800">
-      </div>
-      <div class="carousel-item">
-        <img src="imagenes/gray.jpg" alt="Chicago" width="100%" height="800">
-        <div class="carousel-caption">
-          <h3>nombre</h3>
-          <p>Descripcion de producto</p>
+  <div class="row spacer" style="padding-top: 2rem;">
+    <div class="col-lg-12 col-md-10 col-sm-12">
+      <main class="card">
+        <div class="row">
+          <aside class="col-sm-6 border-right">
+            <article class="gallery-wrap">
+              <div class="img-big-wrap">
+                <div>
+                  <a href="images/items/1.jpg" data-fancybox=""><img src="images/items/1.jpg"></a>
+                </div>
+              </div>
+              <!-- slider-product -->
+            </article>
+            <!-- gallery-wrap -->
+          </aside>
+          <aside class="col-sm-6">
+            <article class="card-body">
+              <!-- short-info-wrap -->
+              <h3 class="title mb-3">Nombre mamalon</h3>
+
+              <div class="mb-3">
+                <var class="price h3 text-primary">
+		                <span class="currency">MXN $</span><span class="num">1299</span>
+	              </var>
+                <span>/por unidad</span>
+              </div>
+              <!-- price-detail-wrap  -->
+              <dl>
+                <dt>Descripción</dt>
+                <dd>
+                  <p>un producto bien shido que si funciona </p>
+                </dd>
+              </dl>
+              <dl class="row">
+                <dt class="col-sm-3">ID Producto#</dt>
+                <dd class="col-sm-9">12345611</dd>
+
+                <dt class="col-sm-3">Vendido por:</dt>
+                <dd class="col-sm-9">planchasmamalonas.com</dd>
+
+              </dl>
+              <hr>
+              <div class="row">
+                <div class="col-sm-5">
+                  <dl class="dlist-inline">
+                    <dt>Quantity: </dt>
+                    <dd>
+                      <select class="form-control form-control-sm" style="width:70px;">
+                        <option> 1 </option>
+                        <option> 2 </option>
+                        <option> 3 </option>
+                      </select>
+                    </dd>
+                  </dl>
+                  <!-- item-property  -->
+                </div>
+                <!-- col -->
+              </div>
+              <!-- row -->
+              <hr>
+              <a href="#" class="btn  btn-primary"> <i class="fa fa-shopping-cart"></i> Agregar al carrito </a>
+              <!-- short-info-wrap  -->
+            </article>
+            <!-- card-body -->
+          </aside>
+          <!-- col -->
         </div>
-      </div>
-      <div class="carousel-item">
-        <img src="imagenes/gray.jpg" alt="New York" width="100%" height="800">
-      </div>
+        <!-- row -->
+      </main>
+      <!-- card -->
     </div>
-    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#demo" data-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </a>
+    <!-- col -->
   </div>
-  <!--Carrusel-->
+  <!-- row -->
 
   <!--modalRegistro-->
   <div class="modal" id="modalRegistro">
@@ -163,14 +177,14 @@
               <div class="tab-content">
                 <div id="login" class="container tab-pane active">
                   <br>
-                  <form action="src/proces-lgn.php" method="post">
+                  <form>
                     <div class="form-group">
                       <label for="email">Correo electrónico:</label>
                       <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="form-group">
                       <label for="pwd">Contraseña:</label>
-                      <input type="password" class="form-control" name="password" required>
+                      <input type="password" class="form-control" name="contraseña" required>
                     </div>
                     <div class="form-group form-check">
                       <label class="form-check-label">
@@ -182,7 +196,7 @@
                 </div>
                 <div id="signup" class="container tab-pane fade">
                   <br>
-                  <form action="src/registro.php" method="post">
+                  <form>
                     <div class="form-row">
                       <div class="col-md-8 mb-3">
                         <label for="mail">Correo electrónico:</label>
@@ -200,27 +214,31 @@
                       </div>
                       <div class="col">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" class="form-control" name="apellidoUsuario" id="apellido" required>
+                        <input type="text" class="form-control" name="apellido" id="apellido" required>
                       </div>
                     </div>
                     <div class="form-row" style="padding-top: 1.2rem;">
                       <div class="col">
                         <label for="pwd">Contraseña:</label>
-                        <input type="password" class="form-control" name="passwordRegistro" id="pwd" required>
+                        <input type="password" class="form-control" name="contraseñaRegistro" id="pwd" required>
                       </div>
                       <div class="col">
                         <label for="pwd2">Repertir contraseña:</label>
-                        <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" required>
+                        <input type="password" class="form-control" name="contraseñaRegistro2" id="pwd2" required>
                       </div>
                     </div>
                     <h6 class="text-primary" style="padding-top:1.22rem;">Domicilio</h6>
                     <hr>
                     <div class="form-row">
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-4 mb-2">
                         <label for="streetReg">Calle</label>
                         <input type="text" class="form-control" id="streetReg" name="calle" required>
                       </div>
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-2 mb-2">
+                        <label for="numCalleReg">Numero</label>
+                        <input type="text" class="form-control" id="numCalleReg" name="numeroCalle" required>
+                      </div>
+                      <div class="col-md-4 mb-2">
                         <label for="formSelect0">Colonia</label>
                         <select class="form-control" id="formSelect0" name="colonia" required>
                           <option value=""></option>
@@ -229,6 +247,10 @@
                           <option value="2">La fresa</option>
                           <option value="3">La naca</option>
                         </select>
+                      </div>
+                      <div class="col-md-2 mb-2">
+                        <label for="cpReg">Código postal</label>
+                        <input type="text" class="form-control" id="cpReg" name="codigoPostal" required>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-primary" name="button">Registrar</button>
@@ -267,9 +289,6 @@
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#modPassword">Modificar contraseña</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link text-danger" href="src/proces-unlgn.php">Cerrar sesión</a>
-                </li>
               </ul>
             </div>
             <div class="card-body">
@@ -295,7 +314,74 @@
                   </form>
                 </div>
                 <div id="datos" class="container tab-pane fade">
-                  <?php infoUser($con, $user); ?>
+                  <form>
+                    <h6 class="text-primary">Datos personales</h6>
+                    <hr>
+                    <div class="form-row espacioHeightsm">
+                      <div class="col">
+                        <label for="nombre">Nombre(s):</label>
+                        <input type="text" class="form-control" name="nombreUsuario" id="nombre" placeholder="consulta para nombre">
+                      </div>
+                      <div class="col">
+                        <label for="apellidoMod">Apellido:</label>
+                        <input type="text" class="form-control" name="apellidoPatUsuario" id="apellidoMod" placeholder="consulta para AP">
+                      </div>
+                      <div class="col">
+                        <label for="tel">Telefono:</label>
+                        <input type="text" class="form-control" name="telefono" id="tel" placeholder="consulta para tel">
+                      </div>
+                    </div>
+                    <h6 class="text-primary">Domicilio</h6>
+                    <hr>
+                    <div class="form-row espacioHeightsm">
+                      <div class="col-md-4 mb-2">
+                        <label for="street">Calle</label>
+                        <input type="text" class="form-control" id="street" name="calle" placeholder="consulta para calle">
+                      </div>
+                      <div class="col-md-2 mb-2">
+                        <label for="numCalle">Numero</label>
+                        <input type="text" class="form-control" id="numCalle" name="numeroCalle" placeholder="consulta para numero">
+                      </div>
+                      <div class="col-md-4 mb-2">
+                        <label for="formSelect0">Colonia</label>
+                        <select class="form-control" id="formSelect0" name="colonia" required>
+                          <option value=""></option>
+                          <option value="0">La chida</option>
+                          <option value="1">La chafa</option>
+                          <option value="2">La fresa</option>
+                          <option value="3">La naca</option>
+                        </select>
+                      </div>
+                      <div class="col-md-2 mb-2">
+                        <label for="cp">Código postal</label>
+                        <input type="text" class="form-control" id="cp" name="codigoPostal" placeholder="consulta para CP">
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="button">Modificar</button>
+                  </form>
+                </div>
+                <div id="modPassword" class="container tab-pane">
+                  <form>
+                    <div class="form-row espacioHeightsm">
+                      <div class="col-md-6 -mb-3">
+                        <label for="passOld">Contraseña antigua:</label>
+                        <input type="password" class="form-control" name="modPasswordOld" id="passOld">
+                      </div>
+                    </div>
+                    <h6 class="text-primary">Escribe tu nueva contraseña</h6>
+                    <hr>
+                    <div class="form-row espacioHeightsm">
+                      <div class="col">
+                        <label for="newPwd">Contraseña:</label>
+                        <input type="password" class="form-control" name="contrasenaMod" id="newPwd">
+                      </div>
+                      <div class="col">
+                        <label for="newPwd2">Repertir contraseña:</label>
+                        <input type="password" class="form-control" name="contraseMod2" id="newPwd2">
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Modificar</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -383,155 +469,20 @@
   </div>
   <!--modalCarrito-->
 
-  <!-- productos recomendados -->
-  <section class="section-request bg padding-y-sm">
-    <div class="container">
-      <header class="section-heading heading-line">
-        <h4 class="title-section bg text-uppercase">Productos recomendados</h4>
-      </header>
-
-      <div class="row">
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/3.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-
-              <div class="price-wrap">
-                <span class="price-new">$1280</span>
-                <del class="price-old">$1980</del>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/4.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/5.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/6.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-      </div>
-
-      <div class="row">
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/3.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-
-              <div class="price-wrap">
-                <span class="price-new">$1280</span>
-                <del class="price-old">$1980</del>
-              </div>
-              <!-- price-wrap.// -->
-
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/4.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/5.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/6.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-      </div>
-      <!-- row.// -->
-    </div>
-    <!-- container // -->
-  </section>
-  <!-- productos recomendados -->
-
-  <footer class="section-footer bg2">
-    <div class="container">
-      <section class="footer-bottom row">
-        <div class="col-sm-6">
-          <p> Hecho con un chingo de amor, dedicación y muchas desveladas por el grupo más verga del CETI sionoraza &lt;3 <br></p>
-        </div>
-        <div class="col-sm-6">
-          <p class="text-sm-right">
+  <footer class="section-footer bg2 fixed-bottom">
+  	<div class="container">
+  		<section class="footer-bottom row">
+  			<div class="col-sm-6">
+  				<p> Hecho con un chingo de amor, dedicación y muchas desveladas por el grupo más verga del CETI sionoraza &lt;3 <br></p>
+  			</div>
+  			<div class="col-sm-6">
+  				<p class="text-sm-right">
               Copyright © 2018 <br>
             <a href="https://www.facebook.com/ismaelCO2">Maestro chido de la carrera</a>
-          </p>
-        </div>
-      </section> <!-- //footer-top -->
-    </div><!-- //container -->
+  				</p>
+  			</div>
+  		</section> <!-- //footer-top -->
+  	</div><!-- //container -->
   </footer>
 
 </body>

@@ -21,10 +21,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="js/ajax.js" charset="utf-8"></script>
 </head>
 <body>
@@ -37,7 +33,7 @@
           <div class="col-lg-5-24 col-sm-5 col-4">
             <div class="brand-wrap">
               <img class="logo" src="">
-              <h2 class="logo-text">CoCo</h2>
+              <h2 class="logo-text"><a href="index.php" class="text-dark">CoCo</a></h2>
             </div>
             <!-- brand-wrap -->
           </div>
@@ -57,18 +53,32 @@
           <!-- col -->
           <div class="col-lg-6-24 col-sm-7 col-8  order-2  order-lg-3">
             <div class="d-flex justify-content-end">
-              <div class="widget-header">
-                <small class="title text-muted" data-toggle="modal" data-target="#modalModificar">¡Hola, invitado!</small>
-                <div>
-                  <a href="#" class="text-dark" data-toggle="modal" data-target="#modalRegistro">Iniciar sesión</a>
-                </div>
-              </div>
-              <a href="#" class="widget-header border-left pl-3 ml-3" data-toggle="modal" data-target="#modalCarrito">
+              <?php
+                if($_SESSION){
+                  echo"
+                  <div class='widget-header'>
+                    <small class='title text-muted' data-toggle='modal' data-target='#modalModificar'>Hola, ".$_SESSION['User_Name']."</small>
+                    <div>
+                      <a href='#'' class='text-dark' data-toggle='modal' data-target='#modalModificar'>Mi cuenta</a>
+                    </div>
+                  </div>";
+                } else {
+                  echo "
+                    <div class='widget-header'>
+                      <small class='title text-muted' >¡Hola, invitado!</small>
+                      <div>
+                        <a href='#'' class='text-dark' data-toggle='modal' data-target='#modalRegistro'>Iniciar sesión</a>
+                      </div>
+                    </div>";
+                }
+              ?>
+              <a id="cart-popover" class="widget-header border-left pl-3 ml-3" data-container="body" data-toggle="popover" data-placement="bottom" title="Shopping Cart">
                 <div class="icontext">
                   <div class="icon-wrap icon-sm round border"><i class="fa fa-shopping-cart text-dark"></i></div>
                 </div>
                 <span class="badge badge-pill badge-danger notify">0</span>
-              </a>
+								<span class="total_price">$ 0.00</span>
+							</a>
             </div>
             <!-- widgets-wrap -->
           </div>
@@ -81,6 +91,19 @@
     <!-- header-main -->
   </div>
   <!-- barra navegacion Categorias -->
+
+  <!--popover-->
+  <div id="popover_content_wrapper" style="display: none">
+  	<span id="cart_details"></span>
+  	<div align="right">
+  		<a href="src/checkout.php" class="btn btn-primary" id="check_out_cart">
+  		 <i class="fa fa-shopping-cart"></i> Proceder al pago
+  		</a>
+  		<a href="#" class="btn btn-danger" id="clear_cart">
+  		 <i class="fas fa-trash-alt"></i> Vaciar todo
+  		</a>
+  	</div>
+  </div>
 
   <!-- container principal-->
   <div class="container-fluid spacer">

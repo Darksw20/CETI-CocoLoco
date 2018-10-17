@@ -2,6 +2,11 @@ body{
   background-color: #fafafa;
 }
 
+.popover{
+  width: 100%;
+  max-width: 800px;
+}
+
 .espacioWidth{
   padding-left: 15px;
   padding-right: 15px;

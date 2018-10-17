@@ -16,19 +16,14 @@
   <link rel="stylesheet" href="css/bootstrap 4/bootstrap.css">
   <link rel="stylesheet" href="css/bootstrap 4/adicionalPanel.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
   <script src="jsGraficas/highcharts.js" charset="utf-8"></script>
   <script src="jsGraficas/modules/exporting.js" charset="utf-8"></script>
-  <script src="js/jquery.tabledit.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -42,7 +37,7 @@
 
       <ul class="list-unstyled components">
         <li>
-          <a href="#" onclick="toggleVisibility('adminDash')" class="text-dark">
+          <a href="#" onclick="toggleVisibility('provDash')" class="text-dark">
             <i class="fas fa-chart-line fa-lg"></i>Dashboard
           </a>
         </li>
@@ -59,6 +54,11 @@
         <li>
           <a href="#" onclick="toggleVisibility('modificarProducto')" class="text-dark">
             <i class="fas fa-edit fa-lg"></i>Modificar producto
+          </a>
+        </li>
+        <li>
+          <a href="src/proces-unlgn.php" class="text-dark">
+            <i class="fas fa-user-circle fa-lg"></i>Cerrar sesión
           </a>
         </li>
       </ul>
@@ -88,11 +88,7 @@
                 <h6 class="text-primary">Datos de producto</h6>
                 <hr>
                 <div class="form-row">
-                  <div class="col-md-3 mb-2">
-                    <label for="idprod">ID producto</label>
-                    <input type="text" class="form-control" id="idprod" name="idProductoNuevo" required>
-                  </div>
-                  <div class="col-md-3 mb-2">
+                  <div class="col-md-6 mb-2">
                     <label for="nombreP">Nombre</label>
                     <input type="text" class="form-control" id="nombreP" name="nombreProducto" required>
                   </div>

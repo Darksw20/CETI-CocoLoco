@@ -15,13 +15,10 @@
   <link rel="stylesheet" href="css/bootstrap 4/bootstrap.css">
   <link rel="stylesheet" href="css/bootstrap 4/adicionalPanel.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="jsGraficas/highcharts.js" charset="utf-8"></script>
@@ -110,15 +107,15 @@
                 <h6 class="text-primary">Datos de usuario</h6>
                 <hr>
                 <div class="form-row">
-                  <div class="col-md-3 mb-2">
+                  <div class="col-md-4 mb-2">
                     <label for="nombreProv">Nombre</label>
                     <input type="text" class="form-control" id="nombreProv" name="nombreProveedor" required>
                   </div>
-                  <div class="col-md-3 mb-2">
+                  <div class="col-md-4 mb-2">
                     <label for="apPaterno">Apellido</label>
                     <input type="text" class="form-control" id="apPaterno" name="apellido" required>
                   </div>
-                  <div class="col-md-3 mb-2">
+                  <div class="col-md-4 mb-2">
                     <label for="tel">Teléfono</label>
                     <input type="text" class="form-control" id="tel" name="telefono" required>
                   </div>
@@ -142,15 +139,11 @@
                 <h6 class="text-primary">Domicilio</h6>
                 <hr>
                 <div class="form-row">
-                  <div class="col-md-4 mb-2">
+                  <div class="col-md-6 mb-2">
                     <label for="street">Calle</label>
                     <input type="text" class="form-control" id="street" name="calle" required>
                   </div>
-                  <div class="col-md-2 mb-2">
-                    <label for="num">Número</label>
-                    <input type="text" class="form-control" id="num" name="numeroCalle" required>
-                  </div>
-                  <div class="col-md-4 mb-2">
+                  <div class="col-md-6 mb-2">
                     <label for="formSelect0">Colonia</label>
                     <select class="form-control" id="formSelect0" name="colonia" required>
                       <option value=""></option>
@@ -159,10 +152,6 @@
                       <option value="2">La fresa</option>
                       <option value="3">La naca</option>
                     </select>
-                  </div>
-                  <div class="col-md-2 mb-2">
-                    <label for="cp">Código postal</label>
-                    <input type="text" class="form-control" id="cp" name="codigoPostal" required>
                   </div>
                 </div>
                 <input type="hidden" name="Type_User" value="1">
@@ -297,7 +286,7 @@
             <div class="container w-75 bg-light rounded shadow-sm" style="padding: 20px;">
               <div class="row">
                 <?php include('src/cuentas.php'); cuentas($con); ?>
-              </div> 
+              </div>
             </div>
           </div>
           <!--Card-body-->
@@ -437,11 +426,11 @@
         <div class="container-fluid">
           <?php
             if (!empty($_GET['msg'])) {
-              echo "     
+              echo "
                   <div class='alert alert-success position-absolute' role='alert' onclick='cerrarMsg()'>".
                     $_GET['msg']
                   ."</div>
-              "; 
+              ";
             }
           ?>
         </div>
@@ -507,7 +496,7 @@
                       text: '',
                       x: -20
                   },
-                  
+
                   xAxis: {
                       categories: [<?php echo $cadenatotal; ?>]
                   },
@@ -562,11 +551,11 @@
                   },
 
                   series: [{
-                    
+
                       name: 'Ganancia por Dia',
                       data: [<?php
                              //A.Folio, A.Date, A.Stocktaking_ID, Id, Product_Name, Rate, COUNT(Rate)
-                        
+
                         echo $numeral;
                         ?>
                         ]
@@ -584,9 +573,9 @@
                     plotShadow: false
                 },
                 title: {
-                    text: 'Browser<br>shares',
+                    text: 'Categorías más vendidas',
                     align: 'center',
-                    verticalAlign: 'middle',
+                    verticalAlign: 'top',
                     y: 50
                 },
                 tooltip: {
@@ -596,7 +585,7 @@
                     pie: {
                         dataLabels: {
                             enabled: true,
-                            distance: -50,
+                            distance: 0,
                             style: {
                                 fontWeight: 'bold',
                                 color: 'white',
@@ -610,21 +599,14 @@
                 },
                 series: [{
                     type: 'pie',
-                    name: 'Browser share',
-                    innerSize: '50%',
+                    name: 'Porcentaje',
+                    innerSize: '100%',
                     data: [
                         ['Firefox',   45.0],
                         ['IE',       26.8],
                         ['Chrome', 12.8],
                         ['Safari',    8.5],
                         ['Opera',     6.2],
-                        {
-                            name: 'Others',
-                            y: 0.7,
-                            dataLabels: {
-                                enabled: false
-                            }
-                        }
                     ]
                 }]
             });
