@@ -24,6 +24,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="jsGraficas/highcharts.js" charset="utf-8"></script>
   <script src="jsGraficas/modules/exporting.js" charset="utf-8"></script>
+  <script src="js/ajax.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -44,11 +45,6 @@
         <li>
           <a href="#" onclick="toggleVisibility('agregarProducto')" class="text-dark">
             <i class="fas fa-plus-square fa-lg"></i>Agregar producto
-          </a>
-        </li>
-        <li>
-          <a href="#" onclick="toggleVisibility('eliminarProducto')" class="text-dark">
-            <i class="fas fa-minus-square fa-lg"></i>Eliminar producto
           </a>
         </li>
         <li>
@@ -84,95 +80,121 @@
           </div>
 
           <div class="card-body">
-              <form action="#" method="post">
-                <h6 class="text-primary">Datos de producto</h6>
-                <hr>
-                <div class="form-row">
-                  <div class="col-md-6 mb-2">
-                    <label for="nombreP">Nombre</label>
-                    <input type="text" class="form-control" id="nombreP" name="nombreProducto" required>
-                  </div>
-                  <div class="col-md-3 mb-2">
-                    <label for="price">Precio</label>
-                    <input type="text" class="form-control" id="price" name="precioProducto" required>
-                  </div>
-                  <div class="col-md-3 mb-2">
-                    <label for="formSelect0">Selecciona una categoría</label>
-                    <select class="form-control" id="formSelect0" required>
-                      <option value=""></option>
-                      <option value="0">Laptops</option>
-                      <option value="1">Smartphones</option>
-                      <option value="2">Tablets</option>
-                      <option value="3">Escritorios</option>
-                    </select>
+            <form action="#" method="post" id="myForm">
+              <h6 class="text-primary">Datos de producto</h6>
+              <hr>
+              <div class="form-row">
+                <div class="col-md-3 mb-2">
+                  <label for="nombreP">Nombre</label>
+                  <input type="text" class="form-control" id="nameProd" name="nameProd" placeholder="Nombre" required>
+                </div>
+                <div class="col-md-3 mb-2">
+                  <label for="price">Precio</label>
+                  <input type="text" class="form-control" id="priceProd" name="priceProd" placeholder="Precio" required>
+                </div>
+                <div class="col-md-3 mb-2">
+                  <label for="formSelect0">Selecciona una categoría</label>
+                  <select class="form-control" id="catProd" name="catProd" onchange="optionfnt('ver-otcat')" required>
+                    <?php
+                      $sqlID = "SELECT Class FROM stocktaking ORDER BY Class";
+                      $check = $con->query($sqlID);
+                      if(mysqli_num_rows($check) > 0) {
+                        $aux = null;
+                        while($fila = $check->fetch_assoc()) {
+                          $class = $fila['Class'];
+                          if($class != $aux) {
+                            $aux = $class;
+                            echo "
+                                <option value=".$class.">$class</option>
+                            ";
+                          }
+                        }
+                      }
+                    ?>
+                    <option value="newCat">Categoría Nueva</option>
+                  </select>
+                  <!-- Categoria nueva div -->
+                  <div style="display: none" class="table-responsive" id="ver-otcat" name="ver-otcat">
+                    <input type="text" class="form-control" id="otherCat" name="otherCat" placeholder="Escribe la categoria nueva" required>
                   </div>
                 </div>
-
-                <div class="form-row" style="padding-bottom: 2rem;">
-                  <div class="col-md-9 mb-6">
-                    <label for="descrip">Descripcion</label>
-                    <textarea class="form-control" name="descripcion" rows="4" cols="80" required></textarea>
+                <div class="col-md-3 mb-2">
+                  <label for="formSelect0">Selecciona una subcategoría</label>
+                  <select class="form-control" id="subcatProd" name="subcatProd" onchange="optionfnt('ver-otsubcat')" required>
+                    <?php
+                      $sqlID = "SELECT SubClass FROM stocktaking ORDER BY SubClass";
+                      $check = $con->query($sqlID);
+                      if(mysqli_num_rows($check) > 0) {
+                        $aux = null;
+                        while($fila = $check->fetch_assoc()) {
+                          $subclass = $fila['SubClass'];
+                          if($subclass != $aux) {
+                            $aux = $subclass;
+                            echo "
+                                <option value=".$subclass.">$subclass</option>
+                            ";
+                          }
+                        }
+                      }
+                    ?>
+                    <option value="newSubCat">Subcategoría Nueva</option>
+                  </select>
+                  <!-- Subcategoria nueva div -->
+                  <div style="display: none" class="table-responsive" id="ver-otsubcat" name="ver-otsubcat">
+                    <input type="text" class="form-control" id="otherSubCat" name="otherSubCat" placeholder="Escribe la categoria nueva" required>
                   </div>
-                  <div class="col-md-3 mb-3">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-9 mb-6">
+                  <label for="descrip">Descripcion</label>
+                  <textarea class="form-control" name="descriptProd" id="descriptProd" rows="4" cols="80" placeholder="Descripción" required></textarea>
+                </div>
+
+                <div class="col-md-3 mb-2">
+                  <label for="price">Provedor</label>
+                  <select class="form-control" id="provProd" name="provProd" required>
+                    <?php
+                      $sqlID = "SELECT User_User_Name FROM stocktaking ORDER BY User_User_Name";
+                      $check = $con->query($sqlID);
+                      if(mysqli_num_rows($check) > 0) {
+                        $aux = null;
+                        while($fila = $check->fetch_assoc()) {
+                          $prob_user = $fila['User_User_Name'];
+                          if($prob_user != $aux) {
+                            $aux = $prob_user;
+                            echo "
+                                <option value=".$prob_user.">$prob_user</option>
+                            ";
+                          }
+                        }
+                      }
+                    ?>
+                  </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
                     <p>Elige una imagen de producto</p>
                     <div class="input-file-container">
-                      <input class="input-file" id="my-file" type="file" name="imagen" required>
-                      <label tabindex="0" for="my-file" class="input-file-trigger">Elegir imagen</label>
+                      <form id="uploadimage" name="uploadimage" method="post" enctype="multipart/form-data">
+                        <input class="input-file" id="my-file" type="file" name="imagProd" required>
+                        <label tabindex="0" for="my-file" class="input-file-trigger">Elegir imagen</label>
+                      </form>
                     </div>
                     <p class="file-return"></p>
                   </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Agregar producto</button>
+                <button class="btn btn-primary" type="submit" id="addProdBtn" name="addProdBtn" onclick="btnAddProd(); myFunction();">Agregar producto</button>
               </form>
-
+              <div style="padding-top: 1.2rem;"id="result">
+              </div>
           </div>
           <!--CARD BODY-->
         </div>
         <!--CARD-->
       </div>
       <!--proveedor-->
-
-      <div id="eliminarProducto" style="display: none; padding-top: 3rem;">
-        <div class="card w-100 mx-auto shadow">
-          <div class="card-header header bg-white text-center">
-            <h4>Eliminar producto</h4>
-          </div>
-          <div class="card-body">
-            <form action="#" method="post">
-              <div class="form-row">
-                <label for="eliminarP">ID de producto</label>
-                <div class="input-group">
-                  <input type="text" class="form-control" id="eliminarP" placeholder="HP-1ZW00LA" name="eliminarProducto">
-                </div>
-              </div>
-            </form>
-            <div class="table-responsive" style="padding-top: 2rem;">
-              <table class="table table-hover table-bordered">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">ID Producto</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Precio</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr data-toggle="modal" data-target="#modalConfirmacionProducto">
-                    <td>HP-1ZW00LA</td>
-                    <td>Laptop HP Omen 15</td>
-                    <td>Laptops</td>
-                    <td class="text-success">$24,000</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <!--tabla-->
-          </div>
-          <!--Card-body-->
-        </div>
-        <!--CARD-->
-      </div>
-      <!--eliminar-->
 
       <!--modificar-->
       <div id="modificarProducto" style="display: none; padding-top: 3rem;">
@@ -181,45 +203,21 @@
             <h4>Modificar producto</h4>
           </div>
           <div class="card-body">
-            <form action="#" method="post">
-              <div class="form-row" >
-                <label for="modificarP">ID de producto</label>
+            <form action="src/verStockProveedor.php" method="post" id="buscarStockProv">
+              <div class="form-row">
+                <label for="buscarP">ID de producto</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" id="modificarP" placeholder="HP-1Z00WA" name="modificarProd">
+                  <input type="text" class="form-control" id="buscarProdProveedor" name="buscarProdProveedor" onkeyup="verStock()" placeholder="HP-1ZW00LA">
                 </div>
               </div>
             </form>
             <form method="post">
               <div class="table-responsive" style="padding-top: 2rem;">
-                <table id="editable_table" class="table table-bordered table-striped">
-                 <thead>
-                  <tr>
-                   <th>ID producto</th>
-                   <th>Nombre</th>
-                   <th>Precio</th>
-                   <th>Descripcion</th>
-                   <th>Categoría</th>
-                  </tr>
-                 </thead>
-                 <tbody>
-                 <?php
-                 while($row = mysqli_fetch_array($result))
-                 {
-                  echo '
-                  <tr>
-                   <td>'.$row["idProducto"].'</td>
-                   <td>'.$row["nomProd"].'</td>
-                   <td>'.$row["precio"].'</td>
-                   <td>'.$row["descripcion"].'</td>
-                   <td>'.$row["cat"].'</td>
-                  </tr>
-                  ';
-                 }
-                 ?>
-                 </tbody>
-                </table>
-               </div>
+                <div id="live_data_prov" style="padding-top: 1.2rem;"></div>
+                <span id="result_prov" style="padding-top: 1.2rem;"></span>
+              </div>
             </form>
+            <!--tabla-->
           </div>
           <!--Card-body-->
         </div>
@@ -329,26 +327,6 @@
     </div>
     <!--contenido-->
 
-    <!--Modal confirmación usuario-->
-    <div class="modal" id="modalConfirmacionProducto">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Confirmar</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <h4>¿Quieres eliminar el producto -ID- de la lista?</h4>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" name="eliminarProv">Aceptar</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--Modal confirmación-->
-
     <script type="text/javascript">
       //control de panel lateral
       $(document).ready(function() {
@@ -361,7 +339,7 @@
       //control de panel lateral
 
       //Mostrar la opcion de panel lateral
-      var divs = ["agregarProducto", "eliminarProducto", "modificarProducto", "provDash"];
+      var divs = ["agregarProducto", "modificarProducto", "provDash"];
       var visibleDivId = null;
 
       function toggleVisibility(divId) {
@@ -547,27 +525,6 @@
             });
         });
       //medio ciruclo
-
-      //tablaEdit
-      $(document).ready(function(){
-           $('#editable_table').Tabledit({
-            url:'action.php',
-            columns:{
-             identifier:[0, 'idProducto'],
-             editable:[[1, 'nomProd'], [2, 'precio'], [3, 'descripcion'], [4, 'cat']]
-            },
-            restoreButton:true,
-            onSuccess:function(data, textStatus, jqXHR)
-            {
-             if(data.action == 'delete')
-             {
-              $('#'+data.idProducto).remove();
-             }
-            }
-           });
-
-      });
-      //tablaEdit
 
     </script>
 </body>

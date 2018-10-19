@@ -77,6 +77,8 @@ function btnDelUser() {
         }
     })
 }
+
+//modificarStockAdmin
 $(document).ready(function(){
     function fetch_data()
     {
@@ -88,7 +90,7 @@ $(document).ready(function(){
             var envio = $('#buscarP').val(); //Se obtiene el valor del input
 
             $.ajax({
-                url: 'src/verStock.php', //Lugar a donde se envia la variable
+                url: 'src/verStockAdmin.php', //Lugar a donde se envia la variable
                 method: "POST",
                 data: ('verStock='+envio), //Variable que recive el PHP
                 success: function(resp) {
@@ -104,7 +106,7 @@ $(document).ready(function(){
 	function edit_data(id, text, column_name)
     {
         $.ajax({
-            url:"src/edit.php",
+            url:"src/editAdmin.php",
             method:"POST",
             data:{id:id, text:text, column_name:column_name},
             dataType:"text",
@@ -145,6 +147,78 @@ $(document).ready(function(){
         edit_data(id,User_User_Name, "User_User_Name");
     });
 });
+//modificarStockAdmin
+
+//modificarStockProveedor
+$(document).ready(function(){
+    function fetch_data()
+    {
+      $('#buscarStockProv').submit(function(e){
+            e.preventDefault(); //Se previene el envio del formulario
+        })
+
+        $('#buscarProdProveedor').keyup(function(){
+            var envio = $('#buscarProdProveedor').val(); //Se obtiene el valor del input
+
+            $.ajax({
+                url: 'src/verStockProveedor.php', //Lugar a donde se envia la variable
+                method: "POST",
+                data: ('verStock='+envio), //Variable que recive el PHP
+                success: function(resp) {
+                    if(resp != "") {
+                        $('#live_data_prov').html(resp); //Muestra la consulta en el div con el id="verDivStock"
+                    }
+                }
+            })
+        })
+
+    }
+    fetch_data();
+	function edit_data(id, text, column_name)
+    {
+        $.ajax({
+            url:"src/editProveedor.php",
+            method:"POST",
+            data:{id:id, text:text, column_name:column_name},
+            dataType:"text",
+            success:function(data){
+                //alert(data);
+      				$('#result_prov').html("<div class='alert alert-success'>"+data+"</div>");
+            }
+        });
+    }
+    $(document).on('blur', '.Product_Name', function(){
+        var id = $(this).data("id1");
+        var Product_Name = $(this).text();
+        edit_data(id, Product_Name, "Product_Name");
+    });
+    $(document).on('blur', '.Rate', function(){
+        var id = $(this).data("id3");
+        var Rate = $(this).text();
+        edit_data(id,Rate, "Rate");
+    });
+    $(document).on('blur', '.Product_Description', function(){
+        var id = $(this).data("id4");
+        var Product_Description = $(this).text();
+        edit_data(id,Product_Description, "Product_Description");
+    });
+    $(document).on('blur', '.Class', function(){
+        var id = $(this).data("id5");
+        var Class = $(this).text();
+        edit_data(id,Class, "Class");
+    });
+    $(document).on('blur', '.SubClass', function(){
+        var id = $(this).data("id2");
+        var Lot = $(this).text();
+        edit_data(id,SubClass, "SubClass");
+    });
+    $(document).on('blur', '.User_User_Name', function(){
+        var id = $(this).data("id6");
+        var User_User_Name = $(this).text();
+        edit_data(id,User_User_Name, "User_User_Name");
+    });
+});
+//modificarStockProveedor
 
 function verGanciasPProducto() {
     $(function(){
@@ -305,5 +379,100 @@ $(document).ready(function(){
 	});
 
 });
-
 //carrito
+
+//yocho
+function myFunction() {
+  document.getElementById("myForm").reset();
+}
+
+function buscarProd() {
+    $(function(){
+        $('#buscarDelProducto').submit(function(e){
+            e.preventDefault(); //Se previene el envio del formulario
+        })
+
+
+        $('#buscarDelProd').keyup(function(){
+            var envio = $('#buscarDelProd').val();
+            $.ajax({
+                method: "POST", //Metodo de envio
+                url: 'src/eliminarProducto.php',
+                data: ('findProd=' + envio), //Variable que recive el PHP
+                success: function(resp) {
+                    if(resp != "") {
+                        $('#ver-resultadoDelProd').html(resp); //Muestra la consulta en el div con el id="ver-resultadoProd"
+                    }
+                }
+            })
+        })
+    })
+}
+
+//Agregar producto Inicio
+function btnAddProd() {
+    $('#addProdBtn').click(function(e){
+        e.preventDefault(); //Se previene el envio del formulario
+    })
+
+    var form = document.querySelector('form');
+
+    var request = new XMLHttpRequest();
+    var formData = new FormData(form);
+
+    var aux = $('#catProd').val();
+    var aux2 = $('#subcatProd').val();
+    var v3 = '';
+    var v4 = '';
+    if(aux == 'newCat') {
+        v3 = $('#otherCat').val();
+    } else {
+        v3 = $('#catProd').val();
+    }
+    if(aux2 == 'newSubCat') {
+        v4 = $('#otherSubCat').val();
+    } else {
+        v4 = $('#subcatProd').val();
+    }
+
+    var v1 = $('#nameProd').val();
+    var v2 = $('#priceProd').val();
+    var v5 = $('#descriptProd').val();
+    var v6 = $('#provProd').val();
+
+    formData.append('nameProd', v1);
+    formData.append('priceProd', v2);
+    formData.append('catProd', v3);
+    formData.append('subcatProd', v4);
+    formData.append('descriptProd', v5);
+    formData.append('provProd', v6);
+
+    request.open('post', 'src/agregarProducto.php', true);
+    request.send(formData);
+    request.onreadystatechange = function() {
+        if (this.readyState === 4 || this.status === 200){
+            $('#result').html(request.responseText);
+            //$('#ver-resultadoAddProd').html(request.responseText);
+        }
+    };
+}
+
+function optionfnt(varDiv) {
+    var valor = document.getElementById("catProd").value;
+    var valor2 = document.getElementById("subcatProd").value;
+    div = document.getElementById(varDiv);
+    if(varDiv == "ver-otcat") {
+      if(valor == "newCat") {
+        div.style.display = "block";
+      } else {
+        div.style.display = "none";
+      }
+    } else {
+      if(valor2 == "newSubCat") {
+        div.style.display = "block";
+      } else {
+        div.style.display = "none";
+      }
+    }
+}
+//yocho

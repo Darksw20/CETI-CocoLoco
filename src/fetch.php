@@ -8,7 +8,7 @@
 
       <div class="col-md-3">
         <figure class="card card-product">
-          <div class="img-wrap">'.$row["Image"].'</div>
+          <div class="img-wrap"><img src="'.$row["Image"].'"></div>
           <figcaption class="info-wrap">
             <h6 class="title "><a href="#">'.$row["Product_Name"].'</a></h6>
             <div class="price-wrap">

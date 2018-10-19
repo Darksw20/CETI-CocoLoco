@@ -301,7 +301,7 @@
             <h4>Inventario en tienda</h4>
           </div>
           <div class="card-body">
-            <form action="src/verStock.php" method="post" id="buscarStock">
+            <form action="src/verStockAdmin.php" method="post" id="buscarStock">
               <div class="form-row">
                 <label for="buscarP">ID de producto</label>
                 <div class="input-group">
