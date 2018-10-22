@@ -3,6 +3,10 @@
 
     include('src/conexion_bd.php');
     include('src/graficaProvedorGanancias.php');
+    include('src/DashboardProv.php');
+    include('src/graficaProvedorClaseVenta.php');
+
+    $user = $_SESSION['User_Name'];
 ?>
 <!DOCTYPE html>
 
@@ -96,7 +100,7 @@
                   <label for="formSelect0">Selecciona una categoría</label>
                   <select class="form-control" id="catProd" name="catProd" onchange="optionfnt('ver-otcat')" required>
                     <?php
-                      $sqlID = "SELECT Class FROM Stocktaking ORDER BY Class";
+                      $sqlID = "SELECT Class FROM stocktaking ORDER BY Class";
                       $check = $con->query($sqlID);
                       if(mysqli_num_rows($check) > 0) {
                         $aux = null;
@@ -122,7 +126,7 @@
                   <label for="formSelect0">Selecciona una subcategoría</label>
                   <select class="form-control" id="subcatProd" name="subcatProd" onchange="optionfnt('ver-otsubcat')" required>
                     <?php
-                      $sqlID = "SELECT SubClass FROM Stocktaking ORDER BY SubClass";
+                      $sqlID = "SELECT SubClass FROM stocktaking ORDER BY SubClass";
                       $check = $con->query($sqlID);
                       if(mysqli_num_rows($check) > 0) {
                         $aux = null;
@@ -156,7 +160,7 @@
                   <label for="price">Provedor</label>
                   <select class="form-control" id="provProd" name="provProd" required>
                     <?php
-                      $sqlID = "SELECT User_User_Name FROM Stocktaking ORDER BY User_User_Name";
+                      $sqlID = "SELECT User_User_Name FROM stocktaking ORDER BY User_User_Name";
                       $check = $con->query($sqlID);
                       if(mysqli_num_rows($check) > 0) {
                         $aux = null;
@@ -240,7 +244,11 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <h6 class="text-white">20</h6>
+                    <h6 class="text-white">
+                    <?php
+                      VentProv($con, $user);
+                    ?>
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -259,7 +267,11 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <h6 class="text-white">20</h6>
+                  <h6 class="text-white">
+                    <?php
+                      GanaHoyProv($con, $user);
+                    ?>
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -270,7 +282,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h6 class="text-white">Gnaancias de la semana</h6>
+                    <h6 class="text-white">Ganancias de la semana</h6>
                   </div>
                   <div class="col">
                     <h5 class="text-right text-white"><i class="fas fa-users"></i></h5>
@@ -278,7 +290,11 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <h6 class="text-white">20</h6>
+                  <h6 class="text-white">
+                    <?php
+                      VentSemProv($con, $user);
+                    ?>
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -297,7 +313,11 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <h6 class="text-white">20</h6>
+                  <h6 class="text-white">
+                    <?php
+                      TopSeller($con, $user);
+                    ?>
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -413,6 +433,10 @@
                   yAxis: {
                       title: {
                           text: 'Dinero $'
+                      },labels: { 
+                      formatter: function () { 
+                          return this.value + '$'; 
+                      } 
                       },
                       plotLines: [{
                           value: 0,
@@ -421,7 +445,7 @@
                       }]
                   },
                   tooltip: {
-                      valueSuffix: '°C'
+                      valueSuffix: '$'
                   },
                   legend: {
                       layout: 'vertical',
@@ -479,10 +503,10 @@
                     plotShadow: false
                 },
                 title: {
-                    text: 'Browser<br>shares',
+                    text: 'Categoria con mas Ganacias',
                     align: 'center',
-                    verticalAlign: 'middle',
-                    y: 50
+                    verticalAlign: 'top',
+                    y: 70
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -491,7 +515,7 @@
                     pie: {
                         dataLabels: {
                             enabled: true,
-                            distance: -50,
+                            distance: 0,
                             style: {
                                 fontWeight: 'bold',
                                 color: 'white',
@@ -506,20 +530,11 @@
                 series: [{
                     type: 'pie',
                     name: 'Browser share',
-                    innerSize: '50%',
+                    innerSize: '100%',
                     data: [
-                        ['Firefox',   45.0],
-                        ['IE',       26.8],
-                        ['Chrome', 12.8],
-                        ['Safari',    8.5],
-                        ['Opera',     6.2],
-                        {
-                            name: 'Others',
-                            y: 0.7,
-                            dataLabels: {
-                                enabled: false
-                            }
-                        }
+                            <?php 
+                              echo $numeral1;
+                            ?>
                     ]
                 }]
             });

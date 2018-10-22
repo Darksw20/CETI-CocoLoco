@@ -11,4 +11,6 @@
 	mysqli_select_db ($con, $basedatos)
 	or die
 	("No se puede conectar con la base de datos");
+
+	mysqli_query($con, "SET NAMES 'utf8'") or die ("Error de consulta");
 ?>

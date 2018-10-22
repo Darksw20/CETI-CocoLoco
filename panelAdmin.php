@@ -3,6 +3,11 @@
 
   include('src/conexion_bd.php');
   include('src/graficaAdminGanancias.php');
+  include('src/DashboardAdmin.php');
+  include('src/colonias.php');
+  include('src/GraficaAdminClaseVenta.php');
+
+  $user = $_SESSION['User_Name'];
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -146,11 +151,7 @@
                   <div class="col-md-6 mb-2">
                     <label for="formSelect0">Colonia</label>
                     <select class="form-control" id="formSelect0" name="colonia" required>
-                      <option value=""></option>
-                      <option value="0">La chida</option>
-                      <option value="1">La chafa</option>
-                      <option value="2">La fresa</option>
-                      <option value="3">La naca</option>
+                      <?php colonia($con); ?>
                     </select>
                   </div>
                 </div>
@@ -216,40 +217,15 @@
             <h4>Ganacias totales</h4>
           </div>
           <div class="card-body">
-            <form action="#" method="post">
+            <form action="src/trasTotales.php" method="post" id="transaccionProv">
               <div class="form-row">
                 <label for="ganaciasProv">Proveedor</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" id="ganaciasProv" name="buscarProveedor" placeholder="Hewlett-Packard">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Buscar</button>
-                  </div>
+                  <input type="text" class="form-control" id="gananciasProv" name="gananciasProv" onkeyup="verGananciasPProveedor()" placeholder="Intoduce el nombre del proveedor">
                 </div>
               </div>
             </form>
-            <div class="table-responsive" style="padding-top: 2rem;">
-              <table class="table table-bordered">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">Proveedor</th>
-                    <th scope="col">Ingreso generado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Intel</td>
-                    <td class="text-success">$30,000,000</td>
-                  </tr>
-                  <tr>
-                    <td>Hewlett-Packard</td>
-                    <td class="text-success">$50,000,000</td>
-                  </tr>
-                  <tr>
-                    <td>Nvidia</td>
-                    <td class="text-success">$10,000,000</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="table-responsive" style="padding-top: 2rem;" id="editable_tableTransaccionProv">
             </div>
             <!--tabla-->
             <div class="container bg-light rounded shadow-sm" style="padding: 20px;">
@@ -276,7 +252,7 @@
               <div class="form-row">
                 <label for="idProd">Nombre del producto o categoría</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" id="buscarPGanancia" name="buscarPGanancia" onkeyup="verGanciasPProducto()" placeholder="Intoduce el nombre del producto o la categoría">
+                  <input type="text" class="form-control" id="buscarPGanancia" name="buscarPGanancia" onkeyup="verGananciasPProducto()" placeholder="Intoduce el nombre del producto o la categoría">
                 </div>
               </div>
             </form>
@@ -301,7 +277,7 @@
             <h4>Inventario en tienda</h4>
           </div>
           <div class="card-body">
-            <form action="src/verStockAdmin.php" method="post" id="buscarStock">
+            <form action="src/verStock.php" method="post" id="buscarStock">
               <div class="form-row">
                 <label for="buscarP">ID de producto</label>
                 <div class="input-group">
@@ -338,7 +314,11 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <h6 class="text-white">20</h6>
+                  <h6 class="text-white">
+                    <?php
+                      TransCount($con);
+                    ?>
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -357,7 +337,11 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <h6 class="text-white">20</h6>
+                  <h6 class="text-white">
+                    <?php
+                      ProdCount($con);
+                    ?>
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -376,7 +360,11 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <h6 class="text-white">20</h6>
+                  <h6 class="text-white">
+                    <?php
+                      UserCount($con);
+                    ?>
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -395,7 +383,11 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <h6 class="text-white">20</h6>
+                  <h6 class="text-white">
+                    <?php
+                      ProvCount($con);
+                    ?>
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -496,13 +488,16 @@
                       text: '',
                       x: -20
                   },
-
                   xAxis: {
                       categories: [<?php echo $cadenatotal; ?>]
                   },
                   yAxis: {
                       title: {
                           text: 'Dinero $'
+                      },labels: { 
+                      formatter: function () { 
+                          return this.value + '$'; 
+                      } 
                       },
                       plotLines: [{
                           value: 0,
@@ -511,7 +506,7 @@
                       }]
                   },
                   tooltip: {
-                      valueSuffix: '$'
+                      valueSuffix: '°C'
                   },
                   legend: {
                       layout: 'vertical',
@@ -549,17 +544,13 @@
                           }
                       }]
                   },
-
                   series: [{
-
                       name: 'Ganancia por Dia',
                       data: [<?php
                              //A.Folio, A.Date, A.Stocktaking_ID, Id, Product_Name, Rate, COUNT(Rate)
-
                         echo $numeral;
-                        ?>
-                        ]
-                  },]
+                        ?>]
+                   }]
               });
           });
       //tabla
@@ -573,10 +564,10 @@
                     plotShadow: false
                 },
                 title: {
-                    text: 'Categorías más vendidas',
+                    text: 'Categoria con mas Ganacias',
                     align: 'center',
                     verticalAlign: 'top',
-                    y: 50
+                    y: 70
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -599,38 +590,17 @@
                 },
                 series: [{
                     type: 'pie',
-                    name: 'Porcentaje',
+                    name: 'Browser share',
                     innerSize: '100%',
                     data: [
-                        ['Firefox',   45.0],
-                        ['IE',       26.8],
-                        ['Chrome', 12.8],
-                        ['Safari',    8.5],
-                        ['Opera',     6.2],
+                            <?php 
+                              echo $numeral1;
+                              ?>
                     ]
                 }]
             });
         });
       //medio ciruclo
-
-      /*$(document).ready(function(){
-        $('#editable_table').Tabledit({
-        url: 'actualizarStock.php',
-        columns: {
-            identifier:[0, 'ID'],
-            editable:[[2, 'Lot']]
-        },
-        editButton: false,
-        deleteButton: false,
-        hideIdentifier: true,
-        restoreButton: false,
-        onSuccess:function(data, textStatus, jqXHR) {
-            if(data.action == 'delete') {
-                $('#'+data.ID).remove();
-            }
-        }
-        });
-    });*/
     </script>
     </div>
 </body>

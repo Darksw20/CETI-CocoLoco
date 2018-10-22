@@ -1,8 +1,13 @@
 <?php
   session_start();
 
+  if (!$_SESSION) {
+    echo "";
+  } else {
+    $user = $_SESSION['User_Name'];
+  }
+
   include('src/infoUser.php');
-  $user = $_SESSION['User_Name'];
 ?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
@@ -216,18 +221,14 @@
                     <h6 class="text-primary" style="padding-top:1.22rem;">Domicilio</h6>
                     <hr>
                     <div class="form-row">
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-6 mb-4">
                         <label for="streetReg">Calle</label>
                         <input type="text" class="form-control" id="streetReg" name="calle" required>
                       </div>
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-6 mb-4">
                         <label for="formSelect0">Colonia</label>
-                        <select class="form-control" id="formSelect0" name="colonia" required>
-                          <option value=""></option>
-                          <option value="0">La chida</option>
-                          <option value="1">La chafa</option>
-                          <option value="2">La fresa</option>
-                          <option value="3">La naca</option>
+                        <select class='form-control' id='formSelect0' name='colonia' required>
+                          <?php include('src/colonias.php'); colonia($con);?>
                         </select>
                       </div>
                     </div>
@@ -277,14 +278,24 @@
                 <div id="saldo" class="container tab-pane active">
                   <h6 class="text-primary">Ingresa tu contraseña y el saldo deseado</h6>
                   <hr>
-                  <form>
+                  <form action="src/infoSaldo.php" method="post">
                     <div class="form-group">
-                      <label for="pwd">Contraseña:</label>
-                      <input type="password" class="form-control" id="pwd" name="contraseña" required>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="saldoAct">Saldo actual:</label>
+                          <div class="container rounded">
+                            <h4 class="text-success"><?php echo "$ ".$_SESSION['Amount'].".00" ?></h4>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="saldoNew">Agregar saldo:</label>
+                          <input type="text" class="form-control" id="saldoNew" name="saldoNuevo">
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">
-                      <label for="saldoNew">Saldo nuevo:</label>
-                      <input type="text" class="form-control" id="saldoNew" name="saldoNuevo">
+                      <label for="pwd">Contraseña:</label>
+                      <input type="password" class="form-control" id="pwd" name="pass" required>
                     </div>
                     <div class="form-group form-check">
                       <label class="form-check-label">
@@ -295,7 +306,7 @@
                   </form>
                 </div>
                 <div id="datos" class="container tab-pane fade">
-                  <?php infoUser($con, $user); ?>
+                  <?php infoUser($con); ?>
                 </div>
               </div>
             </div>

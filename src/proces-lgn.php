@@ -11,6 +11,7 @@
 				$fila = $resultado->fetch_row();
 				session_start();
 				$_SESSION['User_Name'] = $fila[0];
+				$_SESSION['Password'] = $fila[1];
 				$_SESSION['Mail'] = $correo;
 				$_SESSION['Amount'] = $fila[3];
 				$_SESSION['Type_User'] = $fila[4];

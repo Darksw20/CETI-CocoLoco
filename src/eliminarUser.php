@@ -91,11 +91,14 @@
 
     if (!empty($_POST['btnDel'])) {
         if (!empty($btnDel = $_POST['btnDel'])) {
-        $sql = mysqli_query($con, "DELETE FROM User WHERE User_Name = '$btnDel'");
+            $sql = "DELETE FROM User WHERE User_Name = '$btnDel'";
+            $sentencia = $con->prepare($sql);
+            $sentencia->execute();
+            $sentencia->close();
             if ($sql) {
                 echo "Usuario eliminado.";
             } else {
-                echo "No se pudo eliminar al usuario.";
+                echo "No se pudo eliminar el usuario.";
             }
         }
     }

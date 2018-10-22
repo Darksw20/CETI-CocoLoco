@@ -38,25 +38,3 @@
         echo "No se encontraron coincidencias.";
     }
 ?>
-<script>
-    //tabla inventario
-    $(document).ready(function(){
-        $('#editable_table').Tabledit({
-        url: 'actualizarStock.php',
-        columns: {
-            identifier:[0, 'ID'],
-            editable:[[2, 'Lot']]
-        },
-        editButton: false,
-        deleteButton: false,
-        hideIdentifier: true,
-        restoreButton: false,
-        onSuccess:function(data, textStatus, jqXHR) {
-            if(data.action == 'delete') {
-                $('#'+data.ID).remove();
-            }
-        }
-        });
-    });
-    //tabla inventario
-</script>

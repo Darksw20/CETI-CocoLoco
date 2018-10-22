@@ -11,14 +11,20 @@
     $apellidoUsuario = $con->real_escape_string($_POST['apellidoUsuario']);
     $passwordRegistro = $con->real_escape_string($_POST['passwordRegistro']);
     $passwordRegistro2 = $con->real_escape_string($_POST['passwordRegistro2']);
-    //Se declaran variables para que el usuario las modifique despues
+    //Se declaran variables para que el usuario las modifique después
     $amount = '500'; //Saldo se inicia en 0 por defecto
     $type_User = '0'; //El tipo de usuario por defecto es 0 (usuario)
     $phone = '0'; //El telefono por defecto es 0
-    $address = '60'; //La dirección por defecto es 1 (Ninguna (Así asignado en la BD))
+    $address = $con->real_escape_string($_POST['calle']);
+    $colonia = $con->real_escape_string($_POST['colonia']);
 
     //Se insertan los datos en la tabla 'user'
-    $sql = mysqli_query($con, "INSERT INTO User(`User_Name`, `Password`, `Mail`, `Amount`, `Type_User`, `Name`, `Last_Name`, `Phone_Number`, `Adress_Code`) VALUES ('$nombreUser', '$passwordRegistro', '$emailRegistro', '$amount', '$type_User', '$nombreUsuario', '$apellidoUsuario', '$phone', '$address')"); 
+    $sql = "INSERT INTO User(`User_Name`, `Password`, `Mail`, `Amount`, `Type_User`, `Name`, `Last_Name`, `Phone_Number`, `Adress`, `Neighborhood_Code`) VALUES ('$nombreUser', '$passwordRegistro', '$emailRegistro', '$amount', '$type_User', '$nombreUsuario', '$apellidoUsuario', '$phone', '$address', '$colonia')"; 
+
+    $sentencia = $con->prepare($sql);
+    $sentencia->execute();
+    $sentencia->close();
+
     if ($sql) {
         //echo "EXITO";
         //Si se realizó la consulta, se regresa al usuario a la página principal
