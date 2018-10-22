@@ -1,9 +1,13 @@
 <?php
- include('conexion_bd.php');
- $query = "SELECT * FROM Stocktaking ORDER BY ID DESC LIMIT ".$_POST["start"].", ".$_POST["limit"]." ";
- $result = mysqli_query($con, $query);
 
- while($row = mysqli_fetch_array($result)){
+include('conexion_bd.php');
+
+$categoria = $_POST["categoria"];
+$query = "SELECT * FROM Stocktaking WHERE Class = "$categoria"";
+
+$resultado = mysqli_query($con, $query);
+
+while ($row = mysqli_fetch_array($resultado)) {
   echo '
 
       <div class="col-md-3">
@@ -31,5 +35,6 @@
       </div>
 
   ';
- }
+}
+
 ?>

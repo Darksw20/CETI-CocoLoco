@@ -96,7 +96,7 @@
                   <label for="formSelect0">Selecciona una categoría</label>
                   <select class="form-control" id="catProd" name="catProd" onchange="optionfnt('ver-otcat')" required>
                     <?php
-                      $sqlID = "SELECT Class FROM stocktaking ORDER BY Class";
+                      $sqlID = "SELECT Class FROM Stocktaking ORDER BY Class";
                       $check = $con->query($sqlID);
                       if(mysqli_num_rows($check) > 0) {
                         $aux = null;
@@ -122,7 +122,7 @@
                   <label for="formSelect0">Selecciona una subcategoría</label>
                   <select class="form-control" id="subcatProd" name="subcatProd" onchange="optionfnt('ver-otsubcat')" required>
                     <?php
-                      $sqlID = "SELECT SubClass FROM stocktaking ORDER BY SubClass";
+                      $sqlID = "SELECT SubClass FROM Stocktaking ORDER BY SubClass";
                       $check = $con->query($sqlID);
                       if(mysqli_num_rows($check) > 0) {
                         $aux = null;
@@ -156,7 +156,7 @@
                   <label for="price">Provedor</label>
                   <select class="form-control" id="provProd" name="provProd" required>
                     <?php
-                      $sqlID = "SELECT User_User_Name FROM stocktaking ORDER BY User_User_Name";
+                      $sqlID = "SELECT User_User_Name FROM Stocktaking ORDER BY User_User_Name";
                       $check = $con->query($sqlID);
                       if(mysqli_num_rows($check) > 0) {
                         $aux = null;

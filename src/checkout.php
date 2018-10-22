@@ -78,7 +78,7 @@
                 <div class="card-footer">
                   <div class = "row justify-content-end">
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-success"><a href= "compra_usuariotoadmin.php">Pagar</a></button>
+                      <button type="submit" class="btn btn-success"><a href="compra_usuariotoadmin.php">Pagar</a></button>
                       <a href="departamentos.php" class="btn btn-primary">Seguir comprando</a>
                     </div>
                   </div>

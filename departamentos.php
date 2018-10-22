@@ -40,7 +40,7 @@
           <div class="col-lg-13-24 col-sm-12 order-3 order-lg-2">
             <form action="#">
               <div class="input-group w-100">
-                <input type="text" class="form-control" style="width:60%;" name="buscador" placeholder="¿Que buscamos?">
+                	<input type="text" name="busqueda" id="busqueda" placeholder="¿Qué buscamos?">
                 <div class="input-group-append">
                   <button class="btn btn-outline-dark" type="submit">
                     <i class="fa fa-search"></i>
@@ -134,6 +134,9 @@
       <div class="col-md-10 mb-3">
         <div class="card shadow-sm">
           <div class="card-body">
+            <section id="tabla_resultado">
+		           <!-- AQUI SE DESPLEGARA NUESTRA TABLA DE CONSULTA -->
+		        </section>
             <div class="row" id="load_data">
             </div>
           </div>
@@ -315,79 +318,6 @@
   </div>
   <!--modalModificar-->
 
-  <!--modalCarrito-->
-  <div class="modal" id="modalCarrito">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Carrito de compras</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th colspan="2">Producto</th>
-                  <th>Descripcion </th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th colspan="2">Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <a href="#">
-                      <img src="" alt="">Imagen
-                    </a>
-                  </td>
-                  <td><a href="#">Tostadora</a>
-                  </td>
-                  <td>Mejor que la de abajo</td>
-                  <td>
-                    <input type="number" value="2" class="form-control">
-                  </td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">
-                      <img src="" alt="">Imagen
-                    </a>
-                  </td>
-                  <td><a href="#">Omen</a>
-                  </td>
-                  <td>Mejor que la de arriba</td>
-                  <td>
-                    <input type="number" value="1" class="form-control">
-                  </td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th colspan="5">Total</th>
-                  <th colspan="2">$0.00</th>
-                </tr>
-              </tfoot>
-            </table>
-
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--modalCarrito-->
 
   <footer class="section-footer bg2">
   	<div class="container">

@@ -71,8 +71,7 @@ span {
     text-align: center;
 }
 
-#sidebar.active .sidebar-header h3,
-#sidebar.active .CTAs {
+#sidebar.active .sidebar-header h3 {
     display: none;
 }
 
