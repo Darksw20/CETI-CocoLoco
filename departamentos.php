@@ -40,7 +40,7 @@
           <div class="col-lg-13-24 col-sm-12 order-3 order-lg-2">
             <form action="#">
               <div class="input-group w-100">
-                	<input type="text" name="busqueda" id="busqueda" placeholder="¿Qué buscamos?">
+                	<input type="text" class="form-control" name="busqueda" id="busqueda" placeholder="¿Qué buscamos?">
                 <div class="input-group-append">
                   <button class="btn btn-outline-dark" type="submit">
                     <i class="fa fa-search"></i>

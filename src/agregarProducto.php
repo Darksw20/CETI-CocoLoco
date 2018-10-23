@@ -19,7 +19,7 @@
         $fileTemp = $file['tmp_name'];
         $error = 0;
 
-        $sqlID = "SELECT Product_Name FROM stocktaking ORDER BY Product_Name";
+        $sqlID = "SELECT Product_Name FROM Stocktaking ORDER BY Product_Name";
         $check = $con->query($sqlID);
         if(mysqli_num_rows($check) > 0) {
             while($fila = $check->fetch_assoc()) {
@@ -36,13 +36,13 @@
                 if($fileType == 'image/jpeg' || $fileType == 'image/jpg' || $fileType == 'image/png' || $fileType == 'image/gif') {
                     $extencion = "_".str_replace("/",".",$fileType); //Remplazar la / por . para la extencion
                     $nombreimg = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-                    $fileDestiny = '../images/'.$nombreimg.$extencion;
+                    $fileDestiny = "images/".$nombreimg.$extencion;
                     $fileDestiny = mysqli_real_escape_string($con, $fileDestiny);
 
                     $confirmacion = move_uploaded_file($fileTemp, $fileDestiny);
 
                     if($confirmacion == 1) {
-                        $sqlP = "INSERT INTO stocktaking (ID, Product_Name, Lot, Rate, Product_Description, Class, SubClass, Image, User_User_Name) VALUES(NULL, '$nameProd', '$amountProd', '$priceProd', '$descriptProd', '$catProd', '$subcatProd', '$fileDestiny', '$provProd')";
+                        $sqlP = "INSERT INTO Stocktaking VALUES(NULL, '$nameProd', '$amountProd', '$priceProd', '$descriptProd', '$catProd', '$subcatProd', '$fileDestiny', '$provProd')";
                         $sentencia = $con->prepare($sqlP);
                         $sentencia->execute();
                         if($sentencia) {
@@ -50,7 +50,6 @@
                         } else {
                             echo "<div class='alert alert-danger'>Error! El producto ya existe.</div>Error! No se pudo almacenar la imagen en la base de datos.";
                         }
-                        $sentencia->close();
                     } else {
                         echo "<div class='alert alert-danger'>Error! El producto ya existe.</div>Imagen no copiada al servidor, existe algun error";
                     }

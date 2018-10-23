@@ -21,9 +21,7 @@
     //Se insertan los datos en la tabla 'user'
     $sql = "INSERT INTO User(`User_Name`, `Password`, `Mail`, `Amount`, `Type_User`, `Name`, `Last_Name`, `Phone_Number`, `Adress`, `Neighborhood_Code`) VALUES ('$nombreUser', '$passwordRegistro', '$emailRegistro', '$amount', '$type_User', '$nombreUsuario', '$apellidoUsuario', '$phone', '$address', '$colonia')"; 
 
-    $sentencia = $con->prepare($sql);
-    $sentencia->execute();
-    $sentencia->close();
+    $sentencia = mysqli_query($con, $sql);
 
     if ($sql) {
         //echo "EXITO";

@@ -4,9 +4,10 @@
     function infoUser($con) {
         $user = $_SESSION['User_Name'];
         $sql = "SELECT u.User_name, u.Password, u.Mail, u.Amount, u.Name, u.Last_Name, u.Phone_Number, u.Adress, u.Neighborhood_Code, n.Code AS Code, n.Name AS Col, n.PC AS PC FROM User AS u INNER JOIN Neighborhood AS n ON u.Neighborhood_Code = n.Code WHERE User_Name = '$user'";
-        $res = $con->query($sql);
-        if (mysqli_num_rows($res) > 0) {
-            while ($fila = $res->fetch_assoc()) {
+        $res = mysqli_query($con, $sql);
+        $rows = mysqli_num_rows($res);
+        if ($rows > 0) {
+            while ($fila = mysqli_fetch_array($res)) {
                 echo "
                 <form action='src/modificarUsuario.php' method='post'>
                     <h6 class='text-primary'>Datos personales</h6>
