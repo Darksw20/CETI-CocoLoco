@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-md-3 mb-2">
                   <label for="price">Precio</label>
-                  <input type="text" class="form-control" id="priceProd" name="priceProd" placeholder="Precio" required>
+                  <input type="number" class="form-control" id="priceProd" name="priceProd" placeholder="Precio" required>
                 </div>
                 <div class="col-md-3 mb-2">
                   <label for="formSelect0">Selecciona una categoría</label>
@@ -348,6 +348,32 @@
     <!--contenido-->
 
     <script type="text/javascript">
+
+    //deshabilitar flechas
+    jQuery(document).ready( function($) {
+
+      //deshabilitar indicadores en el input number
+      // deshabilitar scroll en el input numero cuando sea enfocado
+      $('form').on('focus', 'input[type=number]', function(e) {
+          $(this).on('wheel', function(e) {
+              e.preventDefault();
+          });
+      });
+
+      // Restaurar el scroll
+      $('form').on('blur', 'input[type=number]', function(e) {
+          $(this).off('wheel');
+      });
+
+      // deshabilitar las flechas de teclado
+      $('form').on('keydown', 'input[type=number]', function(e) {
+          if ( e.which == 38 || e.which == 40 )
+              e.preventDefault();
+      });
+
+    });
+    //deshabilitar indicadores en el input number
+
       //control de panel lateral
       $(document).ready(function() {
 

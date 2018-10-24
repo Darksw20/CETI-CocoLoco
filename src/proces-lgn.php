@@ -32,10 +32,10 @@
 					header("Location: ../panelAdmin.php");
 				}
 			} else {
-				header('Location: '.$_SERVER['PHP_SELF']);
+				header('Location: ../index.php ');
 		}
 	}
 	if (empty($_SESSION)) {
-  		header('Location: '.$_SERVER['PHP_SELF']);
+  		header('Location: ../index.php');
 	}
 ?>

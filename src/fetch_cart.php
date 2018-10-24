@@ -51,7 +51,23 @@ else{
     </tr>
     ';
 }
+
 $output .= '</table></div>';
+
+if (!empty($_SESSION["shopping_cart"])) {
+	$output.='
+	<a href="src/checkout.php" class="btn btn-primary" id="check_out_cart">
+	 <i class="fa fa-shopping-cart"></i> Proceder al pago
+	</a>
+	';
+}else{
+	$output.='
+	<a href="" class="btn btn-primary" id="check_out_cart" disabled>
+	 <i class="fa fa-shopping-cart"></i> Proceder al pago
+	</a>
+	';
+}
+
 $data = array(
 	'cart_details'		=>	$output,
 	'total_price'		=>	'$' . number_format($total_price, 2),

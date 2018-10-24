@@ -1,8 +1,13 @@
 <?php
   session_start();
 
+  if (!$_SESSION) {
+    echo "";
+  } else {
+    $user = $_SESSION['User_Name'];
+  }
+
   include('src/infoUser.php');
-  $user = $_SESSION['User_Name'];
  ?>
 
 
@@ -95,14 +100,9 @@
   <!--popover-->
   <div id="popover_content_wrapper" style="display: none">
   	<span id="cart_details"></span>
-  	<div align="right">
-  		<a href="src/checkout.php" class="btn btn-primary" id="check_out_cart">
-  		 <i class="fa fa-shopping-cart"></i> Proceder al pago
-  		</a>
   		<a href="#" class="btn btn-danger" id="clear_cart">
   		 <i class="fas fa-trash-alt"></i> Vaciar todo
   		</a>
-  	</div>
   </div>
 
   <!-- container principal-->
@@ -289,7 +289,7 @@
                   <form>
                     <div class="form-group">
                       <label for="pwd">Contraseña:</label>
-                      <input type="password" class="form-control" id="pwd" name="contraseña" required>
+                      <input type="password" class="form-control" id="pwd" name="contraseña" minlength='6' maxlength='15' required>
                     </div>
                     <div class="form-group">
                       <label for="saldoNew">Saldo nuevo:</label>

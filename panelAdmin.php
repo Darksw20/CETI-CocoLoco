@@ -122,7 +122,7 @@
                   </div>
                   <div class="col-md-4 mb-2">
                     <label for="tel">Teléfono</label>
-                    <input type="text" class="form-control" id="tel" name="telefono" required>
+                    <input type="number" class="form-control" id="tel" name="telefono" required>
                   </div>
                 </div>
 
@@ -133,7 +133,7 @@
                   </div>
                   <div class="col-md-3 mb-3">
                     <label for="pass">Contraseña</label>
-                    <input type="text" class="form-control" id="pass" name="contrasenaProveedor" required>
+                    <input type="password" class="form-control" id="pass" name="contrasenaProveedor" minlength="6" maxlength="15" required placeholder="Minimo 6 caracteres">
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="userName">Nombre de usuario</label>
@@ -431,176 +431,203 @@
     <!--contenido-->
 
     <script type="text/javascript">
-      //control de panel lateral
-      $(document).ready(function() {
 
-        $('#sidebarCollapse').on('click', function() {
-          $('#sidebar').toggleClass('active');
-        });
+    //deshabilitar flechas
+    jQuery(document).ready( function($) {
 
-      });
-      //control de panel lateral
-
-      //Mostrar la opcion de panel lateral
-      var divs = ["proveedor", "usuario", "gananciasTotales", "gananciasProducto", "inventario", "adminDash"];
-      var visibleDivId = null;
-
-      function toggleVisibility(divId) {
-        if (visibleDivId === divId) {
-          visibleDivId = null;
-        } else {
-          visibleDivId = divId;
-        }
-        hideNonVisibleDivs();
-      }
-
-      function hideNonVisibleDivs() {
-        var i, divId, div;
-        for (i = 0; i < divs.length; i++) {
-          divId = divs[i];
-          div = document.getElementById(divId);
-          if (visibleDivId === divId) {
-            div.style.display = "block";
-          } else {
-            div.style.display = "none";
-          }
-        }
-      }
-      //Mostrar la opcion de panel lateral
-
-      //Seleccionar formulario
-      $(function() {
-        $('#formSelect0').change(function() {
-          $('.formulario').hide();
-          $('#' + $(this).val()).show();
-        });
-      });
-      //seleccionar formulario
-
-      //tabla
-      $(function () {
-              $('#tablaDash').highcharts({
-                  title: {
-                      text: 'Ganancias de la Semana',
-                      x: -20 //center
-                  },
-                  subtitle: {
-                      text: '',
-                      x: -20
-                  },
-                  xAxis: {
-                      categories: [<?php echo $cadenatotal; ?>]
-                  },
-                  yAxis: {
-                      title: {
-                          text: 'Dinero $'
-                      },labels: { 
-                      formatter: function () { 
-                          return this.value + '$'; 
-                      } 
-                      },
-                      plotLines: [{
-                          value: 0,
-                          width: 1,
-                          color: '#808080'
-                      }]
-                  },
-                  tooltip: {
-                      valueSuffix: '°C'
-                  },
-                  legend: {
-                      layout: 'vertical',
-                      align: 'right',
-                      verticalAlign: 'middle',
-                      borderWidth: 0
-                  },
-                  responsive: {
-                      rules: [{
-                          condition: {
-                              maxWidth: 500
-                          },
-                          chartOptions: {
-                              legend: {
-                                  align: 'center',
-                                  verticalAlign: 'bottom',
-                                  layout: 'horizontal'
-                              },
-                              yAxis: {
-                                  labels: {
-                                      align: 'left',
-                                      x: 0,
-                                      y: -5
-                                  },
-                                  title: {
-                                      text: null
-                                  }
-                              },
-                              subtitle: {
-                                  text: null
-                              },
-                              credits: {
-                                  enabled: false
-                              }
-                          }
-                      }]
-                  },
-                  series: [{
-                      name: 'Ganancia por Dia',
-                      data: [<?php
-                             //A.Folio, A.Date, A.Stocktaking_ID, Id, Product_Name, Rate, COUNT(Rate)
-                        echo $numeral;
-                        ?>]
-                   }]
-              });
+      //deshabilitar indicadores en input
+      // deshabilitar scroll en el input numero cuando sea enfocado
+      $('form').on('focus', 'input[type=number]', function(e) {
+          $(this).on('wheel', function(e) {
+              e.preventDefault();
           });
-      //tabla
+      });
 
-      //medio circulo
-      $(function () {
-          $('#medioCirculo').highcharts({
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: 0,
-                    plotShadow: false
-                },
+      // Restaurar el scroll
+      $('form').on('blur', 'input[type=number]', function(e) {
+          $(this).off('wheel');
+      });
+
+      // deshabilitar las flechas de teclado
+      $('form').on('keydown', 'input[type=number]', function(e) {
+          if ( e.which == 38 || e.which == 40 )
+              e.preventDefault();
+      });
+
+    });
+    //deshabilitar indicadores en input
+
+    //control de panel lateral
+    $(document).ready(function() {
+
+      $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('active');
+      });
+
+    });
+    //control de panel lateral
+
+    //Mostrar la opcion de panel lateral
+    var divs = ["proveedor", "usuario", "gananciasTotales", "gananciasProducto", "inventario", "adminDash"];
+    var visibleDivId = null;
+
+    function toggleVisibility(divId) {
+      if (visibleDivId === divId) {
+        visibleDivId = null;
+      } else {
+        visibleDivId = divId;
+      }
+      hideNonVisibleDivs();
+    }
+
+    function hideNonVisibleDivs() {
+      var i, divId, div;
+      for (i = 0; i < divs.length; i++) {
+        divId = divs[i];
+        div = document.getElementById(divId);
+        if (visibleDivId === divId) {
+          div.style.display = "block";
+        } else {
+          div.style.display = "none";
+        }
+      }
+    }
+    //Mostrar la opcion de panel lateral
+
+    //Seleccionar formulario
+    $(function() {
+      $('#formSelect0').change(function() {
+        $('.formulario').hide();
+        $('#' + $(this).val()).show();
+      });
+    });
+    //seleccionar formulario
+
+    //tabla
+    $(function () {
+            $('#tablaDash').highcharts({
                 title: {
-                    text: 'Categoria con mas Ganacias',
-                    align: 'center',
-                    verticalAlign: 'top',
-                    y: 70
+                    text: 'Ganancias de la Semana',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: [<?php echo $cadenatotal; ?>]
+                },
+                yAxis: {
+                    title: {
+                        text: 'Dinero $'
+                    },labels: {
+                    formatter: function () {
+                        return this.value + '$';
+                    }
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
                 },
                 tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    valueSuffix: '°C'
                 },
-                plotOptions: {
-                    pie: {
-                        dataLabels: {
-                            enabled: true,
-                            distance: 0,
-                            style: {
-                                fontWeight: 'bold',
-                                color: 'white',
-                                textShadow: '0px 1px 2px black'
-                            }
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
                         },
-                        startAngle: -90,
-                        endAngle: 90,
-                        center: ['50%', '75%']
-                    }
+                        chartOptions: {
+                            legend: {
+                                align: 'center',
+                                verticalAlign: 'bottom',
+                                layout: 'horizontal'
+                            },
+                            yAxis: {
+                                labels: {
+                                    align: 'left',
+                                    x: 0,
+                                    y: -5
+                                },
+                                title: {
+                                    text: null
+                                }
+                            },
+                            subtitle: {
+                                text: null
+                            },
+                            credits: {
+                                enabled: false
+                            }
+                        }
+                    }]
                 },
                 series: [{
-                    type: 'pie',
-                    name: 'Browser share',
-                    innerSize: '100%',
-                    data: [
-                            <?php 
-                              echo $numeral1;
-                              ?>
-                    ]
-                }]
+                    name: 'Ganancia por Dia',
+                    data: [<?php
+                           //A.Folio, A.Date, A.Stocktaking_ID, Id, Product_Name, Rate, COUNT(Rate)
+                      echo $numeral;
+                      ?>]
+                 }]
             });
         });
-      //medio ciruclo
+    //tabla
+
+    //medio circulo
+    $(function () {
+        $('#medioCirculo').highcharts({
+              chart: {
+                  plotBackgroundColor: null,
+                  plotBorderWidth: 0,
+                  plotShadow: false
+              },
+              title: {
+                  text: 'Categoria con mas Ganacias',
+                  align: 'center',
+                  verticalAlign: 'top',
+                  y: 70
+              },
+              tooltip: {
+                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+              },
+              plotOptions: {
+                  pie: {
+                      dataLabels: {
+                          enabled: true,
+                          distance: 0,
+                          style: {
+                              fontWeight: 'bold',
+                              color: 'white',
+                              textShadow: '0px 1px 2px black'
+                          }
+                      },
+                      startAngle: -90,
+                      endAngle: 90,
+                      center: ['50%', '75%']
+                  }
+              },
+              series: [{
+                  type: 'pie',
+                  name: 'Browser share',
+                  innerSize: '100%',
+                  data: [
+                          <?php
+                            echo $numeral1;
+                            ?>
+                  ]
+              }]
+          });
+      });
+    //medio ciruclo
+
     </script>
     </div>
 </body>

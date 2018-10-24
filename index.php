@@ -21,9 +21,10 @@
   <link href="css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script src="js/ajax.js"></script>
+  <script src="js/ajax.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -94,12 +95,13 @@
                     </div>";
                 }
               ?>
-              <a href="#" class="widget-header border-left pl-3 ml-3" data-toggle="modal" data-target="#modalCarrito">
+              <a id="cart-popover" class="widget-header border-left pl-3 ml-3" data-container="body" data-toggle="popover" data-placement="bottom" title="Shopping Cart">
                 <div class="icontext">
                   <div class="icon-wrap icon-sm round border"><i class="fa fa-shopping-cart text-dark"></i></div>
                 </div>
                 <span class="badge badge-pill badge-danger notify">0</span>
-              </a>
+								<span class="total_price">$ 0.00</span>
+							</a>
             </div>
             <!-- widgets-wrap.// -->
           </div>
@@ -112,6 +114,13 @@
     <!-- header-main .// -->
   </div>
   <!--barra inicio-->
+
+  <div id="popover_content_wrapper" style="display: none">
+    <span id="cart_details"></span>
+      <a href="#" class="btn btn-danger" id="clear_cart">
+       <i class="fas fa-trash-alt"></i> Vaciar todo
+      </a>
+  </div>
 
   <!--Carrusel-->
   <div id="demo" class="carousel slide" data-ride="carousel">
@@ -211,11 +220,11 @@
                     <div class="form-row" style="padding-top: 1.2rem;">
                       <div class="col">
                         <label for="pwd">Contraseña:</label>
-                        <input type="password" class="form-control" name="passwordRegistro" id="pwd" required>
+                        <input type="password" class="form-control" name="passwordRegistro" id="pwd" minlength='6' maxlength='15' required>
                       </div>
                       <div class="col">
                         <label for="pwd2">Repertir contraseña:</label>
-                        <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" required>
+                        <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" minlength='6' maxlength='15' required>
                       </div>
                     </div>
                     <h6 class="text-primary" style="padding-top:1.22rem;">Domicilio</h6>
@@ -289,13 +298,13 @@
                         </div>
                         <div class="col-md-6">
                           <label for="saldoNew">Agregar saldo:</label>
-                          <input type="text" class="form-control" id="saldoNew" name="saldoNuevo">
+                          <input type="number" class="form-control" id="saldoNew" name="saldoNuevo">
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="pwd">Contraseña:</label>
-                      <input type="password" class="form-control" id="pwd" name="pass" required>
+                      <input type="password" class="form-control" id="pwd" name="pass" minlength='6' maxlength='15' required>
                     </div>
                     <div class="form-group form-check">
                       <label class="form-check-label">
@@ -307,6 +316,9 @@
                 </div>
                 <div id="datos" class="container tab-pane fade">
                   <?php infoUser($con); ?>
+                </div>
+                <div id="modPassword" class="container tab-pane fade">
+                  <?php infoPass($con); ?>
                 </div>
               </div>
             </div>

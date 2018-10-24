@@ -502,5 +502,9 @@ else{
     obtener_registros();
   }
 });
-
 //buscador Benja
+
+
+//PANEL ADMIN
+
+//PANEL ADMIN

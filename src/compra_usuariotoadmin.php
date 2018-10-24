@@ -68,8 +68,7 @@ include('conexion_bd.php');
 			}
 		}
 	}
-
-	unset($_SESSION['shopping_cart']);
+	unset($_SESSION["shopping_cart"]);
 	header("Location: ../departamentos.php");
 
 ?>

@@ -23,7 +23,7 @@
                       </div>
                       <div class='col'>
                         <label for='tel'>Telefono:</label>
-                        <input type='text' class='form-control' name='tel' id='tel' value='".$fila['Phone_Number']."'>
+                        <input type='number' class='form-control' name='tel' id='tel' value='".$fila['Phone_Number']."'>
                       </div>
                     </div>
                     <h6 class='text-primary'>Domicilio</h6>
@@ -34,46 +34,48 @@
                         <input type='text' class='form-control' id='street' name='calle' value='".$fila['Adress']."'>
                       </div>
                       <div class='col-md-6 mb-4'>
-                            <label for='formSelect0'>Colonia</label>
-                            <select class='form-control' id='formSelect0' name='colonia' required>
-                                <option value='".$fila['Code']."'>".$fila['Col']."</option>
-                                <option disable></option>
+                        <label for='formSelect0'>Colonia</label>
+                        <select class='form-control' id='formSelect0' name='colonia' required>
+                            <option value='".$fila['Code']."'>".$fila['Col']."</option>
+                            <option disable></option>
                 ";
                           colonia($con);
                 echo "
-                          </select>
-                        </div>
+                        </select>
+                      </div>
                     </div>
                     <input type='hidden' value='".$fila['Code']."' name='code'>
                     <button type='submit' class='btn btn-primary' name='user' value='".$user."'>Modificar</button>
                   </form>
-                </div>
-
-                <div id='modPassword' class='container tab-pane'>
-                  <form action='src/modificarContraseña.php' method='post'>
-                    <div class='form-row espacioHeightsm'>
-                      <div class='col-md-6 -mb-3'>
-                        <label for='passOld'>Contraseña antigua:</label>
-                        <input type='password' class='form-control' name='modPasswordOld' id='passOld'>
-                      </div>
-                    </div>
-                    <h6 class='text-primary'>Escribe tu nueva contraseña</h6>
-                    <hr>
-                    <div class='form-row espacioHeightsm'>
-                      <div class='col'>
-                        <label for='newPwd'>Contraseña:</label>
-                        <input type='password' class='form-control' name='contrasenaMod' id='newPwd'>
-                      </div>
-                      <div class='col'>
-                        <label for='newPwd2'>Repertir contraseña:</label>
-                        <input type='password' class='form-control' name='contraseMod2' id='newPwd2'>
-                      </div>
-                    </div>
-                    <input type='hidden' name='user' value='".$user."' />
-                    <button type='submit' class='btn btn-primary'>Modificar</button>
-                  </form>
                 ";
             }
         }
+    }
+
+    function infoPass($con){
+      $user = $_SESSION['User_Name'];
+      echo "
+            <form action='src/modificarContraseña.php' method='post'>
+                <div class='form-row espacioHeightsm'>
+                  <div class='col-md-6 -mb-3'>
+                    <label for='passOld'>Contraseña antigua:</label>
+                    <input type='password' class='form-control' name='modPasswordOld' id='passOld' minlength='6' maxlength='15' required>
+                  </div>
+                </div>
+                <h6 class='text-primary'>Escribe tu nueva contraseña</h6>
+                <hr>
+                <div class='form-row espacioHeightsm'>
+                  <div class='col'>
+                    <label for='newPwd'>Contraseña:</label>
+                    <input type='password' class='form-control' name='contrasenaMod' id='newPwd' minlength='6' maxlength='15' required>
+                  </div>
+                  <div class='col'>
+                    <label for='newPwd2'>Repertir contraseña:</label>
+                    <input type='password' class='form-control' name='contraseMod2' id='newPwd2' minlength='6' maxlength='15' required>
+                  </div>
+                </div>
+                <input type='hidden' name='user' value='".$user."' />
+                <button type='submit' class='btn btn-primary'>Modificar</button>
+              </form>";
     }
 ?>
