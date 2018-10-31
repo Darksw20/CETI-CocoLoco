@@ -502,6 +502,34 @@ else{
     obtener_registros();
   }
 });
+
+//Pedro Miguel Elguera Mora
+//Como evitar doble sesion
+
+
+setInterval('sesiondoble()',5000); //ejecuto la funcion cada 5 segundos
+
+
+// de manera asincrona mando a ejutar un codigo php donde revisa los tados de la variable de sesion
+//el nombre de usuario y el Id_de la sesion correspondan, si no es asi entonces significa que alguien 
+//mas ya inicio sesion y es necesario cerrar la sesion
+function sesiondoble(){
+    
+    $.ajax({        
+        url : 'src/doblesesion.php',
+        type : 'POST',
+        dataType : 'html',
+        success:function(data)
+				{
+					if(data=='false'){
+                        alert ('Tu sesion a Caducado');  
+                        location.href ="src/proces-unlgn.php";
+                    }
+				}
+    })
+}
+
+
 //buscador Benja
 
 
