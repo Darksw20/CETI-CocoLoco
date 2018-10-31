@@ -6,7 +6,9 @@
   include('src/DashboardAdmin.php');
   include('src/colonias.php');
   include('src/GraficaAdminClaseVenta.php');
-
+  if(!$_SESSION || $_SESSION['Type_User']!=2){
+    header("Location: index.php");
+  }
   $user = $_SESSION['User_Name'];
 ?>
 <!DOCTYPE html>
@@ -114,11 +116,11 @@
                 <div class="form-row">
                   <div class="col-md-4 mb-2">
                     <label for="nombreProv">Nombre</label>
-                    <input type="text" class="form-control" id="nombreProv" name="nombreProveedor" required>
+                    <input type="text" class="form-control" id="nombreProv" name="nombreProveedor" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="No caracteres especiales" required>
                   </div>
                   <div class="col-md-4 mb-2">
                     <label for="apPaterno">Apellido</label>
-                    <input type="text" class="form-control" id="apPaterno" name="apellido" required>
+                    <input type="text" class="form-control" id="apPaterno" name="apellido" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="No caracteres especiales" required>
                   </div>
                   <div class="col-md-4 mb-2">
                     <label for="tel">Teléfono</label>
@@ -137,7 +139,7 @@
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="userName">Nombre de usuario</label>
-                    <input type="text" class="form-control" id="userName" name="usernameProveedor" required>
+                    <input type="text" class="form-control" id="userName" name="usernameProveedor" pattern="[A-Za-z0-9]+" title="Solo letras y numeros sin caracteres especiales #No permitida la Ñ ni asentuaciones" required>
                   </div>
                 </div>
 
@@ -532,7 +534,7 @@
                     }]
                 },
                 tooltip: {
-                    valueSuffix: '°C'
+                    valueSuffix: '$'
                 },
                 legend: {
                     layout: 'vertical',

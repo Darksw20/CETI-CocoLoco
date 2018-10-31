@@ -5,7 +5,9 @@
     include('src/graficaProvedorGanancias.php');
     include('src/DashboardProv.php');
     include('src/graficaProvedorClaseVenta.php');
-
+    if(!$_SESSION || $_SESSION['Type_User']!=1){
+      header("Location: index.php");
+    }
     $user = $_SESSION['User_Name'];
 ?>
 <!DOCTYPE html>

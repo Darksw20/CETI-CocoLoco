@@ -204,17 +204,17 @@
                       </div>
                       <div class="col-md-4 mb-2">
                         <label for="nombre">Nombre de usuario:</label>
-                        <input type="text" class="form-control" name="nombreUser" id="nombreUser" required>
+                        <input type="text" class="form-control" pattern="[A-Za-z0-9]+" title="Solo letras y numeros sin caracteres especiales #No permitida la Ñ ni asentuaciones" name="nombreUser" id="nombreUser" required>
                       </div>
                     </div>
                     <div class="form-row" style="padding-top: 1.2rem;">
                       <div class="col">
                         <label for="nombre">Nombre(s):</label>
-                        <input type="text" class="form-control" name="nombreUsuario" id="nombre" required>
+                        <input type="text" class="form-control" name="nombreUsuario" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="No caracteres especiales" id="nombre" required>
                       </div>
                       <div class="col">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" class="form-control" name="apellidoUsuario" id="apellido" required>
+                        <input type="text" class="form-control" name="apellidoUsuario" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="No caracteres especiales" id="apellido" required>
                       </div>
                     </div>
                     <div class="form-row" style="padding-top: 1.2rem;">
