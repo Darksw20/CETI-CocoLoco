@@ -34,15 +34,17 @@ include('conexion_bd.php');
 			$fila = mysqli_fetch_array ($consulta_creditoadmin);
 			$credito_admin = $fila["Amount"];
 
-			//CONSULTA PARA LA CANTIDAD DEL PRODUCTO DEL ADMINISTRADOR
-			$selectQuery4 = "SELECT Lot FROM Stocktaking WHERE User_User_Name = '$nombre_administrador'  AND Product_Name = '$nombre_producto'";
+			//CONSULTA PARA LA CANTIDAD Y EL ID DEL PRODUCTO DEL ADMINISTRADOR
+			$selectQuery4 = "SELECT Lot, ID FROM Stocktaking WHERE User_User_Name = '$nombre_administrador'  AND Product_Name = '$nombre_producto'";
 			$consulta_inventproductadmin = mysqli_query ($con, $selectQuery4) or die ("Fallo con la consulta para obtener los productos del administrador");
 			echo mysqli_error($con);
 			$fila = mysqli_fetch_array ($consulta_inventproductadmin);
 			$productos_admin = $fila["Lot"];
+			$productosID_admin = $fila["ID"];
 
 			if($total > $credito_usuario){
-				echo "No se  cuenta con el suficiente credito.";
+				$msgError = "La compra no se pudo realizar";
+				header('Location: ../departamentos.php?msgError='.$msgError);
 				break;
 			}
 
@@ -65,10 +67,19 @@ include('conexion_bd.php');
  				//CONSULTA PARA ACTUALIZAR EL PRODUCTO DEL ADMINISTRADOR
 				$consulta_guardaradminprod = mysqli_query($con, $query3) or die ("Fallo con actualizar los productos del administrador");
 
+				date_default_timezone_get('america/mexico_city');
+				$fechas = date("Y-m-d H:i:s");
+				$query4 = "INSERT INTO Transaction (Date, Amount, User_User_Name, Stocktaking_ID) VALUES ('$fechas', '$total', '$nombre_administrador', '$productosID_admin')";
+ 				//CONSULTA PARA GENERAR LA TRANSACCION DEL PRODUCTO
+				$consulta_guardartranustoadmin = mysqli_query($con, $query4) or die ("Fallo la transaccion de usario a administrador");
+
+				$msgSuccess = "Compra realizada con exito";
+				 unset($_SESSION["shopping_cart"]);
+				 header('Location: ../departamentos.php?msgSuccess='.$msgSuccess);
+
 			}
 		}
 	}
-	unset($_SESSION["shopping_cart"]);
-	header("Location: ../departamentos.php");
+
 
 ?>

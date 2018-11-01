@@ -1,15 +1,14 @@
 <?php
   session_start();
 
-  if (!$_SESSION) {
-    echo "";
-  } else {
+  if (isset($_SESSION['User_Name'])) {
     $user = $_SESSION['User_Name'];
+  } else {
+    echo "";
   }
 
   include('src/infoUser.php');
  ?>
-
 
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
@@ -29,6 +28,76 @@
   <script src="js/ajax.js" charset="utf-8"></script>
 </head>
 <body>
+
+  <div class="row" id="msg">
+    <div class="container-fluid">
+      <?php
+      $show_modalSuccess = false;
+      $show_modalError = false;
+        if (!empty($_GET['msgSuccess'])) {
+          $show_modalSuccess = true;
+          echo "
+              <div class='modal' id='modalDatosSuccess'>
+                <div class='modal-dialog modal-lg'>
+                  <div class='modal-content'>
+                    <div class='modal-header'>
+                      <h4 class='modal-title'>¡Gracias por comprar con nosotros!</h4>
+                      <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                    </div>
+                    <div class='modal-body text-center' id='modalAccion'>"
+                      .$_GET['msgSuccess'].
+                      "
+                      <br>
+                      <br>
+                      <i class='far fa-grin-beam fa-9x text-info'></i>
+                    </div>
+                    <div class='modal-footer'>
+                      <button type='button' class='btn btn-danger' data-dismiss='modal' onclick=reset()>Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          ";
+        }
+        if (!empty($_GET['msgError'])) {
+          $show_modalError = true;
+          echo "
+              <div class='modal' id='modalDatosError'>
+                <div class='modal-dialog modal-lg'>
+                  <div class='modal-content'>
+                    <div class='modal-header'>
+                      <h4 class='modal-title'>¡Ha ocurrido un error!</h4>
+                      <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                    </div>
+                    <div class='modal-body text-center' id='modalAccion'>"
+                      .$_GET['msgError'].
+                      "
+                      <br>
+                      <br>
+                      <i class='far fa-sad-cry fa-9x text-info'></i>
+                    </div>
+                    <div class='modal-footer'>
+                      <button type='button' class='btn btn-danger' data-dismiss='modal' onclick=reset()>Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          ";
+        }
+      ?>
+    </div>
+  </div>
+</div>
+
+<?php if($show_modalSuccess == true):?>
+<script> $('#modalDatosSuccess').modal('show');</script>
+<?php endif; ?>
+<?php if($show_modalError == true):?>
+<script> $('#modalDatosError').modal('show');</script>
+<?php endif; ?>
+
 
   <!-- barra navegacion Categorias -->
   <div class="section-header sticky-top bg-white">
@@ -59,10 +128,10 @@
           <div class="col-lg-6-24 col-sm-7 col-8  order-2  order-lg-3">
             <div class="d-flex justify-content-end">
               <?php
-                if($_SESSION){
+                if(isset($_SESSION['User_Name'])){
                   echo"
                   <div class='widget-header'>
-                    <small class='title text-muted' data-toggle='modal' data-target='#modalModificar'>Hola, ".$_SESSION['User_Name']."</small>
+                    <small class='title text-muted' data-toggle='modal' data-target='#modalModificar'>Hola, ".$user."</small>
                     <div>
                       <a href='#'' class='text-dark' data-toggle='modal' data-target='#modalModificar'>Mi cuenta</a>
                     </div>
@@ -215,28 +284,24 @@
                     <div class="form-row" style="padding-top: 1.2rem;">
                       <div class="col">
                         <label for="pwd">Contraseña:</label>
-                        <input type="password" class="form-control" name="passwordRegistro" id="pwd" required>
+                        <input type="password" class="form-control" name="passwordRegistro" id="pwd" minlength='6' maxlength='15' required>
                       </div>
                       <div class="col">
                         <label for="pwd2">Repertir contraseña:</label>
-                        <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" required>
+                        <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" minlength='6' maxlength='15' required>
                       </div>
                     </div>
                     <h6 class="text-primary" style="padding-top:1.22rem;">Domicilio</h6>
                     <hr>
                     <div class="form-row">
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-6 mb-4">
                         <label for="streetReg">Calle</label>
                         <input type="text" class="form-control" id="streetReg" name="calle" required>
                       </div>
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-6 mb-4">
                         <label for="formSelect0">Colonia</label>
-                        <select class="form-control" id="formSelect0" name="colonia" required>
-                          <option value=""></option>
-                          <option value="0">La chida</option>
-                          <option value="1">La chafa</option>
-                          <option value="2">La fresa</option>
-                          <option value="3">La naca</option>
+                        <select class='form-control' id='formSelect0' name='colonia' required>
+                          <?php include('src/colonias.php'); colonia($con);?>
                         </select>
                       </div>
                     </div>
@@ -286,14 +351,24 @@
                 <div id="saldo" class="container tab-pane active">
                   <h6 class="text-primary">Ingresa tu contraseña y el saldo deseado</h6>
                   <hr>
-                  <form>
+                  <form action="src/infoSaldo.php" method="post">
                     <div class="form-group">
-                      <label for="pwd">Contraseña:</label>
-                      <input type="password" class="form-control" id="pwd" name="contraseña" minlength='6' maxlength='15' required>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="saldoAct">Saldo actual:</label>
+                          <div class="container rounded">
+                            <?php infoSS($con); ?>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="saldoNew">Agregar saldo:</label>
+                          <input type="number" class="form-control" id="saldoNew" name="saldoNuevo">
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">
-                      <label for="saldoNew">Saldo nuevo:</label>
-                      <input type="text" class="form-control" id="saldoNew" name="saldoNuevo">
+                      <label for="pwd">Contraseña:</label>
+                      <input type="password" class="form-control" id="pwd" name="pass" minlength='6' maxlength='15' required>
                     </div>
                     <div class="form-group form-check">
                       <label class="form-check-label">
@@ -304,7 +379,10 @@
                   </form>
                 </div>
                 <div id="datos" class="container tab-pane fade">
-                  <?php infoUser($con, $user); ?>
+                  <?php infoUser($con); ?>
+                </div>
+                <div id="modPassword" class="container tab-pane fade">
+                  <?php infoPass($con); ?>
                 </div>
               </div>
             </div>
@@ -318,6 +396,15 @@
   </div>
   <!--modalModificar-->
 
+  <div class="modal" id="modalDatos">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body" id="modalAccion">
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer class="section-footer bg2">
   	<div class="container">

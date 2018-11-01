@@ -10,6 +10,7 @@
 			if ($resultado->num_rows > 0) {
 				$fila = $resultado->fetch_row();
 				session_start();
+				$id_de_sesion = session_id();
 				$_SESSION['User_Name'] = $fila[0];
 				$_SESSION['Password'] = $fila[1];
 				$_SESSION['Mail'] = $correo;
@@ -19,6 +20,9 @@
 				$_SESSION['Last_Name'] = $fila[6];
 				$_SESSION['Phone_Number'] = $fila[7];
 				$_SESSION['Address_Code'] = $fila[8];
+				$_SESSION['Id_Session'] = $id_de_sesion; //numero de la variable de sesion
+				$sql = "UPDATE User SET Sesion='$id_de_sesion' WHERE User_Name='$fila[0]'";
+				mysqli_query($con,$sql);
 				header("Expires: Tue, 01 Jul 2001 06:00:00 GMT");
 				header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 				header("Cache-Control: no-store, no-cache, must-revalidate");

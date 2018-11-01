@@ -1,3 +1,15 @@
+<?php
+  session_start();
+
+  if (isset($_SESSION['User_Name'])) {
+    $user = $_SESSION['User_Name'];
+  } else {
+    echo "";
+  }
+
+  include('infoUser.php');
+ ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -16,156 +28,6 @@
     <script src="../js/ajax.js" charset="utf-8"></script>
   </head>
   <body>
-
-    <!--barra inicio-->
-    <div class="section-header sticky-top bg-white">
-      <section style="padding: 5px;">
-        <div class="container sticky-top">
-          <div class="row align-items-center">
-            <div class="col-lg-3 col-sm-5 col-4">
-              <div class="brand-wrap">
-                <img class="logo" src="">
-                <h2 class="logo-text">CoCo</h2>
-              </div>
-              <!-- brand-wrap.// -->
-            </div>
-            <div class="col-lg-6 col-sm-12 order-3 order-lg-2">
-              <ul class="navbar mx-auto" style="list-style: none; margin-bottom: 0;">
-                <li class="nav-item">
-                  <a class="nav-link font-weight-bold text-dark" href="#">Inicio</a>
-                </li>
-                <li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link font-weight-bold text-dark" href="departamentos.php">Departamentos</a>
-                  </li>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link font-weight-bold text-dark">Link</a>
-                </li>
-              </ul>
-              <!-- search-wrap .end// -->
-            </div>
-            <!-- col.// -->
-            <div class="col-lg-3 col-sm-7 col-8  order-2  order-lg-3">
-              <div class="d-flex justify-content-end">
-                <?php
-                  if($_SESSION){
-                    echo"
-                    <div class='widget-header'>
-                      <small class='title text-muted' data-toggle='modal' data-target='#modalModificar'>Hola, ".$_SESSION['User_Name']."</small>
-                      <div>
-                        <a href='#'' class='text-dark' data-toggle='modal' data-target='#modalModificar'>Mi cuenta</a>
-                      </div>
-                    </div>";
-                  } else {
-                    echo "
-                      <div class='widget-header'>
-                        <small class='title text-muted' >¡Hola, invitado!</small>
-                        <div>
-                          <a href='#'' class='text-dark' data-toggle='modal' data-target='#modalRegistro'>Iniciar sesión</a>
-                        </div>
-                      </div>";
-                  }
-                ?>
-                <a href="#" class="widget-header border-left pl-3 ml-3" data-toggle="modal" data-target="#modalCarrito">
-                  <div class="icontext">
-                    <div class="icon-wrap icon-sm round border"><i class="fa fa-shopping-cart text-dark"></i></div>
-                  </div>
-                  <span class="badge badge-pill badge-danger notify">0</span>
-                </a>
-              </div>
-              <!-- widgets-wrap.// -->
-            </div>
-            <!-- col.// -->
-          </div>
-          <!-- row.// -->
-        </div>
-        <!-- container.// -->
-      </section>
-      <!-- header-main .// -->
-    </div>
-    <!--barra inicio-->
-
-    <?php
-
-    //fetch_cart.php
-
-    session_start();
-
-    $total_price = 0;
-    $total_item = 0;
-
-    $output = '
-      <div class="container" style = "padding-top: 3rem;">
-        <div class="card shadow-lg">
-        <div class="card-header bg-primary">
-          <h4 class="card-title text-light">Tu orden de pago prro :v</h4>
-        </div>
-          <div class="card-body">
-            <div class="table-responsive" id="order_table">
-            	<table class="table">
-            		<tr>
-                    <th scope="col">Nombre del producto</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Total</th>
-                </tr>
-    ';
-    if(!empty($_SESSION["shopping_cart"])){
-    	foreach($_SESSION["shopping_cart"] as $keys => $values){
-    		$output .= '
-    		<tr>
-    			<td>'.$values["product_name"].'</td>
-    			<td>'.$values["product_quantity"].'</td>
-    			<td align="right">$ '.$values["product_price"].'</td>
-    			<td align="right">$ '.number_format($values["product_quantity"] * $values["product_price"], 2).'</td>
-    		</tr>
-    		';
-    		$total_price = $total_price + ($values["product_quantity"] * $values["product_price"]);
-    		$total_item = $total_item + 1;
-    	}
-    	$output .= '
-    	    <tr>
-            <td colspan="3" align="right" class"text-succes">Total</td>
-            <td align="right">$ '.number_format($total_price, 2).'</td>
-          </tr>
-    	';
-    }
-    else{
-    	$output .= '
-        <tr>
-        	<td align="center">
-        		¡Tu carrito está vacio!
-        	</td>
-        </tr>
-        ';
-    }
-      $output .= '   </table>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class = "row justify-content-end">
-                    <div class="col-md-3">
-                      <a href="compra_usuariotoadmin.php" class="btn btn-success">Pagar</a>
-                      <a href="../departamentos.php" class="btn btn-primary">Seguir comprando</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>';
-    $data = array(
-    	'cart_details'		=>	$output,
-    	'total_price'		=>	'$' . number_format($total_price, 2),
-    	'total_item'		=>	$total_item
-    );
-
-    echo $output;
-
-
-    ?>
-
-    <div id="popover_content_wrapper" style="display: none">
-    </div>
 
     <!--modalRegistro-->
     <div class="modal" id="modalRegistro">
@@ -191,7 +53,7 @@
                 <div class="tab-content">
                   <div id="login" class="container tab-pane active">
                     <br>
-                    <form action="proces-lgn.php" method="post">
+                    <form action="src/proces-lgn.php" method="post">
                       <div class="form-group">
                         <label for="email">Correo electrónico:</label>
                         <input type="email" class="form-control" name="email" required>
@@ -210,7 +72,7 @@
                   </div>
                   <div id="signup" class="container tab-pane fade">
                     <br>
-                    <form action="registro.php" method="post">
+                    <form action="src/registro.php" method="post">
                       <div class="form-row">
                         <div class="col-md-8 mb-3">
                           <label for="mail">Correo electrónico:</label>
@@ -234,11 +96,11 @@
                       <div class="form-row" style="padding-top: 1.2rem;">
                         <div class="col">
                           <label for="pwd">Contraseña:</label>
-                          <input type="password" class="form-control" name="passwordRegistro" id="pwd" required>
+                          <input type="password" class="form-control" name="passwordRegistro" id="pwd" minlength='6' maxlength='15' required>
                         </div>
                         <div class="col">
                           <label for="pwd2">Repertir contraseña:</label>
-                          <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" required>
+                          <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" minlength='6' maxlength='15' required>
                         </div>
                       </div>
                       <h6 class="text-primary" style="padding-top:1.22rem;">Domicilio</h6>
@@ -292,7 +154,7 @@
                     <a class="nav-link" data-toggle="tab" href="#modPassword">Modificar contraseña</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-danger" href="proces-unlgn.php">Cerrar sesión</a>
+                    <a class="nav-link text-danger" href="src/proces-unlgn.php">Cerrar sesión</a>
                   </li>
                 </ul>
               </div>
@@ -301,24 +163,24 @@
                   <div id="saldo" class="container tab-pane active">
                     <h6 class="text-primary">Ingresa tu contraseña y el saldo deseado</h6>
                     <hr>
-                    <form action="infoSaldo.php" method="post">
+                    <form action="src/infoSaldo.php" method="post">
                       <div class="form-group">
                         <div class="row">
                           <div class="col-md-6">
                             <label for="saldoAct">Saldo actual:</label>
                             <div class="container rounded">
-                              <h4 class="text-success"><?php echo "$ ".$_SESSION['Amount'].".00" ?></h4>
+                              <?php infoSS($con); ?>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <label for="saldoNew">Agregar saldo:</label>
-                            <input type="text" class="form-control" id="saldoNew" name="saldoNuevo">
+                            <input type="number" class="form-control" id="saldoNew" name="saldoNuevo">
                           </div>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="pwd">Contraseña:</label>
-                        <input type="password" class="form-control" id="pwd" name="pass" required>
+                        <input type="password" class="form-control" id="pwd" name="pass" minlength='6' maxlength='15' required>
                       </div>
                       <div class="form-group form-check">
                         <label class="form-check-label">
@@ -330,6 +192,9 @@
                   </div>
                   <div id="datos" class="container tab-pane fade">
                     <?php infoUser($con); ?>
+                  </div>
+                  <div id="modPassword" class="container tab-pane fade">
+                    <?php infoPass($con); ?>
                   </div>
                 </div>
               </div>
@@ -343,6 +208,144 @@
     </div>
     <!--modalModificar-->
 
+    <div class="modal" id="modalDatos">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body" id="modalAccion">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--barra inicio-->
+    <div class="section-header sticky-top bg-white">
+      <section style="padding: 5px;">
+        <div class="container sticky-top">
+          <div class="row align-items-center">
+            <div class="col-lg-3 col-sm-5 col-4">
+              <div class="brand-wrap">
+                <img class="logo" src="">
+                <h2 class="logo-text">CoCo</h2>
+              </div>
+              <!-- brand-wrap.// -->
+            </div>
+            <div class="col-lg-6 col-sm-12 order-3 order-lg-2">
+              <ul class="navbar mx-auto" style="list-style: none; margin-bottom: 0;">
+                <li class="nav-item">
+                  <a class="nav-link font-weight-bold text-dark" href="../index.php">Inicio</a>
+                </li>
+                <li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link font-weight-bold text-dark" href="../departamentos.php">Departamentos</a>
+                  </li>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link font-weight-bold text-dark">Link</a>
+                </li>
+              </ul>
+              <!-- search-wrap .end// -->
+            </div>
+            <!-- col.// -->
+            <div class="col-lg-3 col-sm-7 col-8  order-2  order-lg-3">
+              <div class="d-flex justify-content-end">
+                <?php
+                  if(isset($_SESSION['User_Name'])){
+                    echo"
+                    <div class='widget-header'>
+                      <small class='title text-muted' data-toggle='modal' data-target='#modalModificar'>Hola, ".$user."</small>
+                      <div>
+                        <a href='#'' class='text-dark' data-toggle='modal' data-target='#modalModificar'>Mi cuenta</a>
+                      </div>
+                    </div>";
+                  } else {
+                    echo "
+                      <div class='widget-header'>
+                        <small class='title text-muted' >¡Hola, invitado!</small>
+                        <div>
+                          <a href='#'' class='text-dark' data-toggle='modal' data-target='#modalRegistro'>Iniciar sesión</a>
+                        </div>
+                      </div>";
+                  }
+                ?>
+              </div>
+              <!-- widgets-wrap.// -->
+            </div>
+            <!-- col.// -->
+          </div>
+          <!-- row.// -->
+        </div>
+        <!-- container.// -->
+      </section>
+      <!-- header-main .// -->
+    </div>
+    <!--barra inicio-->
+
+    <?php
+
+    $total_price = 0;
+    $total_item = 0;
+
+    echo  '
+      <div class="container" style = "padding-top: 3rem;">
+        <div class="card shadow-lg">
+        <div class="card-header bg-primary">
+          <h4 class="card-title text-light">Tu orden de pago</h4>
+        </div>
+          <div class="card-body">
+            <div class="table-responsive" id="order_table">
+              <table class="table">
+                <tr>
+                    <th scope="col">Nombre del producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Total</th>
+                </tr>
+    ';
+    if(!empty($_SESSION["shopping_cart"])){
+      foreach($_SESSION["shopping_cart"] as $keys => $values){
+        echo  '
+        <tr>
+          <td>'.$values["product_name"].'</td>
+          <td>'.$values["product_quantity"].'</td>
+          <td align="right">$ '.$values["product_price"].'</td>
+          <td align="right">$ '.number_format($values["product_quantity"] * $values["product_price"], 2).'</td>
+        </tr>
+        ';
+        $total_price = $total_price + ($values["product_quantity"] * $values["product_price"]);
+        $total_item = $total_item + 1;
+      }
+      echo  '
+          <tr>
+            <td colspan="3" align="right" class"text-succes">Total</td>
+            <td align="right">$ '.number_format($total_price, 2).'</td>
+          </tr>
+      ';
+    }
+    else{
+      echo  '
+        <tr>
+          <td align="center">
+            ¡Tu carrito está vacio!
+          </td>
+        </tr>
+        ';
+    }
+      echo  '   </table>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class = "row justify-content-end">
+                    <div class="col-md-3">
+                      <a href="compra_usuariotoadmin.php" class="btn btn-success">Pagar</a>
+                      <a href="../departamentos.php" class="btn btn-primary">Seguir comprando</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>';
+
+    ?>
 
   </body>
 </html>

@@ -1,10 +1,10 @@
 <?php
   session_start();
 
-  if (!$_SESSION) {
-    echo "";
-  } else {
+  if (isset($_SESSION['User_Name'])) {
     $user = $_SESSION['User_Name'];
+  } else {
+    echo "";
   }
 
   include('src/infoUser.php');
@@ -34,17 +34,40 @@
     <div class="row" id="msg">
       <div class="container-fluid">
         <?php
+        $show_modal = false;
           if (!empty($_GET['msg'])) {
+            $show_modal = true;
             echo "
-                <div class='alert alert-success position-absolute' role='alert' onclick='cerrarMsg()'>".
-                  $_GET['msg']
-                ."</div>
+                <div class='modal' id='modalDatos'>
+                  <div class='modal-dialog modal-lg'>
+                    <div class='modal-content'>
+                      <div class='modal-header'>
+                        <h4 class='modal-title'>¡Lo sentimos :(!</h4>
+                        <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                      </div>
+                      <div class='modal-body' id='modalAccion'>"
+                        .$_GET['msg'].
+                      "</div>
+                      <div class='modal-footer'>
+                        <button type='button' class='btn btn-danger' data-dismiss='modal' onclick=reset()>Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
             ";
           }
         ?>
       </div>
     </div>
   </div>
+
+  <?php if($show_modal == true):?>
+  <script> $('#modalDatos').modal('show');</script>
+<?php
+  $show_modal = false;
+endif;?>
+
   <!--barra inicio-->
   <div class="section-header sticky-top bg-white">
     <section style="padding: 5px;">
@@ -77,10 +100,10 @@
           <div class="col-lg-3 col-sm-7 col-8  order-2  order-lg-3">
             <div class="d-flex justify-content-end">
               <?php
-                if($_SESSION){
+                if(isset($_SESSION['User_Name'])){
                   echo"
                   <div class='widget-header'>
-                    <small class='title text-muted' data-toggle='modal' data-target='#modalModificar'>Hola, ".$_SESSION['User_Name']."</small>
+                    <small class='title text-muted' data-toggle='modal' data-target='#modalModificar'>Hola, ".$user."</small>
                     <div>
                       <a href='#'' class='text-dark' data-toggle='modal' data-target='#modalModificar'>Mi cuenta</a>
                     </div>
@@ -204,17 +227,17 @@
                       </div>
                       <div class="col-md-4 mb-2">
                         <label for="nombre">Nombre de usuario:</label>
-                        <input type="text" class="form-control" name="nombreUser" id="nombreUser" required>
+                        <input type="text" class="form-control" name="nombreUser" id="nombreUser" pattern="[A-Za-z0-9]+" title="Solo letras y numeros sin caracteres especiales #No permitida la Ñ ni asentuaciones" required>
                       </div>
                     </div>
                     <div class="form-row" style="padding-top: 1.2rem;">
                       <div class="col">
                         <label for="nombre">Nombre(s):</label>
-                        <input type="text" class="form-control" name="nombreUsuario" id="nombre" required>
+                        <input type="text" class="form-control" name="nombreUsuario" id="nombre" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="No caracteres especiales" required>
                       </div>
                       <div class="col">
                         <label for="apellido">Apellido:</label>
-                        <input type="text" class="form-control" name="apellidoUsuario" id="apellido" required>
+                        <input type="text" class="form-control" name="apellidoUsuario" id="apellido" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="No caracteres especiales" required>
                       </div>
                     </div>
                     <div class="form-row" style="padding-top: 1.2rem;">
@@ -293,7 +316,7 @@
                         <div class="col-md-6">
                           <label for="saldoAct">Saldo actual:</label>
                           <div class="container rounded">
-                            <h4 class="text-success"><?php echo "$ ".$_SESSION['Amount'].".00" ?></h4>
+                            <?php infoSS($con); ?>
                           </div>
                         </div>
                         <div class="col-md-6">
