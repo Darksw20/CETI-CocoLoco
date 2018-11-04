@@ -183,15 +183,15 @@
                 <div class="col-md-3 mb-3">
                     <p>Elige una imagen de producto</p>
                     <div class="input-file-container">
-                      <form id="uploadimage" name="uploadimage" method="post" enctype="multipart/form-data">
-                        <input class="input-file" id="my-file" type="file" name="imagProd" required>
-                        <label tabindex="0" for="my-file" class="input-file-trigger">Elegir imagen</label>
+                      <form method="post" enctype="multipart/form-data">
+                        <input class="input-file" id="image" type="file" name="image" required>
+                        <label tabindex="0" for="image" class="input-file-trigger">Elegir imagen</label>
                       </form>
                     </div>
                     <p class="file-return"></p>
                   </div>
                 </div>
-                <button class="btn btn-primary" type="submit" id="addProdBtn" name="addProdBtn" onclick="btnAddProd(); myFunction();">Agregar producto</button>
+                <button class="btn btn-primary" type="submit" id="addProdBtn" name="addProdBtn" onclick="btnAddProd();">Agregar producto</button>
               </form>
               <div style="padding-top: 1.2rem;"id="result">
               </div>
@@ -422,27 +422,6 @@
       });
       //seleccionar formulario
 
-
-      //inputFile
-      document.querySelector("html").classList.add('js');
-
-      var fileInput  = document.querySelector( ".input-file" ),
-          button     = document.querySelector( ".input-file-trigger" ),
-          the_return = document.querySelector(".file-return");
-
-      button.addEventListener( "keydown", function( event ) {
-          if ( event.keyCode == 13 || event.keyCode == 32 ) {
-              fileInput.focus();
-          }
-      });
-      button.addEventListener( "click", function( event ) {
-         fileInput.focus();
-         return false;
-      });
-      fileInput.addEventListener( "change", function( event ) {
-          the_return.innerHTML = document.getElementById("my-file").files[0].name; ;
-      });
-      //inputFile
 
       //tabla
       $(function () {

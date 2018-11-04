@@ -444,12 +444,27 @@ function btnAddProd() {
     var v5 = $('#descriptProd').val();
     var v6 = $('#provProd').val();
 
+    var image_name = $('#image').val();
+    if(image_name == ''){
+         alert("Please Select Image");
+         return false;
+    }
+    else{
+         var extension = $('#image').val().split('.').pop().toLowerCase();
+         if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1){
+              alert('Invalid Image File');
+              $('#image').val('');
+              return false;
+         }
+    }
+
     formData.append('nameProd', v1);
     formData.append('priceProd', v2);
     formData.append('catProd', v3);
     formData.append('subcatProd', v4);
     formData.append('descriptProd', v5);
     formData.append('provProd', v6);
+    formData.append('image', image_name);
 
     request.open('post', 'src/agregarProducto.php', true);
     request.send(formData);

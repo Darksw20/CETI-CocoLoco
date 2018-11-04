@@ -18,10 +18,8 @@ $output = '
             <th scope="col">Remover</th>
         </tr>
 ';
-if(!empty($_SESSION["shopping_cart"]))
-{
-	foreach($_SESSION["shopping_cart"] as $keys => $values)
-	{
+if(!empty($_SESSION["shopping_cart"])){
+	foreach($_SESSION["shopping_cart"] as $keys => $values){
 		$output .= '
 		<tr>
 			<td>'.$values["product_name"].'</td>

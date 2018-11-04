@@ -53,7 +53,7 @@
                 <div class="tab-content">
                   <div id="login" class="container tab-pane active">
                     <br>
-                    <form action="src/proces-lgn.php" method="post">
+                    <form action="proces-lgn.php" method="post">
                       <div class="form-group">
                         <label for="email">Correo electrónico:</label>
                         <input type="email" class="form-control" name="email" required>
@@ -72,7 +72,7 @@
                   </div>
                   <div id="signup" class="container tab-pane fade">
                     <br>
-                    <form action="src/registro.php" method="post">
+                    <form action="registro.php" method="post">
                       <div class="form-row">
                         <div class="col-md-8 mb-3">
                           <label for="mail">Correo electrónico:</label>

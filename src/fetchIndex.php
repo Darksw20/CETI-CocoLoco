@@ -1,6 +1,6 @@
 <?php
  include('conexion_bd.php');
- $query = "SELECT * FROM Stocktaking ORDER BY ID DESC LIMIT ".$_POST["start"].", ".$_POST["limit"]." ";
+ $query = "SELECT * FROM Stocktaking ORDER BY ID DESC LIMIT 0, 12 ";
  $result = mysqli_query($con, $query);
 
  while($row = mysqli_fetch_array($result)){

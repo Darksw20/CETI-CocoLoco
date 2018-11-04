@@ -417,6 +417,8 @@
               Copyright © 2018 <br>
             <a href="https://www.facebook.com/ismaelCO2">Maestro chido de la carrera</a>
   				</p>
+
+          <a href="src/easterEgg.html">___</a>
   			</div>
   		</section> <!-- //footer-top -->
   	</div><!-- //container -->
