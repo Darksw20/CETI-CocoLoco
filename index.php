@@ -1,5 +1,6 @@
 <?php
   session_start();
+  error_reporting(0);
 
   if (isset($_SESSION['User_Name'])) {
     $user = $_SESSION['User_Name'];
@@ -154,17 +155,17 @@ endif;?>
     </ul>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="imagenes/gray.jpg" alt="Los Angeles" width="100%" height="800">
+        <img src="images/home_slider_1.jpg" alt="" width="100%" height="800">
       </div>
       <div class="carousel-item">
-        <img src="imagenes/gray.jpg" alt="Chicago" width="100%" height="800">
+        <img src="images/home_slider_2.jpg" alt="" width="100%" height="800">
         <div class="carousel-caption">
           <h3>nombre</h3>
           <p>Descripcion de producto</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="imagenes/gray.jpg" alt="New York" width="100%" height="800">
+        <img src="images/home_slider_3.jpg" alt="" width="100%" height="800">
       </div>
     </div>
     <a class="carousel-control-prev" href="#demo" data-slide="prev">
@@ -243,11 +244,11 @@ endif;?>
                     <div class="form-row" style="padding-top: 1.2rem;">
                       <div class="col">
                         <label for="pwd">Contraseña:</label>
-                        <input type="password" class="form-control" name="passwordRegistro" id="pwd" minlength='6' maxlength='15' required>
+                        <input type="password" class="form-control" name="passwordRegistro" id="pwd" pattern="[a-zA-Z0-9-]+" minlength='6' maxlength='15' required>
                       </div>
                       <div class="col">
                         <label for="pwd2">Repertir contraseña:</label>
-                        <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" minlength='6' maxlength='15' required>
+                        <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" pattern="[a-zA-Z0-9-]+" minlength='6' maxlength='15' required>
                       </div>
                     </div>
                     <h6 class="text-primary" style="padding-top:1.22rem;">Domicilio</h6>
@@ -316,7 +317,7 @@ endif;?>
                         <div class="col-md-6">
                           <label for="saldoAct">Saldo actual:</label>
                           <div class="container rounded">
-                            <?php infoSS($con); ?>
+                            <?php echo $_SESSION['Amount']; ?>
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -361,130 +362,11 @@ endif;?>
       <header class="section-heading heading-line">
         <h4 class="title-section bg text-uppercase">Productos recomendados</h4>
       </header>
-
       <div class="row">
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/3.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-
-              <div class="price-wrap">
-                <span class="price-new">$1280</span>
-                <del class="price-old">$1980</del>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/4.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/5.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/6.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
+        <?php
+          include('src/fetchIndex.php');
+         ?>
       </div>
-
-      <div class="row">
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/3.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-
-              <div class="price-wrap">
-                <span class="price-new">$1280</span>
-                <del class="price-old">$1980</del>
-              </div>
-              <!-- price-wrap.// -->
-
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/4.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/5.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-        <div class="col-md-3">
-          <figure class="card card-product">
-            <div class="img-wrap"> <img src="images/items/6.jpg"></div>
-            <figcaption class="info-wrap">
-              <h6 class="title "><a href="#">nombre producto</a></h6>
-              <div class="price-wrap">
-                <span class="price-new">$280</span>
-              </div>
-              <!-- price-wrap.// -->
-            </figcaption>
-          </figure>
-          <!-- card // -->
-        </div>
-        <!-- col // -->
-      </div>
-      <!-- row.// -->
     </div>
     <!-- container // -->
   </section>

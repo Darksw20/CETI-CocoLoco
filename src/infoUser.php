@@ -81,13 +81,61 @@
         </form>";
     }
 
-    function infoSS($con){
+  /*  function infoSS($con){
       $user = $_SESSION['User_Name'];
-        $query = "SELECT Amount FROM User Where User_name = '$user'";
+        require_once('lib/nusoap.php');
+
+        $cliente = new nusoap_client('http://192.168.1.15:8080/CocoLocoWS/CocoJAXWS?WSDL', true);
+
+        $parametros = array('CocoJAXWS' => '',
+              'User_Name' => $_SESSION['User_Name'],
+              'Password' => $_SESSION['Password'],
+              'Mail' => $_SESSION['Mail'],
+              'Amount' => $_SESSION['Amount'],
+              'Type_User' => $_SESSION['Type_User'],
+              'Name' => $_SESSION['Name'],
+              'Last_Name' => $_SESSION['Last_Name'],
+              'Phone_Number' => $_SESSION['Phone_Number'],
+              'Adress' => $_SESSION['Adress'],
+              'Neighborhood_Code' => $_SESSION['Neighborhood_Code'],
+              'Sesion' => $_SESSION['Id_Session'],
+                            );
+
+        $resultado = $cliente->call('amountUser', $parametros);
+
+
+        if ($resultado['return'][0]) {
+					$_SESSION['User_Name'] = $resultado['return'][0]['userName'];
+					$_SESSION['Password'] = $resultado['return'][0]['password'];
+					$_SESSION['Mail'] = $resultado['return'][0]['mail'];
+					$_SESSION['Amount'] = $resultado['return'][0]['amount'];
+					$_SESSION['Type_User'] = $resultado['return'][0]['typeUser'];
+					$_SESSION['Name'] = $resultado['return'][0]['name'];
+					$_SESSION['Last_Name'] = $resultado['return'][0]['lastName'];
+					$_SESSION['Phone_Number'] = $resultado['return'][0]['phoneNumber'];
+					$_SESSION['Adress'] = $resultado['return'][0]['adress'];
+					$_SESSION['Neighborhood_Code'] = $resultado['return'][0]['neighborhoodCode']['code'];
+					$_SESSION['Id_Session'] = $id_de_sesion; //numero de la variable de sesion
+				}else {
+					$_SESSION['User_Name'] = $resultado['return']['userName'];
+					$_SESSION['Password'] = $resultado['return']['password'];
+					$_SESSION['Mail'] = $resultado['return']['mail'];
+					$_SESSION['Amount'] = $resultado['return']['amount'];
+					$_SESSION['Type_User'] = $resultado['return']['typeUser'];
+					$_SESSION['Name'] = $resultado['return']['name'];
+					$_SESSION['Last_Name'] = $resultado['return']['lastName'];
+					$_SESSION['Phone_Number'] = $resultado['return']['phoneNumber'];
+					$_SESSION['Adress'] = $resultado['return']['adress'];
+					$_SESSION['Neighborhood_Code'] = $resultado['return']['neighborhoodCode']['code'];
+					$_SESSION['Id_Session'] = $id_de_sesion; //numero de la variable de sesion
+				}
+
+        //print_r($resultado);
+        /*$query = "SELECT Amount FROM User Where User_name = '$user'";
         $res = mysqli_query($con, $query);
         echo mysqli_error($con);
-        while ($fila = mysqli_fetch_array($res)) {
-          echo "<h4 id='imprimirSaldo' class='text-success'>$".$fila['Amount']."</h4>";
-        }
-    }
+        while ($fila = mysqli_fetch_array($res)) {*/
+          //echo "<h4 id='imprimirSaldo' class='text-success'>$".$fila['Amount']."</h4>";
+        //}
+
 ?>

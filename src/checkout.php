@@ -53,7 +53,7 @@
                 <div class="tab-content">
                   <div id="login" class="container tab-pane active">
                     <br>
-                    <form action="src/proces-lgn.php" method="post">
+                    <form action="proces-lgn.php" method="post">
                       <div class="form-group">
                         <label for="email">Correo electrónico:</label>
                         <input type="email" class="form-control" name="email" required>
@@ -72,7 +72,7 @@
                   </div>
                   <div id="signup" class="container tab-pane fade">
                     <br>
-                    <form action="src/registro.php" method="post">
+                    <form action="registro.php" method="post">
                       <div class="form-row">
                         <div class="col-md-8 mb-3">
                           <label for="mail">Correo electrónico:</label>
@@ -96,11 +96,11 @@
                       <div class="form-row" style="padding-top: 1.2rem;">
                         <div class="col">
                           <label for="pwd">Contraseña:</label>
-                          <input type="password" class="form-control" name="passwordRegistro" id="pwd" minlength='6' maxlength='15' required>
+                          <input type="password" class="form-control" name="passwordRegistro" id="pwd" pattern="[a-zA-Z0-9-]+" minlength='6' maxlength='15' required>
                         </div>
                         <div class="col">
                           <label for="pwd2">Repertir contraseña:</label>
-                          <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" minlength='6' maxlength='15' required>
+                          <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" pattern="[a-zA-Z0-9-]+" minlength='6' maxlength='15' required>
                         </div>
                       </div>
                       <h6 class="text-primary" style="padding-top:1.22rem;">Domicilio</h6>
@@ -169,7 +169,7 @@
                           <div class="col-md-6">
                             <label for="saldoAct">Saldo actual:</label>
                             <div class="container rounded">
-                              <?php infoSS($con); ?>
+                              <?php //infoSS($con); ?>
                             </div>
                           </div>
                           <div class="col-md-6">
@@ -191,10 +191,10 @@
                     </form>
                   </div>
                   <div id="datos" class="container tab-pane fade">
-                    <?php infoUser($con); ?>
+                    <?php //infoUser($con); ?>
                   </div>
                   <div id="modPassword" class="container tab-pane fade">
-                    <?php infoPass($con); ?>
+                    <?php //infoPass($con); ?>
                   </div>
                 </div>
               </div>

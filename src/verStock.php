@@ -4,8 +4,19 @@
 
     if (!empty($_POST['verStock'])) {
         if ($buscar = $con->real_escape_string($_POST['verStock'])) {
-            $sql = "SELECT * FROM Stocktaking WHERE Product_Name LIKE '%".$buscar."%'";
-            $resultado = $con->query($sql);
+            require_once('../lib/nusoap.php');
+
+            $cliente = new nusoap_client('http://192.168.1.15:8080/CocoLocoWS/CocoJAXWS?WSDL', true);
+
+            $parametros = array('CocoJAXWS' => '',
+                                'Product_Name' => $buscar,
+                                );
+
+            $resultado = $cliente->call('verStock', $parametros);
+
+            print_r($resultado);
+            //$sql = "SELECT * FROM Stocktaking WHERE Product_Name LIKE '%".$buscar."%'";
+            //$resultado = $con->query($sql);
 
             $output .= '
                     <div class="table-responsive">
@@ -20,8 +31,8 @@
                                    <th width="40%">Proveedor</th>
                               </tr>';
 
-            if (mysqli_num_rows($resultado) > 0) {
-                while ($row = $resultado->fetch_assoc()) {
+            //if (mysqli_num_rows($resultado) > 0) {
+                //while ($row = $resultado->fetch_assoc()) {
                       $output .='
                               <tr>
                               <td>'.$row["ID"].'</td>
@@ -32,8 +43,8 @@
                                  <td class="Class" data-id5="'.$row["ID"].'" contenteditable>'.$row["Class"].'</td>
                                  <td class="User_User_Name" data-id6="'.$row["ID"].'" contenteditable>'.$row["User_User_Name"].'</td>
                               </tr>';
-                }
-            }
+                //}
+            //}
             $output .= '</table>
                       </div>';
             echo $output;

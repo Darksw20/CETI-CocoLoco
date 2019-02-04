@@ -1,19 +1,18 @@
 <?php
- error_reporting(0);
+ //error_reporting(0);
  include('conexion_bd.php');
- require_once('../lib/nusoap.php');
+ require_once('lib/nusoap.php');
  $cliente = new nusoap_client('http://192.168.1.15:8080/CocoLocoWS/CocoJAXWS?WSDL', true);
 
  $parametros = array();
 
- $resultado = $cliente->call('fetch', $parametros);
-
+ $resultado = $cliente->call('fetchIndex', $parametros);
  //$query = "SELECT * FROM Stocktaking ORDER BY ID DESC LIMIT 0, 12 ";
  //$result = mysqli_query($con, $query);
 
   $iterador = 0;
 
-  while($iterador < 90) {
+  while($iterador < 12) {
 
   echo '
 

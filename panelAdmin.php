@@ -1,14 +1,16 @@
 <?php
+
+  error_reporting(0);
   session_start();
 
   include('src/conexion_bd.php');
   include('src/graficaAdminGanancias.php');
   include('src/DashboardAdmin.php');
   include('src/colonias.php');
-  include('src/GraficaAdminClaseVenta.php');
-  if(!$_SESSION || $_SESSION['Type_User']!=2){
+  include('src/graficaAdminClaseVenta.php');
+  /*if(!$_SESSION || $_SESSION['Type_User']!=2){
     header("Location: index.php");
-  }
+  }*/
   $user = $_SESSION['User_Name'];
 ?>
 <!DOCTYPE html>
@@ -68,7 +70,7 @@
           </a>
           <ul class="collapse list-unstyled" id="GananciasSubmenu">
             <li>
- >               <a href="#" onclick="toggleVisibility('gananciasTotales')" class="text-dark">Ganancias Totales</a>
+              <a href="#" onclick="toggleVisibility('gananciasTotales')" class="text-dark">Ganancias Totales</a>
             </li>
             <li>
               <a href="#" onclick="toggleVisibility('gananciasProducto')" class="text-dark">Ganancias por producto</a>

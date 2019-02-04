@@ -1,85 +1,162 @@
 <?php
 
-	//CONEXION AL SERVIDOR Y BASE DE DATOS
+
 include('conexion_bd.php');
-
-	//VARIABLES DE USO
-	session_start();
-	$user=$_SESSION['User_Name']; //PONER LA VERDADERA
-	$carrito = $_SESSION['shopping_cart'];
-
-	if(!empty($_SESSION["shopping_cart"])){
-		foreach ($_SESSION["shopping_cart"] as $key => $values) {
-
-			$nombre_producto = $values["product_name"];
-			$cantidad_productos = $values["product_quantity"];
-			$precio_producto = $values["product_price"];
-			$total = $precio_producto * $cantidad_productos;
-
-			//CONSULTA PARA CREDITO DEL USUARIO
-			$selectQuery = "SELECT Amount FROM User WHERE User_Name = '$user'";
-			$consulta_creditous = mysqli_query ($con, $selectQuery) or die ("Fallo con la consulta para obtener el credito del usuario");
-			$fila = mysqli_fetch_array ($consulta_creditous);
-			$credito_usuario = $fila["Amount"];
-
-			//CONSULTA PARA NOMBRE DEL ADMINISTRADOR
-			$selectQuery2 = "SELECT User_User_Name FROM Stocktaking WHERE Product_Name = '$nombre_producto'";
-			$consulta_nombreadmin = mysqli_query ($con, $selectQuery2) or die ("Fallo con la consulta para obtener el nombre del administrador");
-			$fila = mysqli_fetch_array ($consulta_nombreadmin);
-			$nombre_administrador = $fila["User_User_Name"];
-
-			//CONSULTA PARA CREDITO DEL ADMINISTRADOR
-			$selectQuery3 = "SELECT Amount FROM User WHERE Type_user = 2 AND User_Name = '$nombre_administrador'";
-			$consulta_creditoadmin = mysqli_query ($con, $selectQuery3) or die ("Fallo con la consulta para obtener el credito del administrador");
-			$fila = mysqli_fetch_array ($consulta_creditoadmin);
-			$credito_admin = $fila["Amount"];
-
-			//CONSULTA PARA LA CANTIDAD Y EL ID DEL PRODUCTO DEL ADMINISTRADOR
-			$selectQuery4 = "SELECT Lot, ID FROM Stocktaking WHERE User_User_Name = '$nombre_administrador'  AND Product_Name = '$nombre_producto'";
-			$consulta_inventproductadmin = mysqli_query ($con, $selectQuery4) or die ("Fallo con la consulta para obtener los productos del administrador");
-			echo mysqli_error($con);
-			$fila = mysqli_fetch_array ($consulta_inventproductadmin);
-			$productos_admin = $fila["Lot"];
-			$productosID_admin = $fila["ID"];
-
-			if($total > $credito_usuario){
-				$msgError = "La compra no se pudo realizar";
-				header('Location: ../departamentos.php?msgError='.$msgError);
-				break;
-			}
-
-			else{
-				//OPERACIONES
-				$credito_usuario = $credito_usuario - $total;
-				$credito_admin = $credito_admin + $total;
-				$productos_admin = $productos_admin - $cantidad_productos;
+require_once('../lib/nusoap.php');
+//$SERMO = mysqli_autocommit($con, FALSE);
+session_start();
+$user = $_SESSION["User_Name"];
+$total_price = 0;
+$total_item = 0;
 
 
-				$query = "UPDATE User SET Amount = '$credito_usuario' WHERE User_Name = '$user'" ;
-				//CONSULTA PARA ACTUALIZAR EL CREDITO DEL USUARIO
-				$consulta_guardaruscrd = mysqli_query ($con, $query) or die ("Fallo con actualizar el credito del usuario");
+if (!empty($_SESSION["shopping_cart"])) {
+    foreach ($_SESSION["shopping_cart"] as $key => $values) {
 
-				$query2 = "UPDATE User SET Amount = '$credito_admin' WHERE Type_user = 2 AND User_Name = '$nombre_administrador'";
-				//CONSULTA PARA ACTUALIZAR EL CREDITO DEL ADMINISTRADOR
-				$consulta_guardaruadcrd = mysqli_query ($con, $query2) or die ("Fallo con actualizar el credito del administrador");
+    $Product_Name = $values["product_name"];
+    $cantidad_productos = $values["product_quantity"];
+    $precio_producto = $values["product_price"];
 
-				$query3 = "UPDATE Stocktaking SET Lot = '$productos_admin' WHERE User_User_Name = '$nombre_administrador' AND Product_Name = '$nombre_producto'";
- 				//CONSULTA PARA ACTUALIZAR EL PRODUCTO DEL ADMINISTRADOR
-				$consulta_guardaradminprod = mysqli_query($con, $query3) or die ("Fallo con actualizar los productos del administrador");
+    $cliente = new nusoap_client('http://192.168.1.15:8080/CocoLocoWS/CocoJAXWS?WSDL', true);
 
-				date_default_timezone_get('america/mexico_city');
-				$fechas = date("Y-m-d H:i:s");
-				$query4 = "INSERT INTO Transaction (Date, Amount, User_User_Name, Stocktaking_ID) VALUES ('$fechas', '$total', '$nombre_administrador', '$productosID_admin')";
- 				//CONSULTA PARA GENERAR LA TRANSACCION DEL PRODUCTO
-				$consulta_guardartranustoadmin = mysqli_query($con, $query4) or die ("Fallo la transaccion de usario a administrador");
+    //DATOS DEL USUARIO
+    $parametrosAmount = array(
+        'CocoJAXWS' => '',
+        'User_Name' => $user,
+    );
+    $resultadoAmount = $cliente->call('consultaAmount', $parametrosAmount);
+    $Name = $resultadoAmount['return']['name'];
+    $LastName = $resultadoAmount['return']['lastName'];
+    $phone = $resultadoAmount['return']['phoneNumber'];
+    $password = $resultadoAmount['return']['password'];
+    $mail = $resultadoAmount['return']['mail'];
+    $addres = $resultadoAmount['return']['adress'];
+    $nh = $resultadoAmount['return']['neighborhoodCode'];
+    $tu = $resultadoAmount['return']['typeUser'];
+    $session = $resultadoAmount['return']['sesion'];
+    $AmountUser = $resultadoAmount['return']['amount'];
 
-				$msgSuccess = "Compra realizada con exito";
-				 unset($_SESSION["shopping_cart"]);
-				 header('Location: ../departamentos.php?msgSuccess='.$msgSuccess);
+    //CONSULTA PARA DATOS DEL ADMINISTRADOR
+    $parametrosAdmon = array(
+        'CocoJAXWS' => '',
+        'User_Name' => 'PedroAnt',
+    );
+    $resultadoAdmon = $cliente->call('consultaAmountAdmin', $parametrosAdmon);
+    $AmountAdmin = $resultadoAdmon['return']['amount'];
+    $NameAdmin = $resultadoAdmon['return']['name'];
+    $LastNameAdmin = $resultadoAdmon['return']['lastName'];
+    $phoneAdmin = $resultadoAdmon['return']['phoneNumber'];
+    $passwordAdmin = $resultadoAdmon['return']['password'];
+    $mailAdmin = $resultadoAdmon['return']['mail'];
+    $addresAdmin = $resultadoAdmon['return']['adress'];
+    $nhAdmin = $resultadoAdmon['return']['neighborhoodCode'];
+    $tuAdmin = $resultadoAdmon['return']['typeUser'];
+    $sessionAdmin = $resultadoAdmon['return']['sesion'];
+    $userAdmin = $resultadoAdmon['return']['userName'];
 
-			}
-		}
-	}
+    //CONSULTA PARA DATOS DEL PRODUCTO
+    $parametrosStock = array(
+        'CocoJAXWS' => '',
+        'Product_Name' => $Product_Name,
+    );
+    $resultadoLot = $cliente->call('consultaLot', $parametrosStock);
+    //var_dump($resultadoLot);
+    $lot = $resultadoLot['return']['lot'];
+    $ID = $resultadoLot['return']['id'];
+    $Rate = $resultadoLot['return']['rate'];
+    $Product_Description = $resultadoLot['return']['productDescription'];
+    $Class = $resultadoLot['return']['class1'];
+    $SubClass = $resultadoLot['return']['subClass'];
+    $User_User_Name = $resultadoLot['return']['userUserName']['userName'];
+    $imagen = $resultadoLot['return']['image'];
 
+    $total_price = $total_price + ($values["product_quantity"] * $values["product_price"]);
+    $total_item = $total_item + 1;
+    $total = $precio_producto * $cantidad_productos;
+    $AmountUser = $AmountUser - $total;
+    $AmountAdmin = $AmountAdmin + $total;
+
+		$timezone = new DateTimeZone('america/mexico_city');
+		$micro_date = microtime();
+		$date_array = explode(" ", $micro_date);
+		$Date =  Date("Y-m-d H:m:s", $date_array[1]);
+		$Date1 = $Date.$date_array[0];
+
+		if ($cantidad_productos <= $lot){
+			if($AmountUser < $total){
+
+        $msgError = "La compra no se pudo realizar";
+        header('Location: ../departamentos.php?msgError='.$msgError);
+        break;
+
+			}else{
+
+          //registrar transaccion
+          $parametrosTransaction = array(
+            'CocoJAXWS' => '',
+            'Date' => $Date1,
+            'Amount' => $total,
+            'User_User_Name' => $user,
+            'Stocktaking_ID' => $ID,
+          );
+          $resultadoTransaction = $cliente->call('insertTransaction', $parametrosTransaction);
+
+          //actualizar DATOS
+          $parametrosUpdate = array(
+            'CocoJAXWS' => '',
+            'User_Name' => $user,
+            'Password' => $password,
+            'Mail' => $mail,
+            'Amount' => $AmountUser,
+            'Type_User' => $tu,
+            'Name' => $Name,
+            'Last_Name' => $LastName,
+            'Phone_Number' => $phone,
+            'Adress' => $addres,
+            'Neighborhood_Code' => $nh,
+            'Sesion' => $session,
+
+          );
+          $actualizarDatosUser = $cliente->call('updateUser', $parametrosUpdate);
+
+          $parametrosUpdateAdmin = array(
+            'CocoJAXWS' => '',
+            'User_Name' => $userAdmin,
+            'Password' => $passwordAdmin,
+            'Mail' => $mailAdmin,
+            'Amount' => $AmountAdmin,
+            'Type_User' => $tuAdmin,
+            'Name' => $NameAdmin,
+            'Last_Name' => $LastNameAdmin,
+            'Phone_Number' => $phoneAdmin,
+            'Adress' => $addresAdmin,
+            'Neighborhood_Code' => $nhAdmin,
+            'Sesion' => $sessionAdmin,
+          );
+
+          $actualizarDatosAdmin = $cliente->call('updateAdmin', $parametrosUpdateAdmin);
+          $lot = $lot - $cantidad_productos;
+          $parametrosUpdateStock = array(
+            'CocoJAXWS' => '',
+            'ID' => $ID,
+            'Product_Name' => $Product_Name,
+            'Lot' => $lot,
+            'Rate' => $Rate,
+            'Product_Description' => $Product_Description,
+            'Class' => $Class,
+            'SubClass' => $SubClass,
+            'User_User_Name' => $User_User_Name,
+            'Image' => $imagen,
+          );
+          $actualizarDatosStock = $cliente->call('updateStock', $parametrosUpdateStock);
+
+          unset($_SESSION["shopping_cart"]);
+          $msgSuccess = "Compra realizada con exito";
+          header('Location: ../departamentos.php?msgSuccess='.$msgSuccess);
+	       }
+
+       }
+     }
+   }
 
 ?>

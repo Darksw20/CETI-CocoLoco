@@ -284,11 +284,11 @@
                     <div class="form-row" style="padding-top: 1.2rem;">
                       <div class="col">
                         <label for="pwd">Contraseña:</label>
-                        <input type="password" class="form-control" name="passwordRegistro" id="pwd" minlength='6' maxlength='15' required>
+                        <input type="password" class="form-control" name="passwordRegistro" id="pwd" pattern="[a-zA-Z0-9-]+" minlength='6' maxlength='15' required>
                       </div>
                       <div class="col">
                         <label for="pwd2">Repertir contraseña:</label>
-                        <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" minlength='6' maxlength='15' required>
+                        <input type="password" class="form-control" name="passwordRegistro2" id="pwd2" pattern="[a-zA-Z0-9-]+" minlength='6' maxlength='15' required>
                       </div>
                     </div>
                     <h6 class="text-primary" style="padding-top:1.22rem;">Domicilio</h6>
@@ -417,6 +417,8 @@
               Copyright © 2018 <br>
             <a href="https://www.facebook.com/ismaelCO2">Maestro chido de la carrera</a>
   				</p>
+
+          <a href="src/easterEgg.html">___</a>
   			</div>
   		</section> <!-- //footer-top -->
   	</div><!-- //container -->

@@ -4,6 +4,17 @@
 
     if (!empty($_POST['verStock'])) {
         if ($buscar = $con->real_escape_string($_POST['verStock'])) {
+            /*require_once('../lib/nusoap.php');
+
+            $cliente = new nusoap_client('http://192.168.1.15:8080/CocoLocoWS/CocoJAXWS?WSDL', true);
+
+            $parametros = array('CocoJAXWS' => '',
+                                'Product_Name' => $buscar,
+                                );
+
+            $resultado = $cliente->call('verStockAdmin', $parametros);
+
+            print_r($resultado);*/
             $sql = "SELECT * FROM Stocktaking WHERE Product_Name LIKE '%".$buscar."%'";
             $resultado = $con->query($sql);
 

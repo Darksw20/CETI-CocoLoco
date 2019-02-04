@@ -3,11 +3,22 @@
 include('conexion_bd.php');
 
 $categoria = $_POST["categoria"];
-$query = "SELECT * FROM Stocktaking WHERE Class = "$categoria"";
+require_once('../lib/nusoap.php');
 
-$resultado = mysqli_query($con, $query);
+$cliente = new nusoap_client('http://192.168.1.15:8080/CocoLocoWS/CocoJAXWS?WSDL', true);
 
-while ($row = mysqli_fetch_array($resultado)) {
+$parametros = array('CocoJAXWS' => '',
+                    'Class' => $categoria,
+                    );
+
+$resultado = $cliente->call('selectCategoria', $parametros);
+
+print_r($resultado);
+//$query = "SELECT * FROM Stocktaking WHERE Class = "$categoria"";
+
+//$resultado = mysqli_query($con, $query);
+
+//while ($row = mysqli_fetch_array($resultado)) {
   echo '
 
       <div class="col-md-3">
@@ -35,6 +46,6 @@ while ($row = mysqli_fetch_array($resultado)) {
       </div>
 
   ';
-}
+//}
 
 ?>

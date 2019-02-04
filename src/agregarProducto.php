@@ -1,5 +1,6 @@
 <?php
     require_once('conexion_bd.php');
+    require_once('../lib/nusoap.php');
 
     /**
     * Función para agregar producto;
@@ -11,12 +12,8 @@
         $subcatProd = $con -> real_escape_string($_POST['subcatProd']);
         $descriptProd = $con -> real_escape_string($_POST['descriptProd']);
         $provProd = $con -> real_escape_string($_POST['provProd']);
+        $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
         $amountProd = '0';
-        $file = $_FILES['imagProd'];
-        $fileName = $file['name'];
-        $fileType = $file['type'];
-        $fileError = $file['error'];
-        $fileTemp = $file['tmp_name'];
         $error = 0;
 
         $sqlID = "SELECT Product_Name FROM Stocktaking ORDER BY Product_Name";
@@ -31,36 +28,38 @@
             }
         }
 
-        if($error != 1)  {
-            if($fileError == 0) {
-                if($fileType == 'image/jpeg' || $fileType == 'image/jpg' || $fileType == 'image/png' || $fileType == 'image/gif') {
-                    $extencion = "_".str_replace("/",".",$fileType); //Remplazar la / por . para la extencion
-                    $nombreimg = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-                    $fileDestiny = "images/".$nombreimg.$extencion;
-                    $fileDestiny = mysqli_real_escape_string($con, $fileDestiny);
+        if($error != 1){
 
-                    $confirmacion = move_uploaded_file($fileTemp, $fileDestiny);
+          $cliente = new nusoap_client('http://192.168.1.15:8080/CocoLocoWS/CocoJAXWS?WSDL', true);
+          $params = array('CocoJAXWS' => '',
+                          'Product_Name' => $nameProd,
+                          'Lot' => $amountProd,
+                          'Rate' => $priceProd,
+                          'Product_Description' => $descriptProd,
+                          'Class' => $catProd,
+                          'SubClass' => $subcatProd,
+                          'User_User_Name' => $provProd,
+                          'Image' => $file,
+          );
 
-                    if($confirmacion == 1) {
-                        $sqlP = "INSERT INTO Stocktaking VALUES(NULL, '$nameProd', '$amountProd', '$priceProd', '$descriptProd', '$catProd', '$subcatProd', '$fileDestiny', '$provProd')";
-                        $sentencia = $con->prepare($sqlP);
-                        $sentencia->execute();
-                        if($sentencia) {
-                            echo "<div class='alert alert-success'>Producto ingresado correctamente</div>";
-                        } else {
-                            echo "<div class='alert alert-danger'>Error! El producto ya existe.</div>Error! No se pudo almacenar la imagen en la base de datos.";
-                        }
-                    } else {
-                        echo "<div class='alert alert-danger'>Error! El producto ya existe.</div>Imagen no copiada al servidor, existe algun error";
-                    }
-                } else {
-                    echo "<div class='alert alert-danger'>Error! El producto ya existe.</div>Error! No es un tipo de imagen valida o no es una imagen.";
-                }
+
+          $resultado = $cliente->call('agregarProducto', $params);
+
+          print_r($resultado);
+
+            /*$sqlP = "INSERT INTO Stocktaking (ID, Product_Name, Lot, Rate, Product_Description, Class, SubClass, User_User_Name, Image)
+            VALUES('', '$nameProd', '$amountProd', '$priceProd', '$descriptProd', '$catProd', '$subcatProd', '$provProd', '$file')";
+            $sentencia = mysqli_query($con, $sqlP) or die(mysqli_error($con));
+            if($sentencia){
+                echo "<div class='alert alert-success'>Producto ingresado correctamente</div>";
             } else {
-                echo "<div class='alert alert-danger'>Error! La imagen es invalido, tiene algun error o el tamaño excede el limite.</div>";
-            }
+                echo "<div class='alert alert-danger'>No se pudo almacenar la imagen en la base de datos.</div>";
+            }*/
+
+
+
         } else {
-            echo "<div class='alert alert-danger'>Error! El producto ya existe.</div>";
+            echo "<div class='alert alert-danger'>El producto ya existe.</div>";
         }
     }
 ?>

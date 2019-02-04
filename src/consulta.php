@@ -4,12 +4,10 @@ include('conexion_bd.php');
 
 //////////////// VALORES INICIALES ///////////////////////
 
-$tabla="";
-$query="SELECT * FROM Stocktaking ORDER BY ID";
+$query="SELECT * FROM Stocktaking ORDER BY ID DESC";
 
 ///////// LO QUE OCURRE AL TECLEAR SOBRE EL INPUT DE BUSQUEDA ////////////
-if(isset($_POST['stocktaking']))
-{
+if(isset($_POST['stocktaking'])){
 	$q=$con->real_escape_string($_POST['stocktaking']);
 	$query="SELECT * FROM Stocktaking WHERE
 		ID LIKE '%".$q."%' OR
@@ -23,10 +21,10 @@ $buscarProducto=$con->query($query);
 if ($buscarProducto->num_rows > 0){
 
 	while($row= $buscarProducto->fetch_assoc()){
-		$tabla.=
+		echo 
 		'<div class="col-md-3">
 			<figure class="card card-product">
-				<div class="img-wrap"><img src="'.$row["Image"].'"></div>
+				 <div class="img-wrap"><img src="data:image/jpeg;base64,'.base64_encode($row['Image'] ).'"></div>
 				<figcaption class="info-wrap">
 					<h6 class="title "><a href="#">'.$row["Product_Name"].'</a></h6>
 					<div class="price-wrap">
@@ -51,9 +49,7 @@ if ($buscarProducto->num_rows > 0){
 	}
 
 } else{ //Si no se encuentran coincidencias este mensaje aparece
-		$tabla="No se encontraron coincidencias con sus criterios de búsqueda.";
+		echo "No se encontraron coincidencias con sus criterios de búsqueda.";
 	}
 
-
-echo $tabla;//impresion de table
 ?>
