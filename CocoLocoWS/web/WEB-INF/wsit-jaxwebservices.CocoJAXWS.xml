@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <definitions 
+ xmlns="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="CocoJAXWS" targetNamespace="http://jaxwebservices/" xmlns:tns="http://jaxwebservices/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" 
+ >
+    <message name="registrarUser"/>
+    <message name="registrarUserResponse"/>
+    <message name="editAdmin"/>
+    <message name="editAdminResponse"/>
+    <message name="fetchIndex"/>
+    <message name="fetchIndexResponse"/>
+    <message name="fetch"/>
+    <message name="fetchResponse"/>
+    <message name="agregarProducto"/>
+    <message name="agregarProductoResponse"/>
+    <message name="procesLgn"/>
+    <message name="procesLgnResponse"/>
+    <message name="consultaStock"/>
+    <message name="consultaStockResponse"/>
+    <message name="insertTransaction"/>
+    <message name="insertTransactionResponse"/>
+    <message name="updateUser"/>
+    <message name="updateUserResponse"/>
+    <message name="updateStock"/>
+    <message name="updateStockResponse"/>
+    <message name="updateSession"/>
+    <message name="updateSessionResponse"/>
+    <portType name="CocoJAXWS">
+        <operation name="registrarUser">
+            <input message="tns:registrarUser"/>
+            <output message="tns:registrarUserResponse"/>
+        </operation>
+        <operation name="editAdmin">
+            <input message="tns:editAdmin"/>
+            <output message="tns:editAdminResponse"/>
+        </operation>
+        <operation name="fetchIndex">
+            <input message="tns:fetchIndex"/>
+            <output message="tns:fetchIndexResponse"/>
+        </operation>
+        <operation name="fetch">
+            <input message="tns:fetch"/>
+            <output message="tns:fetchResponse"/>
+        </operation>
+        <operation name="agregarProducto">
+            <input message="tns:agregarProducto"/>
+            <output message="tns:agregarProductoResponse"/>
+        </operation>
+        <operation name="procesLgn">
+            <input message="tns:procesLgn"/>
+            <output message="tns:procesLgnResponse"/>
+        </operation>
+        <operation name="consultaStock">
+            <input message="tns:consultaStock"/>
+            <output message="tns:consultaStockResponse"/>
+        </operation>
+        <operation name="insertTransaction">
+            <input message="tns:insertTransaction"/>
+            <output message="tns:insertTransactionResponse"/>
+        </operation>
+        <operation name="updateUser">
+            <input message="tns:updateUser"/>
+            <output message="tns:updateUserResponse"/>
+        </operation>
+        <operation name="updateStock">
+            <input message="tns:updateStock"/>
+            <output message="tns:updateStockResponse"/>
+        </operation>
+        <operation name="updateSession">
+            <input message="tns:updateSession"/>
+            <output message="tns:updateSessionResponse"/>
+        </operation>
+    </portType>
+    <binding name="CocoJAXWSPortBinding" type="tns:CocoJAXWS">
+        <wsp:PolicyReference URI="#CocoJAXWSPortBindingPolicy"/>
+        <operation name="registrarUser">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="editAdmin">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="fetchIndex">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="fetch">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="agregarProducto">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="procesLgn">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="consultaStock">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="insertTransaction">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="updateUser">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="updateStock">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="updateSession">
+            <input/>
+            <output/>
+        </operation>
+    </binding>
+    <service name="CocoJAXWS">
+        <port name="CocoJAXWSPort" binding="tns:CocoJAXWSPortBinding"/>
+    </service>
+    <wsp:Policy wsu:Id="CocoJAXWSPortBindingPolicy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <wsoma:OptimizedMimeSerialization/>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsp:Policy wsu:Id="CocoJAXWSPortBinding_updateStock_Input_Policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:EncryptedParts>
+                    <sp:Body/>
+                </sp:EncryptedParts>
+                <sp:SignedParts>
+                    <sp:Body/>
+                </sp:SignedParts>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsp:Policy wsu:Id="CocoJAXWSPortBinding_updateStock_Output_Policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:EncryptedParts>
+                    <sp:Body/>
+                </sp:EncryptedParts>
+                <sp:SignedParts>
+                    <sp:Body/>
+                </sp:SignedParts>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsp:Policy wsu:Id="CocoJAXWSPortBinding_consultaAmount_Input_Policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:EncryptedParts>
+                    <sp:Body/>
+                </sp:EncryptedParts>
+                <sp:SignedParts>
+                    <sp:Body/>
+                </sp:SignedParts>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsp:Policy wsu:Id="CocoJAXWSPortBinding_consultaAmount_Output_Policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:EncryptedParts>
+                    <sp:Body/>
+                </sp:EncryptedParts>
+                <sp:SignedParts>
+                    <sp:Body/>
+                </sp:SignedParts>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsp:Policy wsu:Id="CocoJAXWSPortBinding_checkSession_Input_Policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:EncryptedParts>
+                    <sp:Body/>
+                </sp:EncryptedParts>
+                <sp:SignedParts>
+                    <sp:Body/>
+                </sp:SignedParts>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsp:Policy wsu:Id="CocoJAXWSPortBinding_checkSession_Output_Policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:EncryptedParts>
+                    <sp:Body/>
+                </sp:EncryptedParts>
+                <sp:SignedParts>
+                    <sp:Body/>
+                </sp:SignedParts>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+</definitions>
